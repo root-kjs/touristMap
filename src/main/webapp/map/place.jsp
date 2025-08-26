@@ -62,7 +62,7 @@
 <!--        <dt title="Party Peaple(인천)"><i class="fa-solid fa-map-location-dot"></i>인천</dt>-->
             <dd class="active"><a href="/map/place.jsp"><i class="fa-solid fa-map-location-dot"></i> 추천모임코스</a></dd>
             <dd><a href="/map/category.jsp"><i class="fa-regular fa-compass"></i> 카테고리</a></dd>
-            <dd><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> 초대장꾸미기</a></dd>
+            <dd><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> 초대장만들기</a></dd>
         </dl>
         <ul class="membership">
             <li><a href="#" onclick="('로그인')"><i class="fa-solid fa-right-to-bracket"></i> 로그인</a></li>
@@ -163,7 +163,7 @@
                             <strong>데이트/동인천/차이나타운</strong>
                         </h2>
                         <p class="keyword_recommand"><!-- 연관 키워드 10개 -->
-                            <a href="#">고기맛집</a><a href="#">월미도</a><a href="#">신포동</a><a href="#">중구</a><a href="#">숯불</a><a href="#" class="matching_keyword">돈비어</a><a href="#">돼지갈비</a>
+                            <a href="#">고기맛집</a><a href="#">월미도</a><a href="#">신포동</a><a href="#">중구</a><a href="#">숯불</a>
                         </p>
                    </dt>
                    <dd class="body">
@@ -181,8 +181,8 @@
                                <li class="tel">032-930-1234</li>
                            </ul>
                            <div class="btn_wrap">
-                                <button>상세정보</button>
-                                <button>지도보기</button>
+                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
+                                <button><i class="fa-solid fa-search"></i></button>
                             </div>
                        </div>
                        <!-- 대안 장소 선택_02: 업체 리스트 -->
@@ -199,8 +199,8 @@
                                <li class="tel">032-773-2368</li>
                            </ul>
                            <div class="btn_wrap">
-                                <button>상세정보</button>
-                                <button>지도보기</button>
+                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
+                                <button><i class="fa-solid fa-search"></i></button>
                             </div>
                        </div>
                        <!-- 대안 장소 선택_03: 업체 리스트 -->
@@ -218,14 +218,14 @@
                                <li class="tel">032-773-2368</li>
                            </ul>
                             <div class="btn_wrap">
-                                <button>상세정보</button>
-                                <button>지도보기</button>
+                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
+                                <button><i class="fa-solid fa-search"></i></button>
                             </div>
                        </div>
                    </dd>
                    <dd class="footer">
                        <button class="basic"><i class="fa-solid fa-location-dot"></i> 지도보기</button>
-                       <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장꾸미기</button>
+                       <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장만들기</button>
                    </dd>
                </dl>
                 <!-- 추천(조합) 모임카드 #.01 끝 -->
@@ -237,7 +237,7 @@
                             <strong>인천/숯불갈비/회식장소</strong>
                         </h2>
                         <p class="keyword_recommand"><!-- 연관 키워드 10개 -->
-                            <a href="#">고기맛집</a><a href="#">월미도</a><a href="#">신포동</a><a href="#">중구</a><a href="#">숯불</a><a href="#" class="matching_keyword">돈비어</a><a href="#">돼지갈비</a>
+                            <a href="#">신포동</a><a href="#">중구</a><a href="#">숯불</a><a href="#" class="matching_keyword">돈비어</a><a href="#">돼지갈비</a>
                         </p>
                     </dt>
                     <dd class="body">
@@ -256,8 +256,8 @@
                                 <li class="tel">032-930-1234</li>
                             </ul>
                             <div class="btn_wrap">
-                                <button>상세정보</button>
-                                <button>지도보기</button>
+                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
+                                <button><i class="fa-solid fa-search"></i></button>
                             </div>
                         </div>
                         <!-- 대안 장소 선택_02: 업체 리스트 -->
@@ -275,10 +275,9 @@
                                 <li class="tel">032-773-2368</li>
                             </ul>
                             <div class="btn_wrap">
-                                <button>상세정보</button>
-                                <button>지도보기</button>
+                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
+                                <button><i class="fa-solid fa-search"></i></button>
                             </div>
-
                         </div>
                         <!-- 대안 장소 선택_03: 업체 리스트 -->
                         <div class="card_list">
@@ -295,14 +294,14 @@
                                 <li class="tel">032-773-2368</li>
                             </ul>
                             <div class="btn_wrap">
-                                <button>상세정보</button>
-                                <button>지도보기</button>
+                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
+                                <button><i class="fa-solid fa-search"></i></button>
                             </div>
                         </div>
                     </dd>
                     <dd class="footer">
                         <button class="basic"><i class="fa-solid fa-location-dot"></i> 지도보기</button>
-                       <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장꾸미기</button>
+                       <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장만들기</button>
                     </dd>
                 </dl>
                 <!-- 추천(조합) 모임카드 #.02 끝 -->

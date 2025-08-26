@@ -44,7 +44,7 @@
             <dt title="Party Peaple(인천)"><a href="/map/index.jsp"> 인천시<br/>(데모체험)</a></dt>
             <dd class="active"><a href="/map/place.jsp"><i class="fa-solid fa-map-location-dot"></i> 추천모임코스</a></dd>
             <dd><a href="/map/category.jsp"><i class="fa-regular fa-compass"></i> 카테고리</a></dd>
-            <dd><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> 초대장꾸미기</a></dd>
+            <dd><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> 초대장만들기</a></dd>
             <dd class="mypage"><a href="/map/mypage.jsp"><i class="fa-solid fa-user-gear"></i> My page</a></dd>
         </dl>
         <ul class="membership">
