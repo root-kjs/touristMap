@@ -2,15 +2,15 @@
 메인 페이지 CSS
 ====================================*/
 /* .main{ background: #0f5132 url(/map/img/bg_06.jpg) no-repeat top; background-size: cover; } */
-.main .header_wrap{ position:fixed; top:0px; left:auto; right:0; width: 70px; height:100%; border:none; background:none; writing-mode: vertical-rl; min-width: auto; z-index: 10 }
-.main .header_wrap header h1{ font: 600 75px/75px Sans-serif; text-align: left; opacity: .6 }
+.main .header_wrap{ position:fixed; top:0px; left:auto; right:0; width: 80px; border:none; background:none; writing-mode: vertical-rl; min-width: auto; z-index: 10 }
+.main .header_wrap header h1{ font: 600 30px/40px Sans-serif; text-align: left; opacity: .6 }
 .main .header_wrap header h1 a{ color:rgba(255,255,255,1); /*  -webkit-text-stroke: 1px rgba(255,255,255,.2); */ text-shadow: -1px 0px rgba(0,0,0,.3), 0px 1px rgba(0,0,0,.3), 1px 0px rgba(0,0,0,.3), 0px -1px rgba(0,0,0,.3); }
 
 /* 좌측메뉴  */
-.main .lnb_wrap{  position:fixed; top:0px; left: 0px; width: 70px; min-width: 70px;  border-right:0; box-shadow: 2px 2px 2px rgba(0,0,0,.3) }
+.main .lnb_wrap{  position:fixed; top:0px; left: 0px; width: 80px; min-width: 80px;  border-right:0; box-shadow: 2px 2px 2px rgba(0,0,0,.3) }
 .main .fixed_quick_menu{ height: 500px }
 .main .membership{ left: 0; bottom: 0;  }
-.fixed_quick_menu dt{ background:url("/map/img/em_ic.png") no-repeat center 10px; padding-top:40px; background-size: 30px 30px; font-weight: 600 }
+.fixed_quick_menu dt{ background:url("/map/img/em_ic.png") no-repeat center 10px;  padding-top:40px; background-size: 30px 30px; font-weight: 600 }
 
 /* 푸터 */
 .main .footer_wrap{ position:fixed;  width: 100%; min-width: 800px; height: 0px; background:none; border:0; z-index: 11;  }
@@ -21,24 +21,24 @@
  메인 컨텐츠
 ====================================*/
 
-.word_cloud_wrap{ max-width: 1200px; max-height: 150px;  margin:70px auto 0; padding:0 }
+.word_cloud_wrap{ max-width: 1200px; max-height: 150px;  margin:70px auto 0; padding:0; display: none; }
 .anychart-credits{ display: none !important; }
 
-.category_main{ position: fixed; top:5px; width:100%; display: flex; justify-content: center; flex-flow: row wrap; word-wrap: break-word; z-index: 11; }
-.category_main li{ }
-.category_main li a{ display:inline-block; padding:5px 10px;  background:rgba(255,255,255,.3); border-radius: 20px; font:600 12px/16px 'Noto Sans KR',Sans-serif; color:rgba(0,0,0,.7); margin:20px 5px 5px 5px; text-align: center; transition: .2s ease; margin-bottom: 20px; }
+.category_main{ display: flex; justify-content: center; flex-flow: row wrap; word-wrap: break-word; z-index: 11; padding-left: 50px;  }
+.category_main li{ padding-bottom: 10px; }
+.category_main li a{ display:inline-block; padding:5px 10px;  background:rgba(255,255,255,.7); border-radius: 20px; font:600 12px/16px 'Noto Sans KR',Sans-serif; color:rgba(0,0,0,.7); margin:20px 5px 5px 5px; text-align: center; transition: .2s ease;  }
 .category_main li a:hover{ background:rgba(255,255,255,.8);}
 .category_main li.active a{background:rgba(255,255,255,.99); color: #009900 }
 .category_main li a i{ display: block; font-size: 16px }
 
-.main_wrap{  position: relative; width: 100%; height:100%; min-height: 700px; box-sizing: border-box; display: flex; justify-content: center; flex-direction:row; justify-content: space-between; word-wrap: break-word; }
+.main_wrap{  position: relative; width: 100%; height:100%; min-height: 700px; box-sizing: border-box; display: flex; justify-content: center; flex-direction:row; justify-content: space-between; word-wrap: break-word;  }
 .main_wrap:after{ content:""; display: block; clear:both; }
 /*.header_wrap{ display: none }*/
 
-.main_left_padding{ position: relative;top:0; left:0; width: 70px; height: 100%;  min-width: 70px;  flex: 0 0 auto;  }
+.main_left_padding{ position: relative;top:0; left:0; width: 80px; height: 100%;  min-width: 80px;  flex: 0 0 auto;  }
 .main_left_padding:after{ content:""; display: block; clear:both; }
 
-.main_contents_center{ overflow:auto; min-width: 900px; width: 100%; /* height:100%; */ }
+.main_contents_center{ /* min-width: 900px; */ height:100%;  }
 .main_contents_center:after{ content:""; display: block; clear:both; }
 
 .main_wrap .ai_card_skin{ min-width: 400px;  margin: 0 auto; padding:0 20px 5px 20px; width:100%; max-width:650px;  box-shadow: 1px 1px 5px rgba(0,0,0,.3); z-index: 2 }
@@ -60,7 +60,7 @@
 .main_wrap .form_info .memo b{ display: none }
 .main_wrap .ai_card .form_info .memo{ text-align: center }
 .main_wrap .ai_card .form_info .memo textarea{ width: 100%; border-color:rgba(0,0,0,.2); height: 20px; margin:0 auto; box-sizing: border-box; font:500 16px/22px 'Noto Sans KR',Sans-serif; text-align: center; padding-top: 12px }
-.main_wrap .ai_card .form_info .memo textarea::placeholder{  }s
+.main_wrap .ai_card .form_info .memo textarea::placeholder{  }
 
 .main_wrap .card_map_wrap{ margin:10px 10px 0 0; width: 280px; height: 320px; border-radius: 3px }
 .main_wrap .ai_card.design dd.body { display: flex; justify-content: center; flex-direction:row; justify-content: space-between; word-wrap: break-word; }

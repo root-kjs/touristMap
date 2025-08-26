@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="robots" content="ALL"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>PARTY PEOPLE</title>
+    <title>데모체험(사용자단)</title>
     <meta name="Description" content="AI추천 인천 명소에 대한 나만의 초대카드를 만들어보세요."/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.1,maximum-scale=5.0,user-scalable=yes" />
     <link rel="stylesheet" type="text/css" href="/map/css/reset.css" >
@@ -19,7 +19,7 @@
     <script src="//kit.fontawesome.com/56b5cc4bd2.js" crossorigin="anonymous"></script><!-- 폰트어썸(아이콘 폰트) 사용 인증된 링크 -->
     <script src="/map/js/jquery-ui-1.10.4.custom.min.js"></script>
 </head>
-<body class="main">
+<body class="main" style="background: #0f5132 url(/map/img/bg_06.jpg) no-repeat; background-size:cover;">
 <div class="container">
     <!-- 모달 레이어 : 모임카드 미리보기 상세페이지 정보 -->
     <div class="modal_layer_wrap detail">
@@ -32,7 +32,7 @@
     <!-- ####### 01. HEADER START ####### -->
     <div class="header_wrap">
         <header>
-            <h1 class="logo"><a href="/">Party People</a></h1>
+            <h1 class="logo"><a href="/">Root Lab</a></h1>
         </header>
     </div>
     <!-- ####### 01. HEADER END ####### -->
@@ -41,10 +41,10 @@
     <div class="lnb_wrap">
         <!-- #### 02-1. 좌측 고정 업종별 아이콘 메뉴 시작 -->
         <dl class="fixed_quick_menu">
-            <dt title="Party Peaple(인천)"><a href="/map/index.jsp"> 인천시</a></dt>
-             <dd class="active"><a href="/map/place.jsp"><i class="fa-solid fa-map-location-dot"></i> Place</a></dd>
-            <dd><a href="/map/category.jsp"><i class="fa-regular fa-compass"></i> Category</a></dd>
-            <dd><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> Invite</a></dd>
+            <dt title="Party Peaple(인천)"><a href="/map/index.jsp"> 인천시<br/>(데모체험)</a></dt>
+            <dd class="active"><a href="/map/place.jsp"><i class="fa-solid fa-map-location-dot"></i> 추천모임코스</a></dd>
+            <dd><a href="/map/category.jsp"><i class="fa-regular fa-compass"></i> 카테고리</a></dd>
+            <dd><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> 초대장꾸미기</a></dd>
             <dd class="mypage"><a href="/map/mypage.jsp"><i class="fa-solid fa-user-gear"></i> My page</a></dd>
         </dl>
         <ul class="membership">
@@ -70,7 +70,7 @@
         <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-core.min.js"></script>
         <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-tag-cloud.min.js"></script>
         <!-- //메인 워드 클라우드  -->
-        <div class="main_wrap" style="background: #0f5132 url(/map/img/bg_06.jpg) no-repeat top; background-size: cover;">
+        <div class="main_wrap" >
                 <div class="main_left_padding"></div>
                 <div class="main_contents_center">
                     <!-- 메인 워드 클라우드 시작 -->
@@ -84,13 +84,13 @@
                                 <dt class="header">
                                     <h2>
                                         <label>
-                                            <b>제 목</b><input type="text" placeholder="원하시는 모임명을 적어주세요." id="" value="동인천/차이나타운/짜파게티/회식">
+                                            <b>제 목</b><input type="text" placeholder="원하시는 모임명을 적어주세요." id="" value="강화도/가족모임/노을/역사">
                                         </label>
                                     </h2>
                                     <div class="form_info"><!-- 연관 키워드 10개 -->
                                         <div class="date">
                                             <label><i class="fa-solid fa-people-group"></i> <b>모임날짜</b><input type="date" value="2023-08-21"></label>
-                                            <label><b>모임시간</b><input type="time" value=""></label>
+                                            <label><b>모임시간</b><input type="time" value="14:30"></label>
                                             <label><b>참가인원</b><input type="text" value="5명"> </label>
                                         </div>
                                         <div class="memo"><label><b>모임내용</b><textarea class="card_memo" name="" rows="2" vlaue="" placeholder="AI추천 인천 명소를 확인하시고, 나만의 모임 초대장을 만들어보세요!"></textarea></label></div>
@@ -160,7 +160,7 @@
                                 </dd>
                             </dl>
                         </dd>
-                        <dd class="footer">© 2025 Root.Lab</dd>
+                        <dd class="footer">© 2025 Root Lab</dd>
                     </dl>
                 </div>
         </div>

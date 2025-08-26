@@ -10,12 +10,13 @@
 .header_wrap header .search_box{ position: absolute; top:1px; right:2% }
 
 .header_wrap header:after{ content:""; display: block; clear:both;  }
-.header_wrap header h1{ position: absolute; top: 9px; left: 0px;width: 100%; text-align: center; letter-spacing: -0.5px; font:600 27px/45px 'Noto Sans KR', SansSerif; letter-spacing:-1px; text-transform:uppercase }
-.header_wrap header h1 a{ display: inline-block; /* background:url("/map/img/em_ic.png") no-repeat 0 8px; padding-left:32px; background-size: 30px 30px; */ }
+.header_wrap header h1{ position: absolute; top: 9px; left: 0px;width: 100%; text-align: center; letter-spacing: -0.5px; font:600 22px/40px 'Noto Sans KR', SansSerif; letter-spacing:-1px; text-transform:uppercase }
+.header_wrap header h1 a{ display: inline-block;  background:url("/map/img/em_ic.png") no-repeat 0 5px; padding-left:35px; background-size: 30px 30px;  }
 .header_wrap header h1:hover{ color: #009900 }
+.main .header_wrap header h1 a{ background: none; }
 
 /* 페이지 검색창 */
-.page_search{  position: absolute; top: 59px; left: 15px;  width:90%;  overflow: hidden;  }
+.page_search{  position: absolute; top: 55px; left: 15px;  width:90%;  overflow: hidden;  }
 .page_search input[type=text]{ width:79%; /*border:solid 1px rgba(0,0,0,.2); background: rgba(0,0,0,.05); */
     font:600 17px/34px Arial, 'Noto Sans KR',Sans-serif;  padding: 0 10px 0 15%; margin-right:5px; color:#000; border:none; border:solid 1px rgba(0,0,0,.7); border-width:2px; border-radius: 5px;  }
 .page_search input::placeholder{ color:rgba(0,0,0,.3); font-size: 14px }
@@ -24,7 +25,7 @@
 
 
 /* 검색창 추천 검색 키워드 */
-.search_keword{ position: relative; top: 106px; left:0; height: 74px; font:500 12px/14px 'Noto Sans KR',Sans-serif; overflow: hidden;display: flex; width: auto; flex-wrap: wrap; flex-direction: row; justify-content: center; align-items: stretch; align-content: stretch; }
+.search_keword{ position: relative; top: 100px; left:0; height: 74px; font:500 12px/14px 'Noto Sans KR',Sans-serif; overflow: hidden;display: flex; width: auto; flex-wrap: wrap; flex-direction: row; justify-content: center; align-items: stretch; align-content: stretch; }
 .search_keword dt{ display: block; width: 100%; padding-bottom:5px; border-bottom:solid 1px rgba(0,0,0,.2)  }
 .search_keword dt a{  font:600 14px/18px 'Noto Sans KR',Sans-serif; }
 .search_keword dt a b{ color: #009900; font:600 15px/18px 'Noto Sans KR',Sans-serif; }
@@ -52,12 +53,12 @@ nav ul li a:hover{ color: #009900 }
 nav ul li a.active{ color: #009900; font-weight: 600 }
 
 /* 좌측메뉴  */
-.lnb_wrap{ position:fixed; top:180px; left: 0px; z-index:9999999;  width: 14.6%;  min-width: 280px; height: 100%; border:solid 1px rgba(0,0,0,.3); border-width:1px 1px 0 ; border-top-color: rgba(0,0,0,.15); overflow-y:auto;
-    background:rgba(255,255,255,1); font-size: 12px; box-shadow: 0px 5px rgba(0,0,0,.4); /*box-shadow: 1px 0px 2px rgba(0,0,0,.3)*/ }
-.lnb_wrap:before{ content:""; display: block; width: 1px; height: 100%; background: rgba(0,0,0,.15); position: absolute; top:0; left:70px }
+.lnb_wrap{ position:fixed; top:174px; left: 0px; z-index:9999999;  width: 14.6%;  min-width: 280px; height: 100%; border:solid 1px rgba(0,0,0,.3); border-width:1px 1px 0 ; border-top-color: rgba(0,0,0,.15); overflow-y:auto; 
+    background:rgba(255,255,255,1); font-size: 12px; box-shadow: 0px 5px rgba(0,0,0,.4); /*box-shadow: 1px 0px 2px rgba(0,0,0,.3)*/  }
+.lnb_wrap:before{ content:""; display: block; width: 1px; height: 100%; background: rgba(0,0,0,.15); position: absolute; top:0; left:80px }
 .lnb_wrap:after{ content:""; display: block; clear:both; }
 
-.fixed_quick_menu{ z-index:40;  position:absolute; top:0px; left: 0px;  width: 70px;  height: 100%;  background: #fff; text-align: center; font:500 12px 'Noto Sans KR', SansSerif; line-height:100%; opacity: .8; height: 720px }
+.fixed_quick_menu{ z-index:40;  position:absolute; top:0px; left: 0px;  width: 80px;  height: 100%;  background: #fff; text-align: center; font:400 12px 'Noto Sans KR', SansSerif; line-height:100%; opacity: .8; height: 720px }
 
 .fixed_quick_menu dt{ padding: 10px 0; text-align: center; cursor: pointer; border-bottom: solid 1px rgba(0,0,0,.1) }
 .fixed_quick_menu dd{ padding: 11px 0; word-break: initial; cursor: pointer; border-bottom: solid 1px rgba(0,0,0,.1); text-transform:uppercase; }
@@ -68,14 +69,14 @@ nav ul li a.active{ color: #009900; font-weight: 600 }
 .fixed_quick_menu dd.active a{  color: #fff;  }
 .fixed_quick_menu dd.active i{ color: #fff; }
 
-.membership{ position: fixed; bottom:30px; left:1px; width: 70px; z-index: 99999; background: #fff; }
+.membership{ position: fixed; bottom:30px; left:1px; width: 80px; z-index: 99999; background: #fff; }
 .membership li{ padding: 10px 0; word-break: initial; cursor: pointer; border-top: solid 1px rgba(0,0,0,.1); text-transform:uppercase; text-align: center; opacity:.7; }
 .membership i{ display: block; font-size: 16px; }
 .membership li:hover{ opacity:1; background: rgba(0,0,0,.05); color: #009900 }
 .membership li:hover a{ color: #009900 }
 
 /* 페이지 컨텐츠 관련 좌측 메뉴  */
-.lnb{ position:absolute; top:0px; left: 0px; font-size: 13px;  width: 100%; min-width: 210px; padding: 15px 0 15px 70px; }
+.lnb{ position:absolute; top:0px; left: 0px; font-size: 13px;  width: 100%; min-width: 210px; padding: 15px 0 15px 80px; }
 .lnb h2{ font:600 24px/33px 'Noto Sans KR', SansSerif; text-align: center; text-transform:uppercase; color:rgba(0,0,0,.9); letter-spacing: 1px; padding: 0 0 15px 0;  }
 .lnb h2 a i{ display: block }
 
@@ -85,7 +86,7 @@ nav ul li a.active{ color: #009900; font-weight: 600 }
 .lnb h2 i{ color: #009900; display: inline-block; padding-right:3px; }
 .dash_board_graph{ height: 240px; margin:0 auto; text-align: center; border-bottom: solid 1px rgba(0,0,0,.1); padding: 15px }
 
-.sub_menu_list{ padding:0 0 20px 0;overflow-y:auto; border-top:solid 1px rgba(0,0,0,.1)  }
+.sub_menu_list{ padding:0 0 20px 0;overflow-y:auto; border-top:solid 1px rgba(0,0,0,.1);  }
 .sub_menu_list li{ padding: 0; }
 .sub_menu_list li a{ position:relative; display: block; padding:5px; box-sizing: border-box; cursor: pointer; font:600 15px 'Noto Sans KR',Sans-serif; line-height:150%;  border-bottom: solid 1px rgba(0,0,0,.08); color: rgba(0,0,0,.6); min-height: 33px  }
 .sub_menu_list li a span{font:600 13px 'Noto Sans KR',Sans-serif;}
@@ -138,9 +139,9 @@ nav ul li a.active{ color: #009900; font-weight: 600 }
 .footer_wrap{ position:fixed;  width: 14.6%; min-width: 280px; height: 30px; bottom:0px; left:0px; z-index:50; background: rgba(255,255,255,1); border-top:solid 1px rgba(0,0,0,.2); border-right:solid 1px rgba(0,0,0,.3); z-index: 99999999 }
 .footer_wrap footer{ }
 .copyright{ padding: 0; font:500 12px/30px 'Noto Sans KR',SansSerif, Arial;color:rgba(0,0,0,.6); text-align: center }
-.to_top{ position: fixed; right:10px; bottom:10px; font:500 14px/20px 'Noto Sans KR',SansSerif, Arial; width: 50px; height: 47px; text-align: center; display: inline-block; color: rgba(0,0,0,.8);  background:rgba(255,255,255,.7); padding-top:12px; border:solid 1px rgba(0,0,0,.2); z-index:9999; border-radius: 100px; vertical-align: middle  }
-.to_top i{ display: block; font-size: 14px; box-sizing: border-box;  }
-.to_top:hover{  background:rgba(0,0,0,.5); color: #fff; }
+.to_top{ position: fixed; right:0px; bottom:0px; font:500 12px/30px 'Noto Sans KR',SansSerif, Arial; text-align: center; display: inline-block; color:rgba(0,0,0,.8); padding:0 10px;  background:rgba(0,0,0,.1); z-index:9999; vertical-align: middle  }
+.to_top i{  font-size: 14px; box-sizing: border-box;  }
+.to_top:hover{ background:rgba(0,0,0,.7);  color: #fff; }
 
 /* 모달 레이어 */
 .modal_layer_wrap{ position: fixed; top:0; left: 0;  z-index:9999999999; display:none;width:100%; height: 100%; }
@@ -174,7 +175,7 @@ nav ul li a.active{ color: #009900; font-weight: 600 }
      우측 컨텐츠
 ===============================  */
 
-.contents_wrap{ position: relative; height: 100%;  box-sizing: border-box; font-size: 12px; word-break: break-all;  }
+.contents_wrap{ position: relative; height: 100%;  box-sizing: border-box; font-size: 12px; word-break: break-all; }
 .contents_wrap:after{ content:""; display: block; clear:both; }
 
 .skin .left_contents{ }
@@ -205,9 +206,9 @@ nav ul li a.active{ color: #009900; font-weight: 600 }
 .right_contents:after{ content:""; display: block; clear:both; }
 
 /* 페이지 타이틀 및 페이지 네비 경로 */
-.right_contents .page_title{ border-bottom: solid 2px rgba(0,0,0,.7); padding: 0 0 16px 0; margin-bottom:20px;}
+.right_contents .page_title{ border-bottom: solid 2px rgba(0,0,0,.7); padding: 0 0 16px 0; }
 .right_contents .page_title:after{ content:""; display: block; clear:both; }
-.right_contents h1{ position: relative; font:600 26px/28px 'Noto Sans KR', SansSerif; display: inline-block }
+.right_contents h1{ position: relative; font:600 20px/28px 'Noto Sans KR', SansSerif; display: inline-block }
 .right_contents h1 span{ display: none }
 .right_contents h1 i{ color: #009900; display: inline-block; font-size: 24px;  }
 .right_contents h1 b.num{ display:none; background: #fff; font:500 14px/18px 'Noto Sans KR', SansSerif; color:  #009900; margin: 0 0 0 10px; border:solid 1px #009900; padding: 1px 10px; border-radius: 10px; }
@@ -230,7 +231,7 @@ nav ul li a.active{ color: #009900; font-weight: 600 }
 
 /* PLACE  우측 카드리스트 컨텐츠 영역 해더 고정 */
 .right_contents.area{ padding-top:70px;  }
-.right_contents.area .page_title{ position: fixed; top:0; right: 0; width: 29%; min-width: 400px; background: #fff; padding: 15px; z-index: 99; border-left:solid 1px rgba(0,0,0,.3); box-sizing: border-box }
+.right_contents.area .page_title{ position: fixed; top:0; right: 0; width: 29%; min-width: 400px; background: #fff; padding:7px 15px; z-index: 99; border-left:solid 1px rgba(0,0,0,.3); box-sizing: border-box; display: flex; align-items: center;}
 .right_contents.area .paging{ position: fixed; bottom:0px; right: 0; width: 29%; min-width: 400px; z-index: 11; background:linear-gradient(to top, #f8f8f8 30%, #fff 100% );  border-top:solid 1px rgba(0,0,0,.3);  border-left:solid 1px rgba(0,0,0,.3); }
 
 
@@ -277,14 +278,13 @@ nav ul li a.active{ color: #009900; font-weight: 600 }
 /*********************
 페이징
 **********************/
-.paging{text-align:center; clear:both; padding: 6px 0;  }
+.paging{text-align:center; clear:both; padding: 1px 0;  }
 .sticky-table .paging{ bottom:0; left:0; right:0; background:linear-gradient(180deg,#fff,#f8f8f8); box-shadow: 1px -1px 1px rgba(255,255,255,1) inset; border-top:1px solid #ccc; padding:5px; /*z-index: 9;
 position: -webkit-sticky; position: sticky;*/}
 .sticky-table .paging .wrap{background:linear-gradient(180deg,#fff,#f8f8f8); box-shadow: 1px -1px 1px rgba(255,255,255,1) inset;}
-.paging a{font-weight:bold; min-width:26px; padding:0 5px; font:500 12px/24px 'Noto Sans KR',sans-serif; vertical-align: middle; color:rgba(0,0,0,.8); border-radius: 10px; }
-.paging a.active{background:rgba(0,0,0,.6); color:#fff; }
-.paging a:hover{ color:#009900; background:#009900; color: #fff}
-.paging a.active:hover{background:#009900; color: #fff }
+.paging a{font-weight:bold; min-width:26px; padding:0 5px; font:500 12px/24px 'Noto Sans KR',sans-serif; vertical-align: middle; color:rgba(0,0,0,.8); border-radius: 2px; }
+.paging a.active{ color:#009900; }
+.paging a:hover{ color:#009900; }
 .paging .btn_first,
 .paging .btn_prev,
 .paging .btn_next,
@@ -306,7 +306,7 @@ position: -webkit-sticky; position: sticky;*/}
 .card_list_wrap:after{ content:""; display: block; clear:both; }
 
 
-dl.ai_card{ position: relative; box-sizing: border-box; padding: 20px 20px 12px 25px;  margin:0 auto 40px; border:solid 1px rgba(0,0,0,.3); box-shadow:2px 2px 3px rgba(0,0,0,.2); border-radius: 20px; min-width: 345px;z-index:1; overflow: hidden; background:#fff }
+dl.ai_card{ position: relative; box-sizing: border-box; padding: 20px 20px 12px 25px;  margin:0 auto 40px; border:solid 1px rgba(0,0,0,.3); box-shadow:2px 2px 3px rgba(0,0,0,.2); border-radius: 10px; min-width: 345px;z-index:1; overflow: hidden; background:#fff }
 dl.ai_card:after{ content:""; display: block; clear:both; }
 dl.ai_card:hover{  }
 .analisys dl.ai_card{ width: 100%; border-radius: 3px }
@@ -440,11 +440,11 @@ ul.summary_card .btn_wrap button:hover, ul.summary_card .btn_wrap a:hover
 
 /* 카테고리 */
 ul.summary_card > li .category{ display: inline-block;  text-align: center; vertical-align: middle; margin-bottom: 6px; border:solid 1px rgba(0,0,0,.1); font:400 11px/11px Sans-serif; border-radius:30px; overflow: hidden }
-ul.summary_card > li .category{ position: absolute; top:37px; right:0px; border-radius: 0; z-index:1; background: #fff; font-weight: 600; border-color:rgba( 0,0,0,.1);  }
+ul.summary_card > li .category{ position: absolute; top:37px; right:0px; border-radius: 0; z-index:1; background:rgba(255,255,255,.8); font-weight: 600; border-color:rgba( 0,0,0,.1);  }
 .left_contents_center ul.summary_card > li .category{ top:34px; }
-ul.summary_card > li .category b{ font:400 12px/18px 'Noto Sans KR',Sans-serif; display: inline-block; padding: 1px 3px  }
-ul.summary_card > li .category b.depth_1{ color: rgba(0,0,0,.5); }
-ul.summary_card > li .category b.depth_2{ background:rgba(0,0,0,.1); border-radius: 0; color: rgba(0,0,0,.5); letter-spacing: 0.5px }
+ul.summary_card > li .category b{ font:400 12px/18px 'Noto Sans KR',Sans-serif; display: inline-block; padding: 1px 4px  }
+ul.summary_card > li .category b.depth_1{ color: rgba(0,0,0,.7); }
+ul.summary_card > li .category b.depth_2{ background:rgba(0,0,0,.1); border-radius: 0; color: rgba(0,0,0,.7); letter-spacing: 0.5px }
 
 .right_contents.area ul.summary_card > li .category{ position: absolute; top:10px; right:-1px;  }
 .right_contents.area ul.summary_card > li .category b{ font:400 11px/16px Sans-serif;  }
@@ -452,7 +452,7 @@ ul.summary_card > li .category b.depth_2{ background:rgba(0,0,0,.1); border-radi
 
 /* 모임카드 푸터 */
 dl.ai_card dd.footer{ text-align: center; padding: 10px 0 0 0; margin:0 -10px; border-top:solid 1px rgba(0,0,0,.3); }
-dl.ai_card dd.footer button, dl.ai_card dd.footer a{ display:inline-block; background: #fff; font:500 18px/40px 'Noto Sans KR', SansSerif; vertical-align: middle; border:solid 1px rgba(0,153,0,.5);  color: #009900;  margin:2px 12px 2px 1px; border-radius: 30px; padding:0 15px;  letter-spacing:-0.5px; vertical-align: middle }
+dl.ai_card dd.footer button, dl.ai_card dd.footer a{ display:inline-block; background: #fff; font:500 18px/40px 'Noto Sans KR', SansSerif; vertical-align: middle; border:solid 1px rgba(0,153,0,.5);  color: #009900;  margin:2px 12px 2px 1px; border-radius: 10px; padding:3px 15px;  letter-spacing:-0.5px; vertical-align: middle }
 .right_contents.area dl.ai_card dd.footer button, .right_contents.area dl.ai_card dd.footer a{ font:400 14px/22px 'Noto Sans KR', SansSerif; }
 dl.ai_card dd.footer button:hover,
 dl.ai_card dd.footer a:hover{border:solid 1px rgba(0,153,0,.9); color: #009900;  }
