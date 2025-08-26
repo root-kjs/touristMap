@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/jsp; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE jsp>
-<jsp>
+<%@ page language = "java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset='utf-8'>
     <title>Root.Lab(소상공인 비즈니스 플랫폼)</title>
