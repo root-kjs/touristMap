@@ -32,7 +32,7 @@
     <!-- ####### 01. HEADER START ####### -->
     <div class="header_wrap">
         <header>
-            <h1 class="logo"><a href="/">Root Lab</a></h1>
+            <h1 class="logo"><a href="/index.jsp">Root Lab</a></h1>
         </header>
     </div>
     <!-- ####### 01. HEADER END ####### -->
