@@ -468,7 +468,7 @@ dl.ai_card dd.footer a.confirm:hover{ background: #018a01;  }
 
 /* 모임카드  반응형 처리  */
 @media(max-width:1400px){
-    ul.summary_card > li{ width:66%;  }
+    ul.summary_card > li{ width:60%;  }
     ul.summary_card .btn_wrap{  width:60%;  margin-top:0px; text-align: right; position: absolute; bottom:7px; right:0 }
     ul.summary_card .btn_wrap button{ margin:1px 0; padding: 1px 2px; border-radius:0px; color: #0a58ca; background: none; font-size:12px; width:auto; border: 0; letter-spacing: -0.5px }
     ul.summary_card .btn_wrap button:hover{ font-weight: 600; color: #009900 }
