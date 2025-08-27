@@ -26,23 +26,15 @@
     <!-- ####### 01. HEADER START ####### -->
     <div class="header_wrap">
         <header>
-            <h1 class="logo"><a href="/map/index.jsp">인천시(데모체험)</a></h1>
+            <h1 class="logo"><a href="/map/index.jsp">인천광역시(데모체험)</a></h1>
         </header>
-<!--        <nav class="gnb">-->
-<!--            <ul>-->
-<!--                <li><a href="place">Place</a></li>-->
-<!--                <li><a href="culture">Culture</a></li>-->
-<!--                <li><a href="invite">Invite</a></li>-->
-<!--                <li><a href="analysis">Analysis</a></li>-->
-<!--            </ul>-->
-<!--        </nav>-->
         <form>
             <div class="page_search">
-                <input type="text" placeholder="[인천] 장소, 상호명 검색" autofocus><!--
+                <input type="text" placeholder="검색 키워드/상호명 입력" autofocus><!--
                  --><input type="submit" value="" class="fa fa-search">
             </div>
            <dl class="search_keword"> 
-                <dt><a href="#" onclick="sendCategory('전체')">인천시 <b>AI추천</b> 키워드</a></dt>
+                <dt><a href="#" onclick="sendCategory('전체')">우리동네 <b>AI추천</b> 모임장소</a></dt>
                 <dd class="관광"><a href="#" class="" onclick="sendCategory('관광')"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> <span>관광</span></a></dd>
                 <dd class="전시"><a href="#" onclick="sendCategory('전시')"><i class="fa-solid fa-landmark" aria-hidden="true"></i> <span>전시</span></a></dd>
                 <dd class="자연"><a href="#" onclick="sendCategory('자연')"><i class="fa-solid fa-mountain-sun" aria-hidden="true"></i> <span>자연</span></a></dd><br>
@@ -61,8 +53,9 @@
         <dl class="fixed_quick_menu">
 <!--        <dt title="Party Peaple(인천)"><i class="fa-solid fa-map-location-dot"></i>인천</dt>-->
             <dd class="active"><a href="/map/place.jsp"><i class="fa-solid fa-map-location-dot"></i> 추천모임코스</a></dd>
-            <dd><a href="/map/category.jsp"><i class="fa-regular fa-compass"></i> 카테고리</a></dd>
+            <dd><a href="/map/category.jsp"><i class="fa-regular fa-compass"></i> 진행중인모임</a></dd>
             <dd><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> 초대장만들기</a></dd>
+
         </dl>
         <ul class="membership">
             <li><a href="#" onclick="('로그인')"><i class="fa-solid fa-right-to-bracket"></i> 로그인</a></li>
@@ -71,26 +64,9 @@
         <!-- #### 02-1. 좌측 고정 업종별 아이콘 메뉴 끝 -->
         <hr class="skip"/>
         <!-- #### 02-2. 좌측 on/off 페이지 서브 메뉴 노출 시작 -->
-        <script>
-            $(function(){
-                // 업종별 대메뉴 활성화(class="active") 메뉴버튼 처리
-                $("nav ul li:nth-child(1) a").addClass("active");
-                // 사용자가 선택한 메뉴 활성화(class="active")에 따른 페이지 메뉴명 제이쿼리 변경 처리
-                $(".fixed_quick_menu dd.active a").clone().prependTo(".lnb h2");
-                $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");
-                // $(".right_contents h1 span").appendTo("분석");
-                // 페이지 네비게이션 경로 처리
-                $(".fixed_quick_menu dd.active a").clone().appendTo(".page_path");
-                $(".sub_menu_list li a.active span").clone().appendTo(".page_path");
-                $(".right_contents.area ul.summary_card input[type=checkbox]").attr(disabled);
-                // 체크 박스 비활성화
-                //$(".right_contents.area ul.summary_card input[type=checkbox]").prop("disabled",true);
-
-            });
-        </script>
         <div class="lnb">
             <!-- 02-2-1. 대시보드 집계 그래프 노출 영역 시작 -->
-            <h2> <div class="standard_cond">Ai추천 모임장소를 확인 후, <br>나만의 초대카드를 만들어보세요.</div></h2>
+            <!--<h2> <div class="standard_cond"><b>우리동네 숨겨진 핫플레이스</b> <br/>주제별 다양한 장소를 확인하세요</div></h2> -->
             <!-- 02-2-1.대시보드 집계 그래프 노출 영역 끝 -->
             <!-- 02-2-2.페이지 컨텐츠 서브 메뉴 노출 시작 -->
             <ul class="sub_menu_list area">
@@ -225,7 +201,7 @@
                    </dd>
                    <dd class="footer">
                        <button class="basic"><i class="fa-solid fa-location-dot"></i> 지도보기</button>
-                       <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장만들기</button>
+                       <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장 만들기</button>
                    </dd>
                </dl>
                 <!-- 추천(조합) 모임카드 #.01 끝 -->
@@ -279,29 +255,10 @@
                                 <button><i class="fa-solid fa-search"></i></button>
                             </div>
                         </div>
-                        <!-- 대안 장소 선택_03: 업체 리스트 -->
-                        <div class="card_list">
-                            <ul class="summary_card">
-                                <li class="subject">
-                                    
-                                    <b>신파시장</b>
-                                    <span class="category"><b class="depth_1">쇼핑</b><b class="depth_2">전통시장</b></span>
-                                </li>
-                                <li class="thumb"><img src="/map/img/sample_store.jpg" alt="신파시장"></li>
-                                <li class="addr">인천 중구 송현로59번길 5</li>
-                                <li class="work_time">10:00~21:00<br>지원센터 09:00~18:00<span class="holyday">(쉬는날 : 매월 첫 주 월요일, 설·추석 당일 / 지원센터 주말 <br>(점포마다 상이함))</span></li>
-                                <li class="parking">주차시설 : 있음,무료</li>
-                                <li class="tel">032-773-2368</li>
-                            </ul>
-                            <div class="btn_wrap">
-                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
-                                <button><i class="fa-solid fa-search"></i></button>
-                            </div>
-                        </div>
                     </dd>
                     <dd class="footer">
                         <button class="basic"><i class="fa-solid fa-location-dot"></i> 지도보기</button>
-                       <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장만들기</button>
+                       <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장 만들기</button>
                     </dd>
                 </dl>
                 <!-- 추천(조합) 모임카드 #.02 끝 -->
