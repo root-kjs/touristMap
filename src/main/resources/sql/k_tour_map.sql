@@ -1,13 +1,26 @@
 # 00. 데이터베이스 초기화 및 설정
-DROP DATABASE IF EXISTS k_tourmap;
-CREATE DATABASE k_tourmap
+DROP DATABASE IF EXISTS k_tour_map;
+CREATE DATABASE k_tour_map
     DEFAULT CHARACTER SET utf8mb4
     COLLATE utf8mb4_general_ci;
-USE k_tourmap;
+USE k_tour_map;
 SET sql_safe_updates = 0; -- mysql workbench : safeMode 해제(끄기 0 / 켜기 1)
 
-# 01. 본사회원 TABLE ------------------------------------------------------------------------------------------------
-CREATE TABLE member_head(                                            -- 01. 본사회원 TABLE
+# 01. 본사회원(기본) TABLE ------------------------------------------------------------------------------------------------통신판매업 번호
+CREATE TABLE member_head(                                            # 01. 본사회원 TABLE
+    mNo BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID(), 1)),    -- 1. [pk]회원번호: 시간순 UUID로 인덱스 성능 고려
+    mId VARCHAR(30) NOT NULL UNIQUE,                                -- 3. 로그인 아이디
+    mPwd CHAR(64) NOT NULL,                                         -- 4. 로그인 비밀번호(SHA-256 암호화)
+    mEmail VARCHAR(100) UNIQUE,                                     -- 5. 이메일
+    mGender ENUM('남', '여') DEFAULT NULL,                           -- 8. 성별(남/여)
+    mTermsAgreed BOOLEAN DEFAULT FALSE NOT NULL,                    -- 11. 이용약관(0_FALSE:미동의, 1_TRUE:동의)
+    mCreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,                  -- 12. 가입일시
+    mUpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 13. 수정일시
+    mdeletedAt DATETIME NULL                                        -- 15. 탈퇴일시/null이면 활성회원
+);
+
+# 01. 본사회원(부가정보/유료회원) TABLE ------------------------------------------------------------------------------------------------통신판매업 번호
+CREATE TABLE member_head(                                            # 01. 본사회원 TABLE
     mNo BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID(), 1)),    -- 1. [pk]회원번호: 시간순 UUID로 인덱스 성능 고려
     mType ENUM('일반', '사업자', '단체/협회') NOT NULL,                    -- 2. 회원유형(1.일반회원/2.사업자/3.단체/협회)
     mId VARCHAR(30) NOT NULL UNIQUE,                                -- 3. 로그인 아이디
@@ -15,9 +28,9 @@ CREATE TABLE member_head(                                            -- 01. 본�
     mEmail VARCHAR(100) UNIQUE,                                     -- 5. 이메일
     mName VARCHAR(30) NOT NULL,                                     -- 6. 이름
     mBirth DATE NOT NULL,                                           -- 7. 생년월일(8자리)
-    mGender ENUM('남', '여') DEFAULT NULL,                               -- 8. 성별(남/여)
+    mGender ENUM('남', '여') DEFAULT NULL,                           -- 8. 성별(남/여)
     mPhone VARCHAR(16) NOT NULL UNIQUE,                             -- 9. 휴대폰번호
-    mNationality ENUM('내국인', '외국인') DEFAULT '내국인',                 -- 10. 구분(내국인/외국인)
+    mNationality ENUM('내국인', '외국인') DEFAULT '내국인',               -- 10. 구분(내국인/외국인)
     mTermsAgreed BOOLEAN DEFAULT FALSE NOT NULL,                    -- 11. 이용약관(0_FALSE:미동의, 1_TRUE:동의)
     mCreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,                  -- 12. 가입일시
     mUpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 13. 수정일시
@@ -59,11 +72,33 @@ CREATE TABLE site_info (                                             -- 03. 구�
     CONSTRAINT FOREIGN KEY (mNo) REFERENCES member_head(mNo)
 );
 
+# 04. 구독자 사업자 정보 TABLE -----------------------------------------------------------------------------------------------
+CREATE TABLE business_info (                          					 # 04. 구독자 사업자 정보 테이블
+    biNo INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,      -- 1. [pk]사업자 정보 번호
+    mNo BINARY(16) NOT NULL UNIQUE,                    -- 2. [fk]본사 회원 번호 (member_head의 PK를 참조)
+    biCompanyName VARCHAR(100) NOT NULL,               -- 3. 상호명
+    biCeoName VARCHAR(50) NOT NULL,                    -- 4. 대표자명
+    biBusinessNumber VARCHAR(12) NOT NULL UNIQUE,      -- 5. 사업자등록번호 (예: 123-45-67890)
+    biCorpNumber VARCHAR(14) UNIQUE,                   -- 6. 법인등록번호 (예: 110111-1234567, 법인만 해당)
+    biIndustry VARCHAR(100),                           -- 7. 업태
+    biBusinessType VARCHAR(100),                       -- 8. 업종
+    biAddress VARCHAR(255),                            -- 9. 사업장 주소
+    biMailOrderNumber VARCHAR(12),                     -- 10. 통신판매업신고번호(예: 2025-XX-XXXX)
+    biTel VARCHAR(20),                                 -- 11. 대표 전화
+    biCreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,    -- 12. 생성 일시
+    biUpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 13. 수정 일시
+    
+    -- member_head 테이블의 mNo를 외래 키로 지정
+    CONSTRAINT FOREIGN KEY (mNo) REFERENCES member_head(mNo) ON DELETE CASCADE
+);
+
 # 04. 구독로그 타입 TABLE ---------------------------------------------------------------------------------------------------
-CREATE TABLE sub_log_type (
-    typeId TINYINT UNSIGNED PRIMARY KEY,                            -- 1. [pk]로그 타입 ID
-    typeName VARCHAR(50) NOT NULL UNIQUE,                           -- 2. 로그 타입명
-    description VARCHAR(255)                                        -- 3. 로그 타입에 대한 상세 설명
+CREATE TABLE sub_log_type (													# 04. 구독로그 타입 TABLE 
+    slTypeNo TINYINT UNSIGNED PRIMARY KEY,                            		-- 1. [pk]로그 타입 ID
+    slTypeName VARCHAR(50) NOT NULL UNIQUE,                           		-- 2. 로그 타입명
+    slTypeDescription VARCHAR(255),                                       	-- 3. 로그 타입에 대한 상세 설명
+    slTypeCreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,   				  	-- 4. 생성 일시
+    slTypeUpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- 5. 수정 일시
 );
 
 # 05. 구독로그 TABLE -------------------------------------------------------------------------------------------------------
@@ -101,12 +136,12 @@ INSERT INTO subscription_plan (spName, spDurationUnit, spDurationValue, spPrice,
 ('프리미엄', 'YEAR', 1, 99000.00, 'KRW', '고급 기능을 포함하며, 1년 구독으로 비용을 절약할 수 있는 플랜입니다.', TRUE),
 ('무료체험', 'DAY', 7, 0.00, 'KRW', '프리미엄 기능을 7일간 무료로 체험할 수 있는 플랜입니다.', TRUE);
 
--- # 03. 구독자 사이트 정보 TABLE > 샘플 데이터
+# 03. 구독자 사이트 정보 TABLE > 샘플 데이터
 INSERT INTO site_info (mNo, siName, siDomain, siIntro, siLogo, siFavicon, siTel, siPrivacyOfficer, siEmail, siKeywords, siIsPublic, siCreatedAt, siUpdatedAt) VALUES
 (UUID_TO_BIN('01889895-c9e8-466d-a19e-e5e347895e55', 1), 'K-TourMap 비즈니스', 'biz.ktourmap.com', '사업자 회원들을 위한 K-TourMap 솔루션 페이지입니다.', NULL, NULL, '02-1234-5678', '박서윤', 'bizuser02@example.com', 'K-TourMap, 기업용, 비즈니스', TRUE, '2023-03-20 12:30:00', '2024-05-11 11:15:00'),
 (UUID_TO_BIN('01889895-c9e8-466d-a19e-e5e347895e58', 1), 'K-TourMap 여행사', 'travel.ktourmap.com', 'K-TourMap과 함께하는 여행사 페이지입니다.', NULL, NULL, '02-5678-1234', '최재현', 'bizuser05@example.com', 'K-TourMap, 여행사, 여행', TRUE, '2023-08-30 14:00:00', '2023-08-30 14:00:00');
 
--- # 04. 구독로그 타입 TABLE > 샘플 데이터
+# 04. 구독로그 타입 TABLE > 샘플 데이터
 INSERT INTO sub_log_type (typeId, typeName, description) VALUES
 (1, 'subscribe', '신규 구독 신청'),
 (2, 'unsubscribe', '구독 취소'),
@@ -120,7 +155,7 @@ INSERT INTO sub_log_type (typeId, typeName, description) VALUES
 (10, 'payment_failed', '결제 실패'),
 (11, 'extend', '구독 기간 연장');
 
--- # 05. 구독로그 테이블 > 샘플 데이터 20개
+# 05. 구독로그 테이블 > 샘플 데이터 20개
 INSERT INTO subscription_log (mNo, spNo, slType, slRecordedAt, slCreatedAt, slEndedAt, slRecordedId) VALUES
 -- 1. 박서윤: 베이직 구독 -> 프리미엄 변경 -> 프리미엄 갱신
 (UUID_TO_BIN('01889895-c9e8-466d-a19e-e5e347895e55', 1), 1, 1, '2023-03-20 12:30:00', '2023-03-20 12:30:00', '2024-03-20 12:30:00', 'user_id_1'),
@@ -154,7 +189,7 @@ INSERT INTO subscription_log (mNo, spNo, slType, slRecordedAt, slCreatedAt, slEn
 # 샘플 데이터 테이블 조회 -----------------------------------------------------------------------------------
 SELECT * FROM member_head;			-- 01. 본사회원 테이블
 SELECT * FROM subscription_plan;	-- 02. 구독플랜 테이블
-SELECT * FROM site_info;			-- 03. 구독사이트
+SELECT * FROM site_info;			-- 03. 구독자사이트정보 테이블
 SELECT * FROM sub_log_type;			-- 04. 구독로그타입 테이블
 SELECT * FROM subscription_log;		-- 05. 구독로그 테이블
 

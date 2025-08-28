@@ -1,0 +1,39 @@
+# 04. 구독자 사업자 정보 TABLE (수정안) -----------------------------------------------------------------------------------------------
+CREATE TABLE business_info (                           -- 04. 구독자 사업자 정보 테이블
+    biNo INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,      -- 1. [pk]사업자 정보 번호
+    mNo BINARY(16) NOT NULL UNIQUE,                    -- 2. [fk]본사 회원 번호 (member_head의 PK를 참조)
+    biCompanyName VARCHAR(100) NOT NULL,               -- 3. 상호명
+    biCeoName VARCHAR(50) NOT NULL,                    -- 4. 대표자명
+    biBusinessNumber VARCHAR(12) NOT NULL UNIQUE,      -- 5. 사업자등록번호 (예: 123-45-67890)
+    biCorpNumber VARCHAR(14) UNIQUE,                   -- 6. 법인등록번호 (예: 110111-1234567, 법인만 해당)
+    biIndustry VARCHAR(100),                           -- 7. 업태
+    biBusinessType VARCHAR(100),                       -- 8. 업종
+    biAddress VARCHAR(255),                            -- 9. 사업장 주소
+    biMailOrderNumber VARCHAR(50),                     -- 10. 통신판매업신고번호
+    biTel VARCHAR(20),                                 -- 11. 대표 전화
+    biCreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,    -- 12. 생성 일시
+    biUpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 13. 수정 일시
+    
+    -- member_head 테이블의 mNo를 외래 키로 지정
+    CONSTRAINT FOREIGN KEY (mNo) REFERENCES member_head(mNo) ON DELETE CASCADE
+);
+
+
+
+관심지역
+2차 depth
+8도 > 해당 구 
+
+카테고리
+
+
+
+취향(데이터 기반 검색 키워드)
+연령대, 
+데이트, 
+건강, 
+운동, 
+맛집
+
+
+mLastLoginAt DATETIME NULL,                                     -- 14. 최종로그인일시
