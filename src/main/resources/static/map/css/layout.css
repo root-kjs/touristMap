@@ -203,7 +203,7 @@ nav ul li a.active{ color: #009900; font-weight: 600 }
 .left_contents_padding_right:after{ content:""; display: block; clear:both; }
 
 .right_contents{ position: relative; float:right; min-height: 100%; width:29%; z-index:1;  min-width:400px;  border-left:solid 1px rgba(0,0,0,.1);  box-sizing: border-box;  background:rgba(0,0,0,.3); padding-bottom: 30px  }
-.right_contents:before{ z-index:-1; position:absolute; top:0; left:0; content:""; display: block; clear: both; width: 100%; height: 100%; background: rgba(255,255,255,.7); }
+.right_contents:before{ z-index:-1; position:absolute; top:0; left:0; content:""; display: block; clear: both; width: 100%; height: 100%; background: rgba(255,255,255,.5); }
 .right_contents:after{ content:""; display: block; clear:both; }
 
 /* 페이지 타이틀 및 페이지 네비 경로 */

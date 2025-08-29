@@ -92,24 +92,9 @@
     <section class="contents_wrap">
         <!-- ########  페이지마다의 고정 서비스 내용이(예, 지도나 모임카드 수정) 들어갑니다. ########### -->
         <div class="left_contents">
-            <div id="map"></div>
-                <script th:inline="javascript">
-                    /* 지도 관련 스크립트*/
-
-                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-                        mapOption = {
-                            /* 전국 지도*/
-                            // center: new kakao.maps.LatLng(36.01683146793617, 129.42603381793853), // 지도의 중심좌표
-                            // level: 13 // 지도의 확대 레벨
-
-                            /* 인천으로만 타겟을 줄인 지도*/
-                            center: new kakao.maps.LatLng(37.45139514881181, 126.74155431191699), // 지도의 중심좌표
-                            level: 8 // 지도의 확대 레벨
-                        };
-                    // 지도를 생성합니다
-                    var map = new kakao.maps.Map(mapContainer, mapOption);
-                </script>
-
+<!-- ############################ 카카오맵 지도 연동 시작 ############################### -->
+        <jsp:include page = "/map/test_kakao_1.jsp"></jsp:include>
+<!-- ############################ 카카오맵 지도 연동 끝 ############################### -->
         </div>
         <!-- #### 03-1.우측 본문 영역 시작 -->
         <div class="right_contents area">
