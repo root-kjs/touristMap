@@ -11,9 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/map/css/reset.css" >
     <link rel="stylesheet" type="text/css" href="/map/css/layout.css" >
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3fa5806dfe291fb3622cf85fca14b017&libraries=services,clusterer,drawing"></script>
     <script src="/map/js/jquery.js"></script>
-    <!--구글 차트 관련 스크립트-->
     <script src="//kit.fontawesome.com/56b5cc4bd2.js" crossorigin="anonymous"></script><!-- 폰트어썸(아이콘 폰트) 사용 인증된 링크 -->
     <script src="/map/js/jquery-ui-1.10.4.custom.min.js"></script>
 </head>
