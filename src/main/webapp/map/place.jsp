@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="robots" content="ALL"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>추천모임코스 > 인천광역시 전체</title>
+    <title></title>
     <meta name="Description" content="인천광역시 소재의 다양한 모임취향에 맞는(회식/데이트/동호회) AI추천 모임장소에 대한 상세정보를 제공합니다."/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.1,maximum-scale=5.0,user-scalable=yes" />
     <link rel="stylesheet" type="text/css" href="/map/css/reset.css" >
@@ -34,7 +34,7 @@
                  --><input type="submit" value="" class="fa fa-search">
             </div>
            <dl class="search_keword"> 
-                <dt><a href="#" onclick="sendCategory('전체')">우리동네 <b>AI추천</b> 모임장소</a></dt>
+                <dt><a href="#" onclick="sendCategory('전체')">우리동네 <b>AI추천</b> 모임아이템</a></dt>
                 <dd class="관광"><a href="#" class="" onclick="sendCategory('관광')"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> <span>관광</span></a></dd>
                 <dd class="전시"><a href="#" onclick="sendCategory('전시')"><i class="fa-solid fa-landmark" aria-hidden="true"></i> <span>전시</span></a></dd>
                 <dd class="자연"><a href="#" onclick="sendCategory('자연')"><i class="fa-solid fa-mountain-sun" aria-hidden="true"></i> <span>자연</span></a></dd><br>
@@ -52,7 +52,7 @@
         <!-- #### 02-1. 좌측 고정 업종별 아이콘 메뉴 시작 -->
         <dl class="fixed_quick_menu">
 <!--        <dt title="Party Peaple(인천)"><i class="fa-solid fa-map-location-dot"></i>인천</dt>-->
-            <dd class="active"><a href="/map/place.jsp"><i class="fa-solid fa-map-location-dot"></i> 추천모임코스</a></dd>
+            <dd class="active"><a href="/map/place.jsp"><i class="fa-solid fa-map-location-dot"></i> 추천모임장소</a></dd>
             <dd><a href="/map/category.jsp"><i class="fa-regular fa-compass"></i> 진행중인모임</a></dd>
             <dd><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> 초대장만들기</a></dd>
 
@@ -63,10 +63,33 @@
         </ul>
         <!-- #### 02-1. 좌측 고정 업종별 아이콘 메뉴 끝 -->
         <hr class="skip"/>
+        <script>
+
+            $(function(){
+                // 업종별 대메뉴 활성화(class="active") 메뉴버튼 처리
+                $("nav ul li:nth-child(1) a").addClass("active");
+                // 사용자가 선택한 메뉴 활성화(class="active")에 따른 페이지 메뉴명 제이쿼리 변경 처리
+                $(".fixed_quick_menu dd.active a").clone().prependTo(".lnb h2");
+                $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");
+                // $(".right_contents h1 span").appendTo("분석");
+                // 페이지 네비게이션 경로 처리
+                //$(".fixed_quick_menu dd.active a").clone().appendTo(".page_path");
+                $(".sub_menu_list li a.active span").clone().appendTo(".page_path");
+                $(".right_contents.area ul.summary_card input[type=checkbox]").attr(disabled);
+                // 체크 박스 비활성화
+                //$(".right_contents.area ul.summary_card input[type=checkbox]").prop("disabled",true);
+
+
+
+            });
+            let activeLinkText = $(".fixed_quick_menu dd.active a").text();
+            $("title").text(activeLinkText);
+        </script>
         <!-- #### 02-2. 좌측 on/off 페이지 서브 메뉴 노출 시작 -->
         <div class="lnb">
             <!-- 02-2-1. 대시보드 집계 그래프 노출 영역 시작 -->
-            <!--<h2> <div class="standard_cond"><b>우리동네 숨겨진 핫플레이스</b> <br/>주제별 다양한 장소를 확인하세요</div></h2> -->
+            <h2><div class="standard_cond">우리동네 숨겨진 핫플레이스 <br/>주제별 다양한 장소를 확인하세요</div></h2>
+
             <!-- 02-2-1.대시보드 집계 그래프 노출 영역 끝 -->
             <!-- 02-2-2.페이지 컨텐츠 서브 메뉴 노출 시작 -->
             <ul class="sub_menu_list area">
@@ -99,9 +122,9 @@
         <!-- #### 03-1.우측 본문 영역 시작 -->
         <div class="right_contents area">
             <div class="page_title">
-                <h1>추천모임코스<!-- ## 페이지 타이틀 ##  좌측 메뉴 .active 되어 있는 메뉴명 제이쿼리 클론하여 가져옴 --> </h1>
+                <h1><!-- ## 페이지 타이틀 ##  좌측 메뉴 .active 되어 있는 메뉴명 제이쿼리 클론하여 가져옴 --> </h1>
                 <!-- ## 페이지 네비 경로 ## -->
-                <span class="page_path"> > 인천광역시 전체</span>
+                <span class="page_path"> </span>
             </div>
             <div class="paging">
                 <a href="#" class="btn_first"></a>
