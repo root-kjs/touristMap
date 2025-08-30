@@ -39,14 +39,16 @@
     <hr class="skip"/>
     <!-- ####### 02. LNB START ######### -->
     <div class="lnb_wrap">
-        <ul class="membership">
-            <li><a href="/map/index.jsp"><img src="/map/img/em_ic.png"/> 인천광역시<br/>(데모체험)</a></li>
-            <li><a href="/map/place.jsp"><i class="fa-solid fa-map-location-dot"></i> 추천모임코스</a></li>
-            <li><a href="/map/category.jsp"><i class="fa-regular fa-compass"></i> 진행중인모임</a></li>
-            <li><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> 초대장만들기</a></li>
-            <li><a href="#"><i class="fa-solid fa-right-to-bracket"></i> 로그인</a></li>
-            <li><a href="#"><i class="fa-solid fa-user-plus"></i> 회원가입</a></li>
-        </ul>
+        <div class="membership">
+            <ul>
+                <li><a href="/map/index.jsp"><img src="/map/img/em_ic.png"/> 인천광역시<br/>(데모체험)</a></li>
+                <li><a href="/map/place.jsp"><i class="fa-solid fa-map-location-dot"></i> 추천모임코스</a></li>
+                <li><a href="/map/category.jsp"><i class="fa-regular fa-compass"></i> 진행중인모임</a></li>
+                <li><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> 초대장만들기</a></li>
+                <li><a href="#"><i class="fa-solid fa-right-to-bracket"></i> 로그인</a></li>
+                <li><a href="#"><i class="fa-solid fa-user-plus"></i> 회원가입</a></li>
+            </ul>
+        </div>
         <!-- #### 02-1. 좌측 고정 업종별 아이콘 메뉴 끝 -->
     </div>
     <!-- ####### 02. LNB END ########## -->
