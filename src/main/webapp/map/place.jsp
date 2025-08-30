@@ -33,13 +33,15 @@
             </div>
            <dl class="search_keword"> 
                 <dt><a href="#" onclick="sendCategory('전체')">우리동네 <b>AI추천</b> 모임아이템</a></dt>
-                <dd class="관광"><a href="#" class="" onclick="sendCategory('관광')"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> <span>관광</span></a></dd>
-                <dd class="전시"><a href="#" onclick="sendCategory('전시')"><i class="fa-solid fa-landmark" aria-hidden="true"></i> <span>전시</span></a></dd>
-                <dd class="자연"><a href="#" onclick="sendCategory('자연')"><i class="fa-solid fa-mountain-sun" aria-hidden="true"></i> <span>자연</span></a></dd><br>
-                <dd class="레저"><a href="#" onclick="sendCategory('레저')"><i class="fa-solid fa-person-hiking" aria-hidden="true"></i> <span>레저</span></a></dd>
-                <dd class="쇼핑"><a href="#" onclick="sendCategory('쇼핑')"><i class="fa-brands fa-shopify" aria-hidden="true"></i> <span>쇼핑</span></a></dd>
-                <dd class="음식"><a href="#" onclick="sendCategory('음식')"><i class="fa-solid fa-utensils" aria-hidden="true"></i> <span>음식</span></a></dd>
-                <dd class="숙박"><a href="#" onclick="sendCategory('숙박')"><i class="fa-solid fa-bed" aria-hidden="true"></i> <span>숙박</span></a></dd>
+                <dd>
+                    <a href="#"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> <span>관광</span></a>
+                    <a href="#"><i class="fa-solid fa-landmark" aria-hidden="true"></i> <span>전시</span></a>
+                    <a href="#"><i class="fa-solid fa-mountain-sun" aria-hidden="true"></i> <span>자연</span></a>
+                    <a href="#"><i class="fa-solid fa-person-hiking" aria-hidden="true"></i> <span>레저</span></a>
+                    <a href="#"><i class="fa-brands fa-shopify" aria-hidden="true"></i> <span>쇼핑</span></a>
+                    <a href="#"><i class="fa-solid fa-utensils" aria-hidden="true"></i> <span>음식</span></a>
+                    <a href="#"><i class="fa-solid fa-bed" aria-hidden="true"></i> <span>숙박</span></a>
+                </dd>
             </dl>
         </form>
     </div>
@@ -47,64 +49,48 @@
     <hr class="skip"/>
     <!-- ####### 02. LNB START ######### -->
     <div class="lnb_wrap">
-        <!-- #### 02-1. 좌측 고정 업종별 아이콘 메뉴 시작 -->
-        <dl class="fixed_quick_menu">
-<!--        <dt title="Party Peaple(인천)"><i class="fa-solid fa-map-location-dot"></i>인천</dt>-->
-            <dd class="active"><a href="/map/place.jsp"><i class="fa-solid fa-map-location-dot"></i> 추천모임장소</a></dd>
-            <dd><a href="/map/category.jsp"><i class="fa-regular fa-compass"></i> 진행중인모임</a></dd>
-            <dd><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> 초대장만들기</a></dd>
-
-        </dl>
-        <ul class="membership">
-            <li><a href="#" onclick="('로그인')"><i class="fa-solid fa-right-to-bracket"></i> 로그인</a></li>
-            <li><a href="#" onclick="('회원가입')"><i class="fa-solid fa-user-plus"></i> 회원가입</a></li>
-        </ul>
+        <div class="membership">
+            <ul>
+                <li class="active"><a href="#"><i class="fa-solid fa-map-location-dot"></i> 추천모임장소</a></li>
+                <li><a href="#"><i class="fa-regular fa-compass"></i> 진행중인모임</a></li>
+                <li><a href="#"><i class="fa-solid fa-people-group"></i> 초대장만들기</a></li>
+                <li><a href="#"><i class="fa-solid fa-right-to-bracket"></i> 로그인</a></li>
+                <li><a href="#"><i class="fa-solid fa-user-plus"></i> 회원가입</a></li>
+            </ul>
+        </div>
         <!-- #### 02-1. 좌측 고정 업종별 아이콘 메뉴 끝 -->
         <hr class="skip"/>
         <script>
-
             $(function(){
                 // 업종별 대메뉴 활성화(class="active") 메뉴버튼 처리
                 $("nav ul li:nth-child(1) a").addClass("active");
                 // 사용자가 선택한 메뉴 활성화(class="active")에 따른 페이지 메뉴명 제이쿼리 변경 처리
-                $(".fixed_quick_menu dd.active a").clone().prependTo(".lnb h2");
+                $(".membership li.active a").clone().prependTo(".lnb h2");
                 $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");
-                // $(".right_contents h1 span").appendTo("분석");
-                // 페이지 네비게이션 경로 처리
-                //$(".fixed_quick_menu dd.active a").clone().appendTo(".page_path");
                 $(".sub_menu_list li a.active span").clone().appendTo(".page_path");
                 $(".right_contents.area ul.summary_card input[type=checkbox]").attr(disabled);
-                // 체크 박스 비활성화
-                //$(".right_contents.area ul.summary_card input[type=checkbox]").prop("disabled",true);
-
-
-
             });
-            let activeLinkText = $(".fixed_quick_menu dd.active a").text();
+            let activeLinkText = $(".membership li.active a").text();
             $("title").text(activeLinkText);
         </script>
         <!-- #### 02-2. 좌측 on/off 페이지 서브 메뉴 노출 시작 -->
         <div class="lnb">
-            <!-- 02-2-1. 대시보드 집계 그래프 노출 영역 시작 -->
-            <h2><div class="standard_cond">우리동네 숨겨진 핫플레이스 <br/>주제별 다양한 장소를 확인하세요</div></h2>
-
-            <!-- 02-2-1.대시보드 집계 그래프 노출 영역 끝 -->
+            <h2><div class="standard_cond"><!--우리동네 숨겨진 핫플레이스 <br/>-->주제별 다양한 장소를 확인하세요</div></h2>
             <!-- 02-2-2.페이지 컨텐츠 서브 메뉴 노출 시작 -->
             <ul class="sub_menu_list area">
-                <li><a href="#" onclick="('인천광역시')" class="active"><i class="fa-solid fa-map-location-dot"></i> <span>인천광역시 전체</span><b class="num">18,562</b></a></li>
-                <li><a href="#" onclick="('연수구')"><i class="fa-solid fa-location-dot"></i> <span>연수구</span><b class="num">18,562</b></a></li>
-                <li><a href="#" onclick="('남동구')"><i class="fa-solid fa-map-pin"></i> <span>남동구</span><b class="num">18,562</b></a></li>
-                <li><a href="#" onclick="('부평구')"><i class="fa-solid fa-location-arrow"></i> <span>부평구</span><b class="num">18,562</b></a></li>
-                <li><a href="#" onclick="('계양구')"><i class="fa-regular fa-compass"></i> <span>계양구</span><b class="num">18,562</b></a></li>
-                <li><a href="#" onclick="('서구')"><i class="fa-solid fa-location-crosshairs"></i> <span>서구</span><b class="num">18,562</b></a></li>
-                <li><a href="#" onclick="('동구')"><i class="fa-solid fa-map-location-dot"></i> <span>동구</span><b class="num">18,562</b></a></li>
-                <li><a href="#" onclick="('중구')"><i class="fa-solid fa-bookmark"></i> <span>중구</span><b class="num">18,562</b></a></li>
-                <li><a href="#" onclick="('미추홀구')"><i class="fa-solid fa-route"></i> <span>미추홀구</span><b class="num">18,562</b></a></li>
-                <li><a href="#" onclick="('강화군')"><i class="fa-solid fa-circle-info"></i> <span>강화군</span><b class="num">18,562</b></a></li>
-                <li><a href="#" onclick="('옹진군')"><i class="fa-solid fa-tags"></i> <span>옹진군</span><b class="num">18,562</b></a></li>
+                <li><a href="#" class="active"><i class="fa-solid fa-map-location-dot"></i> <span>인천광역시 전체</span><b class="num">18,562</b></a></li>
+                <li><a href="#"><i class="fa-solid fa-location-dot"></i> <span>연수구</span><b class="num">18,562</b></a></li>
+                <li><a href="#"><i class="fa-solid fa-map-pin"></i> <span>남동구</span><b class="num">18,562</b></a></li>
+                <li><a href="#"><i class="fa-solid fa-location-arrow"></i> <span>부평구</span><b class="num">18,562</b></a></li>
+                <li><a href="#"><i class="fa-regular fa-compass"></i> <span>계양구</span><b class="num">18,562</b></a></li>
+                <li><a href="#"><i class="fa-solid fa-location-crosshairs"></i> <span>서구</span><b class="num">18,562</b></a></li>
+                <li><a href="#"><i class="fa-solid fa-map-location-dot"></i> <span>동구</span><b class="num">18,562</b></a></li>
+                <li><a href="#"><i class="fa-solid fa-bookmark"></i> <span>중구</span><b class="num">18,562</b></a></li>
+                <li><a href="#"><i class="fa-solid fa-route"></i> <span>미추홀구</span><b class="num">18,562</b></a></li>
+                <li><a href="#"><i class="fa-solid fa-circle-info"></i> <span>강화군</span><b class="num">18,562</b></a></li>
+                <li><a href="#"><i class="fa-solid fa-tags"></i> <span>옹진군</span><b class="num">18,562</b></a></li>
             </ul>
         </div>
-
         <!-- #### 02-2 좌측 on/off 페이지 서브 메뉴 노출 끝 -->
     </div>
     <!-- ####### 02. LNB END ########## -->
