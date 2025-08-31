@@ -8,12 +8,12 @@
     <title></title>
     <meta name="Description" content="인천광역시 소재의 다양한 모임취향에 맞는(회식/데이트/동호회) AI추천 모임장소에 대한 상세정보를 제공합니다."/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.1,maximum-scale=5.0,user-scalable=yes" />
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/map/css/reset.css" >
     <link rel="stylesheet" type="text/css" href="/map/css/layout.css" >
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <script src="/map/js/jquery.js"></script>
+    <script src="/map/js/jquery-1.10.2.min.js"></script>
     <script src="//kit.fontawesome.com/56b5cc4bd2.js" crossorigin="anonymous"></script><!-- 폰트어썸(아이콘 폰트) 사용 인증된 링크 -->
-    <script src="/map/js/jquery-ui-1.10.4.custom.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -60,19 +60,6 @@
         </div>
         <!-- #### 02-1. 좌측 고정 업종별 아이콘 메뉴 끝 -->
         <hr class="skip"/>
-        <script>
-            $(function(){
-                // 업종별 대메뉴 활성화(class="active") 메뉴버튼 처리
-                $("nav ul li:nth-child(1) a").addClass("active");
-                // 사용자가 선택한 메뉴 활성화(class="active")에 따른 페이지 메뉴명 제이쿼리 변경 처리
-                $(".membership li.active a").clone().prependTo(".lnb h2");
-                $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");
-                $(".sub_menu_list li a.active span").clone().appendTo(".page_path");
-                $(".right_contents.area ul.summary_card input[type=checkbox]").attr(disabled);
-            });
-            let activeLinkText = $(".membership li.active a").text();
-            $("title").text(activeLinkText);
-        </script>
         <!-- #### 02-2. 좌측 on/off 페이지 서브 메뉴 노출 시작 -->
         <div class="lnb">
             <h2><div class="standard_cond"><!--우리동네 숨겨진 핫플레이스 <br/>-->주제별 다양한 장소를 확인하세요</div></h2>
@@ -97,7 +84,6 @@
     <hr class="skip"/>
     <!-- ####### 03. CONTENTS START ####### -->
     <section class="contents_wrap">
-        <!-- ########  페이지마다의 고정 서비스 내용이(예, 지도나 모임카드 수정) 들어갑니다. ########### -->
         <div class="left_contents">
 <!-- ############################ 카카오맵 지도 연동 시작 ############################### -->
         <jsp:include page = "/map/test_kakao_1.jsp"></jsp:include>
@@ -134,7 +120,7 @@
                             <a href="#">고기맛집</a><a href="#">월미도</a><a href="#">신포동</a><a href="#">중구</a><a href="#">숯불</a>
                         </p>
                    </dt>
-                   <dd class="body">
+                   <dd class="body" id="mapInfoBody">
                        <!-- 대안 장소 선택_01: 업체 리스트 -->
                        <div class="card_list">
                            <ul class="summary_card">
@@ -142,7 +128,7 @@
                                    <b><span class="matching_keyword">돈비어</span>천가</b>
                                    <span class="category"><b class="depth_1">음식</b><b class="depth_2">한식</b></span>
                                </li>
-                               <li class="thumb"><img src="/map/img/sample_store.jpg" alt="돈비어천가"></li>
+                               <li class="thumb"></li>
                                <li class="addr">인천 중구 개항로 63-2</li>
                                <li class="work_time">10:00~22:00브레이크타임없음<span>(쉬는날 : 연중무휴)</span></li>
                                <li class="parking">주차시설 : 있음,유료</li>
@@ -153,43 +139,7 @@
                                 <button><i class="fa-solid fa-search"></i></button>
                             </div>
                        </div>
-                       <!-- 대안 장소 선택_02: 업체 리스트 -->
-                       <div class="card_list">
-                           <ul class="summary_card">
-                               <li class="subject">
-                                   <b>신포국제시장</b>
-                                   <span class="category"><b class="depth_1">쇼핑</b><b class="depth_2">전통시장</b></span>
-                               </li>
-                               <li class="thumb"><img src="/map/img/sample_store1.jpg" alt="신포국제시장"></li>
-                               <li class="addr">인천 중구 송현로59번길 5</li>
-                               <li class="work_time">10:00~21:00<br>지원센터 09:00~18:00<span class="holyday">(쉬는날 : 매월 첫 주 월요일, 설·추석 당일 / 지원센터 주말 <br>(점포마다 상이함))</span></li>
-                               <li class="parking">주차시설 : 있음,무료</li>
-                               <li class="tel">032-773-2368</li>
-                           </ul>
-                           <div class="btn_wrap">
-                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
-                                <button><i class="fa-solid fa-search"></i></button>
-                            </div>
-                       </div>
-                       <!-- 대안 장소 선택_03: 업체 리스트 -->
-                       <div class="card_list">
-                           <ul class="summary_card">
-                               <li class="subject">
-                                   <b>신파시장</b>
-                                   <span class="category"><b class="depth_1">쇼핑</b><b class="depth_2">전통시장</b></span>
-                               </li>
-                               <li class="thumb"><img src="/map/img/sample_store2.jpg" alt="신파시장"></li>
-                               
-                               <li class="addr">인천 중구 송현로59번길 5</li>
-                               <li class="work_time">10:00~21:00<br>지원센터 09:00~18:00<span class="holyday">(쉬는날 : 매월 첫 주 월요일, 설·추석 당일 / 지원센터 주말 <br>(점포마다 상이함))</span></li>
-                               <li class="parking">주차시설 : 있음,무료</li>
-                               <li class="tel">032-773-2368</li>
-                           </ul>
-                            <div class="btn_wrap">
-                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
-                                <button><i class="fa-solid fa-search"></i></button>
-                            </div>
-                       </div>
+
                    </dd>
                    <dd class="footer">
                        <button class="basic"><i class="fa-solid fa-location-dot"></i> 지도보기</button>
@@ -270,6 +220,5 @@
     <a href="#" class="to_top"> 맨위로 </a>
     <!-- ####### 04. FOOTER END ####### -->
 </div>
-<script src="/map/js/test.js"></script>
 </body>
 </html>

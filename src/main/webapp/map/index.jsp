@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>데모체험(사용자단)</title>
     <meta name="Description" content="AI추천 인천 명소에 대한 나만의 초대카드를 만들어보세요."/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.1,maximum-scale=5.0,user-scalable=yes" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
     <link rel="stylesheet" type="text/css" href="/map/css/reset.css" >
     <link rel="stylesheet" type="text/css" href="/map/css/layout.css" >
     <link rel="stylesheet" type="text/css" href="/map/css/card.css" >
