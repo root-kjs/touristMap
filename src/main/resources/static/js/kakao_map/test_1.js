@@ -16,17 +16,7 @@ console.log("schoolList js start");
     https://apis.data.go.kr/B551011/KorService2/locationBasedList2
     ?serviceKey=DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3%3D
 
-    &numOfRows=10		// 한페이지결과수            $(function(){
-                                                  // 업종별 대메뉴 활성화(class="active") 메뉴버튼 처리
-                                                  $("nav ul li:nth-child(1) a").addClass("active");
-                                                  // 사용자가 선택한 메뉴 활성화(class="active")에 따른 페이지 메뉴명 제이쿼리 변경 처리
-                                                  $(".membership li.active a").clone().prependTo(".lnb h2");
-                                                  $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");
-                                                  $(".sub_menu_list li a.active span").clone().appendTo(".page_path");
-                                                  $(".right_contents.area ul.summary_card input[type=checkbox]").attr(disabled);
-                                              });
-                                              let activeLinkText = $(".membership li.active a").text();
-                                              $("title").text(activeLinkText);
+    &numOfRows=10		// 한페이지결과수
     &pageNo=1		    // 페이지번호
     &MobileOS=ETC		// OS 구분 : IOS (아이폰), AND (안드로이드), WEB (웹), ETC(기타)
     &MobileApp=AppTest	// 서비스명(어플명)
@@ -48,9 +38,8 @@ console.log("schoolList js start");
     &cat3=A05020100		// 소분류(서비스분류코드조회 참고, cat1/cat2필수입력)
 */
     const serviceKey = "DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D";
-    //const URL = "https://api.odcloud.kr/api/15039731/v1/uddi:1fcb72a0-ba75-4c97-a045-9ef7e3ef43c0?page=1&perPage=72&serviceKey=";
-    const URL = "https://apis.data.go.kr/B551011/KorService2/locationBasedList2?serviceKey=DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D&numOfRows=100&MobileOS=ETC&MobileApp=AppTest&_type=json&arrange=A&mapX=126.7052&mapY=37.4563&radius=20000&contentTypeId=12&areaCode=2";
-    const response = await fetch( URL, {method : "GET"} );
+    const URL = "https://apis.data.go.kr/B551011/KorService2/locationBasedList2?lDongRegnCd=28&mapX=126.7052&mapY=37.4563&radius=20000&contentTypeId=12&numOfRows=100&MobileOS=ETC&MobileApp=AppTest&_type=json&arrange=A&serviceKey=";
+    const response = await fetch( URL+serviceKey, {method : "GET"} );
     const data = await response.json();
     // console.log(data.response.body.items.item.map); //확인용
 
@@ -61,7 +50,7 @@ console.log("schoolList js start");
             <ul class="summary_card">
                  <li class="subject">
                      <b>${value.title}</b>
-                     <span class="category"><b class="depth_1">${value.cat1}</b><b class="depth_2">${value.cat2}</b></span>
+                     <span class="category"><b class="depth_1">${value.cat1}</b><b class="depth_2">${value.cat3}</b></span>
                  </li>
                  <li class="thumb"><img src="${value.firstimage ? value.firstimage : value.firstimage2}" alt="${value.title}"></li>
                  <li class="addr">${value.addr1}</li>
@@ -90,13 +79,9 @@ const schoolMap = async() => {
        });
 
 
-       //https://api.odcloud.kr/api/15039731/v1/uddi:1fcb72a0-ba75-4c97-a045-9ef7e3ef43c0?page=1&perPage=10&serviceKey=JbK3US3dccf5%2Bz%2BQig8jxLUU4s%2BMMlps5%2BxExVQHLtypXrG3I3uzGd8V4RiKfI7Ex9jeINDO8%2FVKEBLRLv5e0Q%3D%3D
-       //const serviceKey = "JbK3US3dccf5%2Bz%2BQig8jxLUU4s%2BMMlps5%2BxExVQHLtypXrG3I3uzGd8V4RiKfI7Ex9jeINDO8%2FVKEBLRLv5e0Q%3D%3D";
        const serviceKey = "DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D";
-       //일반 인증키(Encoding)	// DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D
-       //const URL = "https://api.odcloud.kr/api/15039731/v1/uddi:1fcb72a0-ba75-4c97-a045-9ef7e3ef43c0?page=1&perPage=72&serviceKey=";  37.415166, 126.671758
-       const URL = "https://apis.data.go.kr/B551011/KorService2/locationBasedList2?serviceKey=DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D&numOfRows=100&MobileOS=ETC&MobileApp=AppTest&_type=json&arrange=A&mapX=126.7052&mapY=37.4563&radius=20000&contentTypeId=12&areaCode=2";
-       const response = await fetch( URL, {method : "GET"} );
+       const URL = "https://apis.data.go.kr/B551011/KorService2/locationBasedList2?lDongRegnCd=28&mapX=126.7052&mapY=37.4563&radius=20000&contentTypeId=12&numOfRows=100&MobileOS=ETC&MobileApp=AppTest&_type=json&arrange=A&serviceKey=";
+       const response = await fetch( URL+serviceKey, {method : "GET"} );
        const data = await response.json();
        console.log(data.response.body.items.item); //확인용
 
