@@ -13,9 +13,6 @@ console.log("schoolList js start");
     모바일 앱 뿐만 아니라, 웹서비스, 태블릿, 홍보물, 잡지 등 다양한 매체에서 어플리케이션을 개발, 활용할 수 있으며 다양한 활용을 통해서 신규/융복합 관광서비스를 창출할 수 있습니다.
     ※ 제공되는 데이터중 사진 자료의 경우, 피사체에 대한 명예훼손 및 인격권 침해 등 일반 정서에 반하는 용도의 사용 및 기업 CI,BI로의 이용 금지하고 있습니다. (공공누리 1유형, 3유형 이미지 제공됨)
     API 목록
-    https://apis.data.go.kr/B551011/KorService2/locationBasedList2
-    ?serviceKey=DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3%3D
-
     &numOfRows=10		// 한페이지결과수
     &pageNo=1		    // 페이지번호
     &MobileOS=ETC		// OS 구분 : IOS (아이폰), AND (안드로이드), WEB (웹), ETC(기타)
@@ -38,7 +35,7 @@ console.log("schoolList js start");
     &cat3=A05020100		// 소분류(서비스분류코드조회 참고, cat1/cat2필수입력)
 */
     const serviceKey = "DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D";
-    const URL = "https://apis.data.go.kr/B551011/KorService2/locationBasedList2?lDongRegnCd=28&mapX=126.7052&mapY=37.4563&radius=20000&contentTypeId=12&numOfRows=100&MobileOS=ETC&MobileApp=AppTest&_type=json&arrange=A&serviceKey=";
+    const URL = "https://apis.data.go.kr/B551011/KorService2/searchKeyword2?&keyword=시장&lDongRegnCd=50&lDongSignguCd=130&lclsSystm1=SH&lclsSystm2=SH06&lclsSystm3=SH060100&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&arrange=C&serviceKey=";
     const response = await fetch( URL+serviceKey, {method : "GET"} );
     const data = await response.json();
     // console.log(data.response.body.items.item.map); //확인용
