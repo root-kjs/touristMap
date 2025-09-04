@@ -14,15 +14,15 @@ public class TourApiController {
 
     @Autowired TourApiService tourApiService;
 
-    @GetMapping
+    @GetMapping("/ldong")
     public String ldongCode2() throws IOException {
-        String result = tourApiService.lclsSystm();
+        String result = tourApiService.ldongCode2();
         return result;
     }// func end
 
-    @GetMapping
-    public String lclsSystm() throws IOException {
-        String result = tourApiService.lclsSystm();
+    @GetMapping("/lcls")
+    public String lclsSystmCode2() throws IOException {
+        String result = tourApiService.lclsSystmCode2();
         return result;
     }// func end
 

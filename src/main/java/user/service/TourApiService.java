@@ -22,21 +22,21 @@ public class TourApiService {
     @Scheduled( cron = "0 0 9 * * *" ) //  매일 오전 9시가 될때마다 api 가져오기
     public String ldongCode2() throws IOException {
         StringBuilder urlBuilder = new StringBuilder("https://apis.data.go.kr/B551011/KorService2/ldongCode2"); /*URL*/
-        urlBuilder.append("?" + URLEncoder.encode("numOfRows","UTF-8") +"="+ "300");    // 응답 데이터(콘텐츠) 수량
+        urlBuilder.append("?" + URLEncoder.encode("numOfRows","UTF-8")+"="+"300");    // 응답 데이터(콘텐츠) 수량
         urlBuilder.append("&" + URLEncoder.encode("lDongListYn","UTF-8")+"="+"Y");  // 분류체계 목록조회 여부(N: 코드조회, Y: 전체목록조회)
         /* --------------------------- 아래 공통 *필수* 파라미터 ------------------------------ */
-        urlBuilder.append("&" + URLEncoder.encode("serviceKey","UTF-8") + "=DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D"); /* Service Key */
-        urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8") +"="+"WEB");      // OS 구분: IOS(아이폰), AND(안드로이드),WEB(웹), ETC(기타)
+        urlBuilder.append("&" + URLEncoder.encode("serviceKey","UTF-8")+"="+"DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D"); /* Service Key */
+        urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8")+"="+"WEB");      // OS 구분: IOS(아이폰), AND(안드로이드),WEB(웹), ETC(기타)
         urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8")+"="+"Root.Lab"); // 서비스명=어플명
         urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+"="+"json");         // REST 방식의 URL 호출 시 Json값 추가 (디폴트 응답 메세지 형식은 XML)
         URL url = new URL(urlBuilder.toString());  // URL 생성 및 파라미터 대입
-        System.out.println(url);
+        //System.out.println(url);
 
         // 2) 조합한 URL주소로 HTTP 통신 접속(GET) 요청
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
-        System.out.println("Response code(!): " + conn.getResponseCode());
+        //System.out.println("Response code(!): " + conn.getResponseCode());
         BufferedReader rd;
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -52,24 +52,24 @@ public class TourApiService {
 
     /*[02] 15.분류체계 코드조회(lclsSystm) : 분류체계코드목록을 1Deth, 2Deth, 3Deth 코드별 조회하는 기능 */
     @Scheduled( cron = "0 0 9 * * *" ) //  매일 오전 9시가 될때마다 api 가져오기
-    public String lclsSystm() throws IOException {
+    public String lclsSystmCode2() throws IOException {
     // 1) 가져올 API 경로 파라미터 설정
         StringBuilder urlBuilder = new StringBuilder("https://apis.data.go.kr/B551011/KorService2/lclsSystmCode2"); /*URL*/
-        urlBuilder.append("?" + URLEncoder.encode("numOfRows","UTF-8") +"="+ "300");    // 응답 데이터(콘텐츠) 수량
-        urlBuilder.append("&" + URLEncoder.encode("lclsSystm1","UTF-8") +"="+ "");      // 대분류코드(예시: AC), 중분류코드(lclsSystm1필수)LclsSystm3 소분류코드(lclsSystm1,lclsSystm2필수)
+        urlBuilder.append("?" + URLEncoder.encode("numOfRows","UTF-8")+"="+"300");    // 응답 데이터(콘텐츠) 수량
+        urlBuilder.append("&" + URLEncoder.encode("lclsSystm1","UTF-8")+"="+"");      // 대분류코드(예시: AC), 중분류코드(lclsSystm1필수)LclsSystm3 소분류코드(lclsSystm1,lclsSystm2필수)
         urlBuilder.append("&" + URLEncoder.encode("lclsSystmListYn","UTF-8")+"="+"Y");  // 분류체계 목록조회 여부(N: 코드조회, Y: 전체목록조회)
          /* --------------------------- 아래 공통 *필수* 파라미터 ------------------------------ */
-        urlBuilder.append("&" + URLEncoder.encode("serviceKey","UTF-8") + "=DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D"); /* Service Key */
-        urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8") +"="+"WEB");      // OS 구분: IOS(아이폰), AND(안드로이드),WEB(웹), ETC(기타)
+        urlBuilder.append("&" + URLEncoder.encode("serviceKey","UTF-8")+"="+"DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D"); /* Service Key */
+        urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8")+"="+"WEB");      // OS 구분: IOS(아이폰), AND(안드로이드),WEB(웹), ETC(기타)
         urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8")+"="+"Root.Lab"); // 서비스명=어플명
         urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+"="+"json");         // REST 방식의 URL 호출 시 Json값 추가 (디폴트 응답 메세지 형식은 XML)
         URL url = new URL(urlBuilder.toString());  // URL 생성 및 파라미터 대입
-        System.out.println(url);
+        //System.out.println(url);
     // 2) 조합한 URL주소로 HTTP 통신 접속(GET) 요청
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
-        System.out.println("Response code(!): " + conn.getResponseCode());                         // 서버가 어떻게 응답상태 코드(숫자) 확인!, 200 '성공', 404 '페이지 없음', 500 '서버 내부 오류
+        //System.out.println("Response code(!): " + conn.getResponseCode());                     // 서버가 어떻게 응답상태 코드(숫자) 확인!, 200 '성공', 404 '페이지 없음', 500 '서버 내부 오류
     // 3) 서버가 보낸 응답 데이터를 읽기
         // **입력 스트림(Input Stream)**BufferedReader는 Java에서 텍스트 입력을 효율적으로 처리하기 위한 클래스(패키지: java.io.BufferedReader)
         // 문자 기반 입력 스트림(Reader)을 버퍼링(buffering) 해서 읽기 속도를 향상시킴, 보통 파일, 콘솔 입력, 네트워크 스트림에서 많이 사용됨 **라인 단위 입력(readLine())**이 가능 → 텍스트 처리에 자주 활용
