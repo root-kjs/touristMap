@@ -108,8 +108,8 @@
                 <a href="#" class="btn_last"></a>
             </div>
             <form>
-            <div class="card_list_wrap">
-                <!-- 추천(조합) 모임카드 #.01 시작 -->
+            <div class="card_list_wrap" id="mapInfoBox">
+               <!-- 추천(조합) 모임카드 #.01 시작 -->
                <dl class="ai_card">
                    <dt class="header">
                         <h2 class="subject_keyword">
@@ -120,7 +120,7 @@
                             <a href="#">고기맛집</a><a href="#">월미도</a><a href="#">신포동</a><a href="#">중구</a><a href="#">숯불</a>
                         </p>
                    </dt>
-                   <dd class="body" id="mapInfoBody">
+                   <dd class="body">
                        <!-- 대안 장소 선택_01: 업체 리스트 -->
                        <div class="card_list">
                            <ul class="summary_card">
@@ -131,7 +131,6 @@
                                <li class="thumb"></li>
                                <li class="addr">인천 중구 개항로 63-2</li>
                                <li class="work_time">10:00~22:00브레이크타임없음<span>(쉬는날 : 연중무휴)</span></li>
-                               <li class="parking">주차시설 : 있음,유료</li>
                                <li class="tel">032-930-1234</li>
                            </ul>
                            <div class="btn_wrap">
@@ -147,63 +146,6 @@
                    </dd>
                </dl>
                 <!-- 추천(조합) 모임카드 #.01 끝 -->
-                <!-- 추천(조합) 모임카드 #.02 시작 -->
-                <dl class="ai_card">
-                    <dt class="header">
-                        <h2 class="subject_keyword">
-                            <span class="area"><b class="depth_1">2</b><b class="depth_2">미추홀구</b></span>
-                            <strong>인천/숯불갈비/회식장소</strong>
-                        </h2>
-                        <p class="keyword_recommand"><!-- 연관 키워드 10개 -->
-                            <a href="#">신포동</a><a href="#">중구</a><a href="#">숯불</a><a href="#" class="matching_keyword">돈비어</a><a href="#">돼지갈비</a>
-                        </p>
-                    </dt>
-                    <dd class="body">
-                        <!-- 대안 장소 선택_01: 업체 리스트 -->
-                        <div class="card_list">
-                            <ul class="summary_card">
-                                <li class="subject">
-                                    <b><span class="matching_keyword">돈비어</span>천가</b>
-                                    <span class="category"><b class="depth_1">음식</b><b class="depth_2">한식</b></span>
-                                </li>
-                                <li class="thumb"><img src="/map/img/sample_store.jpg" alt="돈비어천가"></li>
-                                
-                                <li class="addr">인천 중구 개항로 63-2</li>
-                                <li class="work_time">10:00~22:00브레이크타임없음<span>(쉬는날 : 연중무휴)</span></li>
-                                <li class="parking">주차시설 : 있음,유료</li>
-                                <li class="tel">032-930-1234</li>
-                            </ul>
-                            <div class="btn_wrap">
-                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
-                                <button><i class="fa-solid fa-search"></i></button>
-                            </div>
-                        </div>
-                        <!-- 대안 장소 선택_02: 업체 리스트 -->
-                        <div class="card_list">
-                            <ul class="summary_card">
-                                <li class="subject">
-                                    
-                                    <b>신포국제시장</b>
-                                    <span class="category"><b class="depth_1">쇼핑</b><b class="depth_2">전통시장</b></span>
-                                </li>
-                                <li class="thumb"><img src="/map/img/sample_store2.jpg" alt="신포국제시장"></li>
-                                <li class="addr">인천 중구 송현로59번길 5</li>
-                                <li class="work_time">10:00~21:00<br>지원센터 09:00~18:00<span class="holyday">(쉬는날 : 매월 첫 주 월요일, 설·추석 당일 / 지원센터 주말 <br>(점포마다 상이함))</span></li>
-                                <li class="parking">주차시설 : 있음,무료</li>
-                                <li class="tel">032-773-2368</li>
-                            </ul>
-                            <div class="btn_wrap">
-                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
-                                <button><i class="fa-solid fa-search"></i></button>
-                            </div>
-                        </div>
-                    </dd>
-                    <dd class="footer">
-                        <button class="basic"><i class="fa-solid fa-location-dot"></i> 지도보기</button>
-                       <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장 만들기</button>
-                    </dd>
-                </dl>
-                <!-- 추천(조합) 모임카드 #.02 끝 -->
             </div>
             </form>
         </div>

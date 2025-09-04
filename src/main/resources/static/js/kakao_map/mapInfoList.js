@@ -44,37 +44,53 @@ console.log("mapInfoList(우측지도업체정보) js start");
         const response = await fetch( URL+serviceKey, {method : "GET"} );
         const data = await response.json();
         // console.log(data.response.body.items.item.map); // !데이터 확인
-        const sidebar = document.querySelector('#mapInfoBody');
+        const mapInfoBox = document.querySelector('#mapInfoBox');
         let html = "";
 
         // 2) 카카오맵 API 제이슨 데이터 가져오기
-        data.response.body.items.item.forEach( (value) => {
+        data.response.body.items.item.slice(5, 10).forEach( (value) => {
             const addr_ldong1 = ldongMap.get(value.lDongRegnCd);       console.log( lclsMap.get(value.lDongRegnCd) );
             const addr_ldong2 = ldongMap.get(value.lDongSignguCd);
             const category1 = lclsMap.get(value.lclsSystm1);           //console.log( lclsMap.get(value.lclsSystm1) );
             const category2 = lclsMap.get(value.lclsSystm2);
             const category3 = lclsMap.get(value.lclsSystm3);
 
-            html += `
-            <div class="card_list">
-                <ul class="summary_card">
-                     <li class="subject">
-                         <b>${value.title}</b>
-                         <span class="category"><b class="depth_2">${category1}</b></span>
-                     </li>
-                     <li class="thumb"><img src="${value.firstimage ? value.firstimage : value.firstimage2}" alt="${value.title}"></li>
-                     <li class="addr">${value.addr1 ? value.addr1 : addr_ldong1 + ' ' +addr_ldong2}</li>
-                     <li class="work_time">${category2} > ${category3}</li>
-                     <li class="tel">${value.tel ? 'Tel. ' + value.tel : 'Tel. -'}</li>
-                 </ul>
-                 <div class="btn_wrap">
-                     <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
-                     <button><i class="fa-solid fa-search"></i></button>
-                 </div>
-            </div>
+            html += `<dl class="ai_card">
+               <dt class="header">
+                    <h2 class="subject_keyword">
+                        <span class="area"><b class="depth_1">1</b><b class="depth_2">중구</b></span>
+                        <strong>데이트/동인천/차이나타운</strong>
+                    </h2>
+                    <p class="keyword_recommand"><!-- 연관 키워드 10개 -->
+                        <a href="#">고기맛집</a><a href="#">월미도</a><a href="#">신포동</a><a href="#">중구</a><a href="#">숯불</a>
+                    </p>
+               </dt>
+               <dd class="body" id="mapInfoBody">
+                    <div class="card_list">
+                        <ul class="summary_card">
+                             <li class="subject">
+                                 <b>${value.title}</b>
+                                 <span class="category"><b class="depth_2">${category2}</b></span>
+                             </li>
+                             <li class="thumb"><img src="${value.firstimage ? value.firstimage : value.firstimage2}" alt="${value.title}"></li>
+                             <li class="addr">${value.addr1 ? value.addr1 : addr_ldong1 + ' ' +addr_ldong2}</li>
+                             <li class="work_time">${category1} > ${category3}</li>
+                             <li class="tel">${value.tel ? 'Tel. ' + value.tel : 'Tel. -'}</li>
+                         </ul>
+                         <div class="btn_wrap">
+                             <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
+                             <button><i class="fa-solid fa-search"></i></button>
+                         </div>
+                    </div>
+                  </dd>
+                  <dd class="footer">
+                      <button class="basic"><i class="fa-solid fa-location-dot"></i> 지도보기</button>
+                      <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장 만들기</button>
+                  </dd>
+              </dl>
             `
         });
-        sidebar.innerHTML = html;
+        mapInfoBox.innerHTML = html;
     } catch (error) {
         console.error("위치 기반 오류 발생:", error);
     }
