@@ -1,5 +1,9 @@
 package user.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
@@ -8,13 +12,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class TourApiService {
 
     /*[01] 15.분류체계 코드조회(lclsSystm) : 분류체계코드목록을 1Deth, 2Deth, 3Deth 코드별 조회하는 기능 */
     @Scheduled( cron = "0 0 9 * * *" ) //  매일 오전 9시가 될때마다 api 가져오기
-    public void lclsSystm() throws IOException {
+    public String lclsSystm() throws IOException {
     // 1) 가져올 API 경로 파라미터 설정
         StringBuilder urlBuilder = new StringBuilder("https://apis.data.go.kr/B551011/KorService2/lclsSystmCode2"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("numOfRows","UTF-8") +"="+ "300");    // 응답 데이터(콘텐츠) 수량
@@ -26,7 +32,7 @@ public class TourApiService {
         urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8")+"="+"ETC");      // 서비스명=어플명
         urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+"="+"json");         // REST 방식의 URL 호출 시 Json값 추가 (디폴트 응답 메세지 형식은 XML)
         URL url = new URL(urlBuilder.toString());  // URL 생성 및 파라미터 대입
-        //System.out.println(url);
+        System.out.println(url);
     // 2) 조합한 URL주소로 HTTP 통신 접속(GET) 요청
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
@@ -51,6 +57,47 @@ public class TourApiService {
         }
         rd.close();
         conn.disconnect();
-        System.out.println( "결과 : " + sb.toString() );
+        return sb.toString();
+        //System.out.println( "결과 : " + sb.toString() ); // StringBuilder
+//
+//            String jsonString = sb.toString(); // StringBuilder를 String으로 변환
+//            JSONObject jsonObj = new JSONObject(jsonString); // String을 JSONObject로 파싱
+//            JSONObject response = jsonObj.getJSONObject("response"); // 키에 대한 값 호출
+//            JSONObject body = response.getJSONObject("body");
+//            JSONObject items = body.getJSONObject("items");
+//            JSONArray itemArray = items.getJSONArray("item");
+//
+//        System.out.println( "!!!!제이슨" + itemArray ); // *************** 제이슨 리스트 타입 ***************
+//
+        /* *************** 맵 리스트 타입 ***************
+            // ObjectMapper를 사용하여 JSON 문자열을 Map<String, Object>로 변환
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            // TypeReference를 사용해 복잡한 중첩 구조의 제네릭 타입을 명시
+            Map<String, Object> resultMap = objectMapper.readValue(sb.toString(), new TypeReference<Map<String, Object>>() {});
+            // Map을 탐색하여 원하는 데이터에 접근 (Casting이 필요) : // 키를 이용해 단계적으로 내부 데이터에 접근
+            Map<String, Object> response = (Map<String, Object>) resultMap.get("response");
+            Map<String, Object> body = (Map<String, Object>) response.get("body");
+            Map<String, Object> items = (Map<String, Object>) body.get("items");
+
+            // 최종 데이터 : item ---> List 형태이므로 List<Map<String, String>>으로 캐스팅(데이터 자료형) 변환
+            List<Map<String, String>> itemList = (List<Map<String, String>>) items.get("item");
+
+            // 7) 결과 출력
+            System.out.println("총 아이템 개수: " + itemList.size());
+            System.out.println( itemList );
+
+            // 각 아이템을 순회하며 'name'과 'code' 출력
+            for (Map<String, String> item : itemList) {
+                String name = item.get("lclsSystm1Nm");
+                String code = item.get("lclsSystm3Nm");
+                System.out.println("분류명: " + name + ", 코드: " + code);
+            }
+
+        */
+
+
+
+
     }// func end
 }// class end

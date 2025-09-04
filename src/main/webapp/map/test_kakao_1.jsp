@@ -5,4 +5,5 @@
 
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b47cc59ad7a7b09cf4b9ca38e849df19&libraries=clusterer"></script>
+<script type="text/javascript" src="/js/kakao_map/mapInfoList.js"></script>
 <script type="text/javascript" src="/js/kakao_map/test_1.js"></script>

@@ -7,14 +7,17 @@ import org.springframework.web.bind.annotation.RestController;
 import user.service.TourApiService;
 import java.io.IOException;
 
+// 공공데이터 API 연동(한국관광공사_국문 관광정보 서비스_GW)https://apis.data.go.kr/B551011/KorService2/lclsSystmCode2?
 @RequestMapping("/api")
 @RestController
 public class TourApiController {
 
     @Autowired TourApiService tourApiService;
+
     @GetMapping
-    public void lclsSystm() throws IOException {
-        tourApiService.lclsSystm();
+    public String lclsSystm() throws IOException {
+        String result = tourApiService.lclsSystm();
+        return result;
     }// func end
 
 }// class end
