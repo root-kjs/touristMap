@@ -1,14 +1,26 @@
+// 1) 자바단 > 법정동코드조회(ldongCode2)데이터 가져오기
+const getLdongCodeData = async() => {
+    try {
+        const response = await fetch(`/api`);
+        const data = await response.json();
+        console.log(data.response.body.items.item);
+        return data.response.body.items.item;
+    } catch ( error ) {
+        console.log( error );
+    }
+}//func end
+
+// 2) 자바단 > 분류체계코드(lclsSystmCode2) 데이터 가져오기
 const getLclsSystmData = async() => {
     try {
         const response = await fetch(`/api`);
         const data = await response.json();
         //console.log(data.response.body.items.item);
         return data.response.body.items.item;
-    } catch (  error ) {
+    } catch ( error ) {
         console.log( error );
     }
 }//func end
-lclsSystm();
 
 const mapInfoList = async() => {
 console.log("mapInfoList(우측지도업체정보) js start");
@@ -16,8 +28,8 @@ console.log("mapInfoList(우측지도업체정보) js start");
 
     const lclsMap = new Map();
     lclsItems.forEach(item => {
-        // 중복된 키는 덮어쓰므로 별도 처리가 필요 없습니다.
         lclsMap.set(item.lclsSystm1Cd, item.lclsSystm1Nm);
+        lclsMap.set(item.lclsSystm2Cd, item.lclsSystm2Nm);
         lclsMap.set(item.lclsSystm3Cd, item.lclsSystm3Nm);
     });
     console.log( lclsMap );
@@ -46,16 +58,17 @@ console.log("mapInfoList(우측지도업체정보) js start");
     // console.log(data.response.body.items.item.map); // !데이터 확인
     const sidebar = document.querySelector('#mapInfoBody');
     let html = "";
-    // 1) 자바단  분류체계코드(https://apis.data.go.kr/B551011/KorService2/lclsSystmCode2?&numOfRows=245&lclsSystm1=&lclsSystmListYn=Y&MobileOS=ETC&MobileApp=APP&_type=json&serviceKey=DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D) 데이터 가져오기
 
     // 2) 카카오맵 API 제이슨 데이터 가져오기
-    //
     data.response.body.items.item.forEach( (value) => {
+        const category1 =  lclsMap.get(value.lclsSystm1);
+        const category3 =  lclsMap.get(value.lclsSystm3);
+        console.log( lclsMap.get(value.lclsSystm1) );
         html += `
             <ul class="summary_card">
                  <li class="subject">
                      <b>${value.title}</b>
-                     <span class="category"><b class="depth_1">${value.lclsSystm1}</b><b class="depth_2">${value.lclsSystm3}</b></span>
+                     <span class="category"><b class="depth_1">${category1}</b><b class="depth_2">${category3}</b></span>
                  </li>
                  <li class="thumb"><img src="${value.firstimage ? value.firstimage : value.firstimage2}" alt="${value.title}"></li>
                  <li class="addr">${value.addr1}</li> <!-- lDongSignguCd -->

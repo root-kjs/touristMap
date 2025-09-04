@@ -15,6 +15,12 @@ public class TourApiController {
     @Autowired TourApiService tourApiService;
 
     @GetMapping
+    public String ldongCode2() throws IOException {
+        String result = tourApiService.lclsSystm();
+        return result;
+    }// func end
+
+    @GetMapping
     public String lclsSystm() throws IOException {
         String result = tourApiService.lclsSystm();
         return result;
