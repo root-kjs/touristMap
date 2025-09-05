@@ -37,18 +37,19 @@ console.log("mapInfoList(우측지도업체정보) js start");
         lclsMap.set(item.lclsSystm3Cd, item.lclsSystm3Nm);
     });
     //console.log( lclsMap );
-
+    //arrange=S(A=제목순,C=수정일순, D=생성일순, E=거리순) 대표이미지가 반드시 있는 정렬 (O=제목순, Q=수정일순, R=생성일순,S=거리순)
+    //mapX=126.7052062&mapY=37.4562557 부평구 부평동 주부토로 19 인근 (부평구청 근처)
     try {
        const serviceKey = "DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D";
-       const URL = "https://apis.data.go.kr/B551011/KorService2/locationBasedList2?lDongRegnCd=28&mapX=126.7052&mapY=37.4563&radius=20000&contentTypeId=&numOfRows=100&MobileOS=ETC&MobileApp=AppTest&_type=json&arrange=S&serviceKey=";
+       const URL = "https://apis.data.go.kr/B551011/KorService2/locationBasedList2?lDongRegnCd=28&arrange=S&mapX=126.7052062&mapY=37.4562557&radius=20000&numOfRows=100&MobileOS=WEB&MobileApp=AppTest&_type=json&serviceKey="; //
         const response = await fetch( URL+serviceKey, {method : "GET"} );
         const data = await response.json();
-        // console.log(data.response.body.items.item.map); // !데이터 확인
+        console.log(data.response.body.items.item); // !데이터 확인
         const mapInfoBox = document.querySelector('#mapInfoBox');
         let html = "";
 
         // 2) 카카오맵 API 제이슨 데이터 가져오기
-        data.response.body.items.item.slice(5, 10).forEach( (value) => {
+        data.response.body.items.item.forEach( (value) => { //.slice(5, 10)
             const addr_ldong1 = ldongMap.get(value.lDongRegnCd);       console.log( lclsMap.get(value.lDongRegnCd) );
             const addr_ldong2 = ldongMap.get(value.lDongSignguCd);
             const category1 = lclsMap.get(value.lclsSystm1);           //console.log( lclsMap.get(value.lclsSystm1) );
