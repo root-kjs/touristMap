@@ -15,7 +15,7 @@ const schoolMap = async() => {
        const URL = "//apis.data.go.kr/B551011/KorService2/locationBasedList2?lDongRegnCd=28&arrange=S&mapX=126.7052062&mapY=37.4562557&radius=20000&numOfRows=100&MobileOS=WEB&MobileApp=AppTest&_type=json&serviceKey=";
        const response = await fetch( URL+serviceKey, {method : "GET"} );
        const data = await response.json();
-       console.log(data.response.body.items.item); //확인용
+       //console.log(data.response.body.items.item); //확인용
        // 마커 이미지의 이미지 주소
        var imageSrc = "/img/kakao_map/logo.jpg"; // https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png
        var imageSize = new kakao.maps.Size(24, 35); // 마커 이미지의 이미지 크기
