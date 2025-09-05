@@ -1,12 +1,17 @@
 plugins {
     id 'java' // 자바
-    id 'org.springframework.boot' version '3.5.5' // 스프링부트 버전
-    id 'io.spring.dependency-management' version '1.1.7'  // 스프링 의존성 버전
+    id 'org.springframework.boot' version '3.5.5'           // 스프링부트 버전
+    id 'io.spring.dependency-management' version '1.1.7'    // 스프링 의존성 버전
     id 'war'
 }
 
-java {
-    toolchain {
+bootWar {
+    archiveBaseName = "Root.Lab"    // 기본 아카이브(사이트명) 이름 (아무거나)
+    archiveFileName = "ROOT.war"    // 최종 생성되는 파일 이름 (ROOT.war) 파일명 고정
+    archiveVersion  = "0.0.0"       // 버전 정보 (여기서는 0.0.0 고정)
+}
+
+java { toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
