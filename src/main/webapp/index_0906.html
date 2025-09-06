@@ -12,8 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/map/css/reset.css" >
     <link rel="stylesheet" type="text/css" href="/map/css/layout.css" >
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <script src="/map/js/jquery-1.10.2.min.js"></script>
-    <script src="//kit.fontawesome.com/56b5cc4bd2.js" crossorigin="anonymous"></script><!-- 폰트어썸(아이콘 폰트) 사용 인증된 링크 -->
+
 </head>
 <body>
 <div class="container">
@@ -31,7 +30,7 @@
                 <input type="text" placeholder="검색 키워드/상호명 입력" autofocus><!--
                  --><input type="submit" value="" class="fa fa-search">
             </div>
-           <dl class="search_keword"> 
+            <dl class="search_keword">
                 <dt><a href="#" onclick="sendCategory('전체')">우리동네 <b>AI추천</b> 모임아이템</a></dt>
                 <dd>
                     <a href="#"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> <span>관광</span></a>
@@ -85,9 +84,9 @@
     <!-- ####### 03. CONTENTS START ####### -->
     <section class="contents_wrap">
         <div class="left_contents">
-<!-- ############################ 카카오맵 지도 연동 시작 ############################### -->
-        <jsp:include page = "/map/test_kakao_1.jsp"></jsp:include>
-<!-- ############################ 카카오맵 지도 연동 끝 ############################### -->
+            <!-- ############################ 카카오맵 지도 연동 시작 ############################### -->
+            <jsp:include page = "/map/test_kakao_1.jsp"></jsp:include>
+            <!-- ############################ 카카오맵 지도 연동 끝 ############################### -->
         </div>
         <!-- #### 03-1.우측 본문 영역 시작 -->
         <div class="right_contents area">
@@ -108,45 +107,45 @@
                 <a href="#" class="btn_last"></a>
             </div>
             <form>
-            <div class="card_list_wrap" id="mapInfoBox">
-               <!-- 추천(조합) 모임카드 #.01 시작 -->
-               <dl class="ai_card">
-                   <dt class="header">
-                        <h2 class="subject_keyword">
-                            <span class="area"><b class="depth_1">1</b><b class="depth_2">중구</b></span>
-                            <strong>데이트/동인천/차이나타운</strong>
-                        </h2>
-                        <p class="keyword_recommand"><!-- 연관 키워드 10개 -->
-                            <a href="#">고기맛집</a><a href="#">월미도</a><a href="#">신포동</a><a href="#">중구</a><a href="#">숯불</a>
-                        </p>
-                   </dt>
-                   <dd class="body">
-                       <!-- 대안 장소 선택_01: 업체 리스트 -->
-                       <div class="card_list">
-                           <ul class="summary_card">
-                               <li class="subject">
-                                   <b><span class="matching_keyword">돈비어</span>천가</b>
-                                   <span class="category"><b class="depth_1">음식</b><b class="depth_2">한식</b></span>
-                               </li>
-                               <li class="thumb"></li>
-                               <li class="addr">인천 중구 개항로 63-2</li>
-                               <li class="work_time">10:00~22:00브레이크타임없음<span>(쉬는날 : 연중무휴)</span></li>
-                               <li class="tel">032-930-1234</li>
-                           </ul>
-                           <div class="btn_wrap">
-                                <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
-                                <button><i class="fa-solid fa-search"></i></button>
+                <div class="card_list_wrap" id="mapInfoBox">
+                    <!-- 추천(조합) 모임카드 #.01 시작 -->
+                    <dl class="ai_card">
+                        <dt class="header">
+                            <h2 class="subject_keyword">
+                                <span class="area"><b class="depth_1">1</b><b class="depth_2">중구</b></span>
+                                <strong>데이트/동인천/차이나타운</strong>
+                            </h2>
+                            <p class="keyword_recommand"><!-- 연관 키워드 10개 -->
+                                <a href="#">고기맛집</a><a href="#">월미도</a><a href="#">신포동</a><a href="#">중구</a><a href="#">숯불</a>
+                            </p>
+                        </dt>
+                        <dd class="body">
+                            <!-- 대안 장소 선택_01: 업체 리스트 -->
+                            <div class="card_list">
+                                <ul class="summary_card">
+                                    <li class="subject">
+                                        <b><span class="matching_keyword">돈비어</span>천가</b>
+                                        <span class="category"><b class="depth_1">음식</b><b class="depth_2">한식</b></span>
+                                    </li>
+                                    <li class="thumb"></li>
+                                    <li class="addr">인천 중구 개항로 63-2</li>
+                                    <li class="work_time">10:00~22:00브레이크타임없음<span>(쉬는날 : 연중무휴)</span></li>
+                                    <li class="tel">032-930-1234</li>
+                                </ul>
+                                <div class="btn_wrap">
+                                    <button><i class="fa-solid fa-solid fa-map-location-dot"></i></button>
+                                    <button><i class="fa-solid fa-search"></i></button>
+                                </div>
                             </div>
-                       </div>
 
-                   </dd>
-                   <dd class="footer">
-                       <button class="basic"><i class="fa-solid fa-location-dot"></i> 지도보기</button>
-                       <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장 만들기</button>
-                   </dd>
-               </dl>
-                <!-- 추천(조합) 모임카드 #.01 끝 -->
-            </div>
+                        </dd>
+                        <dd class="footer">
+                            <button class="basic"><i class="fa-solid fa-location-dot"></i> 지도보기</button>
+                            <button class="confirm"><i class="fa-solid fa-pen-to-square"></i> 초대장 만들기</button>
+                        </dd>
+                    </dl>
+                    <!-- 추천(조합) 모임카드 #.01 끝 -->
+                </div>
             </form>
         </div>
         <!-- #### 03-1.우측 본문 영역 끝 -->
@@ -162,5 +161,8 @@
     <a href="#" class="to_top"> 맨위로 </a>
     <!-- ####### 04. FOOTER END ####### -->
 </div>
+<script src="/map/js/jquery-1.10.2.min.js"></script>
+<script src="//kit.fontawesome.com/56b5cc4bd2.js" crossorigin="anonymous"></script><!-- 폰트어썸(아이콘 폰트) 사용 인증된 링크 -->
+<script src="/js/nav.js"></script>
 </body>
 </html>

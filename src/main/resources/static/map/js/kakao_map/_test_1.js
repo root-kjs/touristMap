@@ -15,7 +15,7 @@ const schoolMap = async() => {
        const URL = "//apis.data.go.kr/B551011/KorService2/locationBasedList2?lDongRegnCd=28&arrange=S&mapX=126.7052062&mapY=37.4562557&radius=20000&numOfRows=100&MobileOS=WEB&MobileApp=AppTest&_type=json&serviceKey=";
        const response = await fetch( URL+serviceKey, {method : "GET"} );
        const data = await response.json();
-       //console.log(data.response.body.items.item); //확인용
+       //console.log(data); //확인용
        // 마커 이미지의 이미지 주소
        var imageSrc = "/img/kakao_map/logo.jpg"; // https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png
        var imageSize = new kakao.maps.Size(24, 35); // 마커 이미지의 이미지 크기
@@ -27,7 +27,6 @@ const schoolMap = async() => {
                position : new kakao.maps.LatLng(value.mapy, value.mapx), //  공공데이터 속성명으로 변경
                image : markerImage // 마커 이미지
            });
-
            // 개별 마커 클릭 했을 경우, 해당 정보 노출하게 하는 이벤트
            let html = "";
            kakao.maps.event.addListener( marker, 'click', () => {
@@ -48,39 +47,12 @@ const schoolMap = async() => {
            });
            return marker;
        });
-       // ####### 아래 기존 제이쿼리(아작스) 소스 변경 ############ 데이터를 가져오기 위해 jQuery를 사용합니다
-       // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-       // $.get("/download/web/data/chicken.json", function(data) {
-       //     // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-       //     // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-       //     var markers = $(data.positions).map(function(i, position) {
-       //         return new kakao.maps.Marker({
-       //             position : new kakao.maps.LatLng(position.lat, position.lng)
-       //         });
-       //     });
-       // 클러스터러에 마커들을 추가합니다
-           clusterer.addMarkers(markers);
-       // });
-       // 마커 클러스터러에 클릭이벤트를 등록합니다
-       // 마커 클러스터러를 생성할 때 disableClickZoom을 true로 설정하지 않은 경우
-       // 이벤트 헨들러로 cluster 객체가 넘어오지 않을 수도 있습니다
+           clusterer.addMarkers(markers); // 클러스터러에 마커들을 추가합니다
        kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
-           // 현재 지도 레벨에서 1레벨 확대한 레벨
-           var level = map.getLevel()-1;
-           // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
-           map.setLevel(level, {anchor: cluster.getCenter()});
+           var level = map.getLevel()-1; // 현재 지도 레벨에서 1레벨 확대한 레벨
+           map.setLevel(level, {anchor: cluster.getCenter()});  // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
        });
 
    }//func end
 
 schoolMap(); // map 실행
-$(function(){
-    // 업종별 대메뉴 활성화(class="active") 메뉴버튼 처리
-    $("nav ul li:nth-child(1) a").addClass("active");
-    // 사용자가 선택한 메뉴 활성화(class="active")에 따른 페이지 메뉴명 제이쿼리 변경 처리
-    $(".membership li.active a").clone().prependTo(".lnb h2");
-    $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");
-    $(".sub_menu_list li a.active span").clone().appendTo(".page_path");
-});
-let activeLinkText = $(".membership li.active a").text();
-$("title").text(activeLinkText);

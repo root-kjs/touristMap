@@ -139,7 +139,7 @@ public class TourApiService {
         urlBuilder.append("&" + URLEncoder.encode("mapX","UTF-8")+"="+"126.7052062");
         urlBuilder.append("&" + URLEncoder.encode("mapY","UTF-8")+"="+"37.4562557");
         urlBuilder.append("&" + URLEncoder.encode("radius","UTF-8")+"="+"20000");
-        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8")+"="+"1000");
+        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8")+"="+"100");
         /* --------------------------- 아래 공통 *필수* 파라미터 ------------------------------ */
         urlBuilder.append("&" + URLEncoder.encode("serviceKey","UTF-8")+"="+"DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D"); /* Service Key */
         urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8")+"="+"WEB");      // OS 구분: IOS(아이폰), AND(안드로이드),WEB(웹), ETC(기타)
