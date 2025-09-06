@@ -8,9 +8,9 @@ import user.service.TourApiService;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
 // 공공데이터 API 연동(한국관광공사_국문 관광정보 서비스_GW  https://apis.data.go.kr/B551011/KorService2/
-@RequestMapping("/api")
+@RequestMapping("/api_tour")
+
 @RestController
 public class TourApiController {
 
@@ -30,10 +30,17 @@ public class TourApiController {
         return result;
     }// func end
 
-    /* [03] 위치기반조회(locationBasedList2) */
+    /* [03] 위치기반_관광정보_조회(locationBasedList2) */
     @GetMapping("/location")
     public List<Map<String, Object>> locationBasedList2() throws IOException {
         List<Map<String, Object>> result = tourApiService.locationBasedList2();
+        return result;
+    }// func end
+
+    /* [04] 지역기반_관광정보_조회(areaBasedList2) */
+    @GetMapping("/area")
+    public List<Map<String, Object>> areaBasedList2() throws IOException {
+        List<Map<String, Object>> result = tourApiService.areaBasedList2();
         return result;
     }// func end
 
