@@ -111,6 +111,7 @@ public class TourApiService {
         String extraParams = URLEncoder.encode("numOfRows", "UTF-8") + "=" + "60000";// 한 페이지 결과 수 : 일단 최대값 설정함(250906기준 전국관광 정보 데이터수 : 50,204개)
         extraParams += "&" + URLEncoder.encode("lDongRegnCd", "UTF-8") + "=" + "28";
         extraParams += "&" + URLEncoder.encode("arrange", "UTF-8") + "=" + "S"; // //arrange=S(A=제목순,C=수정일순, D=생성일순, E=거리순) 대표이미지가 반드시 있는 정렬 (O=제목순, Q=수정일순, R=생성일순,S=거리순)
+        // 지도 기본 중심좌표 수정(대한민국 인천광역시 옹진군 영흥면 : 위도 37.4689816 / 경도 126.5207318) 강화도 관광정보도 나와야 해서 중심좌표 수정(반경 20km 내)_추후 접속한 사용자 IP 좌표 기준으로 변경 예정_250906(토)
         extraParams += "&" + URLEncoder.encode("mapX", "UTF-8") + "=" + "126.5207318";  // *필수입력 파라미터
         extraParams += "&" + URLEncoder.encode("mapY", "UTF-8") + "=" + "37.4689816"; // *필수입력 파라미터
         extraParams += "&" + URLEncoder.encode("radius", "UTF-8") + "=" + "20000"; // *필수입력 파라미터: 거리반경(단위:m) , Max값 20000m=20Km
