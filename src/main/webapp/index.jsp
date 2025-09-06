@@ -23,7 +23,7 @@
     <!-- ####### 01. HEADER START ####### -->
     <div class="header_wrap">
         <header>
-            <h1 class="logo"><a href="/map/index.jsp">인천광역시(데모체험)</a></h1>
+            <h1 class="logo"><a href="/index.jsp">인천광역시(데모체험)</a></h1>
         </header>
         <form>
             <div class="page_search">
@@ -85,7 +85,7 @@
     <section class="contents_wrap">
         <div class="left_contents">
         <!-- ############################ 카카오맵 지도 연동 시작 ############################### -->
-        <jsp:include page = "/map/test_kakao_1.jsp"></jsp:include>
+        <jsp:include page = "/map/tour_kakao.jsp"></jsp:include>
         <!-- ############################ 카카오맵 지도 연동 끝 ################################# -->
         </div>
         <!-- 03-1.우측 본문 영역 시작 -->
