@@ -1,4 +1,4 @@
-<%@ page language = "java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="/map/css/reset.css" >
     <link rel="stylesheet" type="text/css" href="/map/css/layout.css" >
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-
 </head>
 <body>
 <div class="container">
@@ -85,7 +84,7 @@
     <section class="contents_wrap">
         <div class="left_contents">
         <!-- ############################ 카카오맵 지도 연동 시작 ############################### -->
-        <jsp:include page = "/map/tour_kakao.jsp"></jsp:include>
+        <jsp:include page = "/map/tour.jsp"></jsp:include>
         <!-- ############################ 카카오맵 지도 연동 끝 ################################# -->
         </div>
         <!-- 03-1.우측 본문 영역 시작 -->
