@@ -9,17 +9,17 @@ const fetchData = async(apiPath) => {
         return null;
     }
 };
-const getLdongCodeData = async() => fetchData('ldong');      // [01] 법정동코드(ldongCode2) 
-const getLclsSystmData = async() => fetchData('lcls');       // [02] 분류체계코드(lclsSystmCode2) 
-const getLocationListData = async() => fetchData('location');// [03] 위치기반 관광정보(locationBasedList2)
-const getCityData = async() => fetchData('city');            // [04] 법정동코드 > 대분류(17개)
-const getAreaListData = async( lDongRegnCd ) => fetchData(`area?lDongRegnCd=${lDongRegnCd}`);       // [05] 지역기반(17개) 관광정보(areaBasedList2)
+export const getLdongCodeData = async() => fetchData('ldong');      // [01] 법정동코드(ldongCode2) 
+export const getLclsSystmData = async() => fetchData('lcls');       // [02] 분류체계코드(lclsSystmCode2) 
+export const getLocationListData = async() => fetchData('location');// [03] 위치기반 관광정보(locationBasedList2)
+export const getCityData = async() => fetchData('city');            // [04] 법정동코드 > 대분류(17개)
+export const getAreaListData = async( lDongRegnCd ) => fetchData(`area?lDongRegnCd=${lDongRegnCd}`);// [05] 지역기반(17개) 관광정보(areaBasedList2)
 
 //getAreaListData().then( data => {console.log(data);} );    // !확인용
 
 /* ========================= [01] 우측영역(index.jsp) > 지도 업체정보 출력하기 ========================= */
 
-const mapInfoList = async() => { console.log("mapInfoList(우측지도업체정보) js start");
+export const mapInfoList = async() => { console.log("mapInfoList(우측지도업체정보) js start");
     try {
         /* 1) 법정동코드(ldongCode2) 호출 */
         const ldongData = await getLdongCodeData();
@@ -124,7 +124,7 @@ mapInfoList();
 
 /* ========================= [02] 중앙영역(index.jsp) > 지역별 지도 마커 출력하기 ========================= */
 
-const userlocationMap = async() => { console.log("페이지 최초 접속시, 사용자 좌표 중심 20km 내 관광정보 출력");
+export const userlocationMap = async( areaCode ) => { console.log("페이지 최초 접속시, 사용자 좌표 중심 20km 내 관광정보 출력");
     /* 1) 지도 위치 및 기본옵션 설정 */
     var map = new kakao.maps.Map(document.getElementById('map'), {
         // 인천 중심좌표 : mapX=126.7052062  mapY=37.4562557 부평구 부평동 주부토로 19 인근(부평구청 근처)
@@ -142,7 +142,7 @@ const userlocationMap = async() => { console.log("페이지 최초 접속시, �
     /* 2) 위치기반조회(locationBasedList2) 호출 */
     // const areaListData = await getAreaListData(); //console.log( locationData ); // 기존 전국 관광정보 데이터(5만개 넘음)
     // const incheonAreaData = areaListData.filter(item => item.lDongRegnCd === '28'); // 기존 전체 맵에서 인천코드로 필터한 경우 
-    const incheonAreaData = await getAreaListData('28');
+    const incheonAreaData = await getAreaListData( areaCode );
 
     // 3) 마커 이미지의 이미지 주소
     var imageSrc = "/img/kakao_map/logo.jpg"; // https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png
@@ -184,4 +184,4 @@ const userlocationMap = async() => { console.log("페이지 최초 접속시, �
     });
 
 }//func end
-userlocationMap(); // 카카오 map 출력
+// userlocationMap(); // 카카오 map 출력

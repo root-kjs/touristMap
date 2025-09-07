@@ -62,18 +62,8 @@
         <div class="lnb">
             <h2><div class="standard_cond"><!--우리동네 숨겨진 핫플레이스 <br/>-->주제별 다양한 장소를 확인하세요</div></h2>
             <!-- 02-2-2.페이지 컨텐츠 서브 메뉴 노출 시작 -->
-            <ul class="sub_menu_list area">
-                <li><a href="#" class="active"><i class="fa-solid fa-map-location-dot"></i> <span>인천광역시 전체</span><b class="num">18,562</b></a></li>
-                <li><a href="#"><i class="fa-solid fa-location-dot"></i> <span>연수구</span><b class="num">18,562</b></a></li>
-                <li><a href="#"><i class="fa-solid fa-map-pin"></i> <span>남동구</span><b class="num">18,562</b></a></li>
-                <li><a href="#"><i class="fa-solid fa-location-arrow"></i> <span>부평구</span><b class="num">18,562</b></a></li>
-                <li><a href="#"><i class="fa-regular fa-compass"></i> <span>계양구</span><b class="num">18,562</b></a></li>
-                <li><a href="#"><i class="fa-solid fa-location-crosshairs"></i> <span>서구</span><b class="num">18,562</b></a></li>
-                <li><a href="#"><i class="fa-solid fa-map-location-dot"></i> <span>동구</span><b class="num">18,562</b></a></li>
-                <li><a href="#"><i class="fa-solid fa-bookmark"></i> <span>중구</span><b class="num">18,562</b></a></li>
-                <li><a href="#"><i class="fa-solid fa-route"></i> <span>미추홀구</span><b class="num">18,562</b></a></li>
-                <li><a href="#"><i class="fa-solid fa-circle-info"></i> <span>강화군</span><b class="num">18,562</b></a></li>
-                <li><a href="#"><i class="fa-solid fa-tags"></i> <span>옹진군</span><b class="num">18,562</b></a></li>
+            <ul class="sub_menu_list area" id="lnbMap">
+                
             </ul>
         </div>
         <!-- 02-2 좌측 on/off 페이지 서브 메뉴 노출 끝 -->
@@ -114,5 +104,6 @@
 <script src="/js/jquery-1.10.2.min.js"></script>
 <script src="//kit.fontawesome.com/56b5cc4bd2.js" crossorigin="anonymous"></script><!-- 폰트어썸(아이콘 폰트) 사용 인증된 링크 -->
 <script src="/js/nav.js"></script>
+<script type="module" src="/map/js/lnb_map.js"></script>
 </body>
 </html>
