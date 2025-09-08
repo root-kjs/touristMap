@@ -9,7 +9,7 @@ const fetchData = async(apiPath) => {
         return null;
     }
 };
-export const getLdongCodeData = async() => fetchData('ldong');      // [01] 법정동코드(ldongCode2) 
+const getLdongCodeData = async() => fetchData('ldong');      // [01] 법정동코드(ldongCode2) 
 export const getLclsSystmData = async() => fetchData('lcls');       // [02] 분류체계코드(lclsSystmCode2) 
 export const getLocationListData = async() => fetchData('location');// [03] 위치기반 관광정보(locationBasedList2)
 export const getCityData = async() => fetchData('city');            // [04] 법정동코드 > 대분류(17개)
