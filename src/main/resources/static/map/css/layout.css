@@ -227,7 +227,7 @@ nav ul li a.active{ color: #009900; font-weight: 600 }
 .right_contents .page_title{ border-bottom: solid 2px rgba(0,0,0,.7); padding: 0 0 16px 0; }
 .right_contents .page_title:after{ content:""; display: block; clear:both; }
 .right_contents h1{ position: relative; font:600 20px/20px 'Noto Sans KR', SansSerif; display: inline-block }
-.right_contents h1 span{ display: none }
+.right_contents h1 span{ font:500 18px/26px 'Noto Sans KR', SansSerif; }
 .right_contents h1 i{ color: #009900; display: inline-block; font-size: 20px;  }
 .right_contents h1 b.num{ display:none; background: #fff; font:500 14px/18px 'Noto Sans KR', SansSerif; color:  #009900; margin: 0 0 0 10px; border:solid 1px #009900; padding: 1px 10px; border-radius: 10px; }
 .right_contents .title{ position: relative; padding: 0 0 6px 0 }

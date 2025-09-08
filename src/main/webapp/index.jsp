@@ -103,7 +103,7 @@
 </div>
 <script src="/js/jquery-1.10.2.min.js"></script>
 <script src="//kit.fontawesome.com/56b5cc4bd2.js" crossorigin="anonymous"></script><!-- 폰트어썸(아이콘 폰트) 사용 인증된 링크 -->
-<script src="/js/nav.js"></script>
 <script type="module" src="/map/js/lnb_map.js"></script>
+<script src="/js/nav.js"></script>
 </body>
 </html>

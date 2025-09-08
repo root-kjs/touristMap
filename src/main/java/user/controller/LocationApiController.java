@@ -1,5 +1,6 @@
 package user.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +14,10 @@ import java.util.Map;
 
 @RequestMapping("/api")
 @RestController
+@RequiredArgsConstructor
 public class LocationApiController {
 
-    @Autowired
-    LocationApiService locationApiService;
+    private final LocationApiService locationApiService;
 
     /* [01] 법정동_지역코드(getLdongCode2) */
     @GetMapping("/ldong")
