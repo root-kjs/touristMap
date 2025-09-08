@@ -26,7 +26,7 @@ public class AreaController {
 
     /* [02] 법정동 코드(17개지역) > 지역기반 관광정보 데이터 호출  */
     @GetMapping("/area1") // @RequestParam: lDongRegnCd=11 (서울), lDongRegnCd=28 (인천)
-    public List<Map<String, Object>> getAreaList2Resion( @RequestParam String lDongRegnCd) throws IOException {
+    public List<Map<String, Object>> getAreaList2Resion( @RequestParam String lDongRegnCd ) throws IOException {
         List<Map<String, Object>> result = areaService.getAreaList2Resion( lDongRegnCd );
         return result;
     }// func end

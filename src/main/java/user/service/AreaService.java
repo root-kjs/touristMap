@@ -25,29 +25,7 @@ public class AreaService {
         return result;
     }//func end
 
-//    /* [02_17개] 1차 법정동코드(17개) 가져와서, getAreaList2Resion()에 해당 법정동코드 넘겨주는 메소드 */
-//    @Scheduled(cron = "0 0 3 * * *")
-//    public void fetchAllCityDataScheduled() {
-//        System.out.println("[시작] 전국 주요도시 관광정보 조회 ");
-//        try {
-//            List<Map<String, Object>> regionList = getLdongCode2Resion1(); // 1. 1차 지역(17개) 법정동 리스트 가져오기
-//            // 2. for-each(반복문) 1차 지역목록 순회 > 코드와 지역명 추출
-//            for (Map<String, Object> region : regionList) { // Map에서 code와 name값 추출
-//                String lDongRegnCd = (String) region.get("code");
-//                String name = (String) region.get("name");
-//                try {
-//                    System.out.printf("[%s(%s)] 관광정보 조회\n", name, code); // !확인용
-//                    List<Map<String, Object>> touristData = getAreaList2Resion( lDongRegnCd ); // 추출code > 해당 지역 관광정보 조회
-//                    System.out.printf("[%s] [02_17개]지역기반 관광정보(areaBasedList2) %s\n 4.총 개수: %d\n ",name, url_api, touristData.size() ); // 해당 지역 데이터 확인용!
-//                } catch (IOException e) {
-//                    System.out.println("오류:" + name + e);
-//                }
-//            }
-//        } catch (IOException e) { System.out.printf("오류:"+ e); }
-//        System.out.println("[종료] 전국 주요도시 관광정보 조회");
-//    }//func end
-
-    /* [03_공통] 법정동코드(1차지역_17개)를 개별코드 파라미터로 받아 > 지역기반 관광정보를 데이터 호출 > 리스트/맵으로 변환 */
+    /* [02_공통] 법정동코드(1차지역_17개)를 개별코드 파라미터로 받아 > 지역기반 관광정보를 데이터 호출 > 리스트/맵으로 변환 */
     public List<Map<String, Object>> getAreaList2Resion( String lDongRegnCd ) throws IOException {
         // numOfRows(한 페이지 결과 수): 전국 data: 50,204개(250906)
         // arrange(정렬구분): A=제목순, C=수정일순, D=생성일순 / 대표 이미지가 반드시 있는 정렬(O=제목순, Q=수정일순, R=생성일순)
@@ -56,6 +34,30 @@ public class AreaService {
         System.out.printf("[03_공통].지역(areaBasedList2) : %s\n 1. api_url : %s\n 1.총 개수: %d", lDongRegnCd, url_api, result.size()); //!확인용
         return result;
     }//func end
+
+    /*
+    // [03_17개] 1차 법정동코드(17개) 가져와서, getAreaList2Resion()에 해당 법정동코드 넘겨주는 메소드
+    @Scheduled(cron = "0 0 3 * * *")
+    public void fetchAllCityDataScheduled() {
+        System.out.println("[시작] 전국 주요도시 관광정보 조회 ");
+        try {
+            List<Map<String, Object>> regionList = getLdongCode2Resion1(); // 1. 1차 지역(17개) 법정동 리스트 가져오기
+            // 2. for-each(반복문) 1차 지역목록 순회 > 코드와 지역명 추출
+            for (Map<String, Object> region : regionList) { // Map에서 code와 name값 추출
+                String lDongRegnCd = (String) region.get("code");
+                String name = (String) region.get("name");
+                try {
+                    System.out.printf("[%s(%s)] 관광정보 조회\n", name, code); // !확인용
+                    List<Map<String, Object>> touristData = getAreaList2Resion( lDongRegnCd ); // 추출code > 해당 지역 관광정보 조회
+                    System.out.printf("[%s] [02_17개]지역기반 관광정보(areaBasedList2) %s\n 4.총 개수: %d\n ",name, url_api, touristData.size() ); // 해당 지역 데이터 확인용!
+                } catch (IOException e) {
+                    System.out.println("오류:" + name + e);
+                }
+            }
+        } catch (IOException e) { System.out.printf("오류:"+ e); }
+        System.out.println("[종료] 전국 주요도시 관광정보 조회");
+    }//func end
+    */
 
     /* 예비확인용
     // [*전국*] 지역기반 관광정보(areaBasedList2) : 전국 관광데이터 (50,204개_250907기준)

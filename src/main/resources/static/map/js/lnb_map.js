@@ -7,7 +7,7 @@ $("title").text(activeLinkText);
     $(".membership li.active a").clone().prependTo(".lnb h2");
 
 
-// [02] 법정동코드(1차 대분류 지역) 연동 >  죄측메뉴 지역명 매칭 출력 ----------------------------------
+// [02] 법정동코드(1차 대분류 지역) 연동 >  좌측메뉴 지역명 매칭 출력 ----------------------------------
 const getAreaLnb = async() =>{
    
     const ldong1Data = await getLdong1Data();
@@ -16,13 +16,13 @@ const getAreaLnb = async() =>{
     const lnbMap = document.querySelector("#lnbMap");
     const defaultActiveAreaCode = '28'; 
     let html = "";
-    ldong1Data.forEach( (area) =>{
-        const isActive = area.code === defaultActiveAreaCode ? 'active' : '';
+    ldong1Data.forEach( ( lDongRegnCd ) =>{
+        const isActive = lDongRegnCd.code === defaultActiveAreaCode ? 'active' : '';
         html += `
-        <li data-code="${area.code}">
-            <a href="#" class ="${isActive}" onclick="handleAreaClick('${area.code}')">
+        <li data-code="${lDongRegnCd.code}">
+            <a href="#" class ="${isActive}" onclick="handleAreaClick('${lDongRegnCd.code}')">
             <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
-                <span>${area.name}</span><b class="num">18,562</b>
+                <span>${lDongRegnCd.name}</span><b class="num">18,562</b>
             </a>
         </li>`
     });
@@ -37,7 +37,7 @@ window.addEventListener('load', async() => {
 });
 
 // [04] 좌측 지역메뉴 클릭시마다 > 우측 관광정보 타이틀명 변경------------------------
-window.handleAreaClick = ( areaCode ) => {
+window.handleAreaClick = ( lDongRegnCd ) => {
     const activeLink = document.querySelector("#lnbMap .active");
     const currentPageTitle = document.querySelector('.right_contents.area > .page_title > h1 > a');
     // 1) 기존 'active' 클래스 제거
@@ -47,13 +47,13 @@ window.handleAreaClick = ( areaCode ) => {
         currentPageTitle.remove('a');
     }
     // 2) 클릭된 링크에 'active' 클래스 추가
-    const clickedLink = document.querySelector(`#lnbMap [data-code="${areaCode}"] a`);
+    const clickedLink = document.querySelector(`#lnbMap [data-code="${lDongRegnCd}"] a`);
     if (clickedLink) {
         clickedLink.classList.add('active');
         $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");
         //console.log("복사 생성");
     }
     // 3) 좌측 지역명 선택에 따른 지도 마커 업데이트
-    userlocationMap( areaCode );
+    userlocationMap( lDongRegnCd );
 };
 
