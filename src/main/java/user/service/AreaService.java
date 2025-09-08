@@ -3,16 +3,18 @@ package user.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import user.api.TourApiClient;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import static user.api.TourApiClient.url_api;
-
 @Service
 @RequiredArgsConstructor
+
 public class AreaService {
 
     private final TourApiClient tourApiClient; //공공데이터 API통신(GET) + JSON파싱 로직을 처리하는 범용함수
@@ -25,39 +27,50 @@ public class AreaService {
         return result;
     }//func end
 
-    /* [02_공통] 법정동코드(1차지역_17개)를 개별코드 파라미터로 받아 > 지역기반 관광정보를 데이터 호출 > 리스트/맵으로 변환 */
+    /* [02_공통] 법정동코드(1차지역_17개)를 개별코드 파라미터로 받아 > 지역기반 관광정보를 데이터 호출
+    /// **** 매개변수가 있는 메소드는 스케쥴링 불가(의존하는 데이터가 있기 때문에) **** */
     public List<Map<String, Object>> getAreaList2Resion( String lDongRegnCd ) throws IOException {
-        // numOfRows(한 페이지 결과 수): 전국 data: 50,204개(250906)
-        // arrange(정렬구분): A=제목순, C=수정일순, D=생성일순 / 대표 이미지가 반드시 있는 정렬(O=제목순, Q=수정일순, R=생성일순)
+        // arrange(정렬구분): A=제목순, C=수정일순, D=생성일순 / 대표 이미지가 반드시 있는 정렬(O=제목순, Q=수정일순, R=생성일순) // 전국 data: 50,204개(250906)
         String extraParams = String.format("lDongRegnCd=%s&numOfRows=10000&arrange=Q", URLEncoder.encode(lDongRegnCd, StandardCharsets.UTF_8));
         List<Map<String, Object>> result = tourApiClient.fetchAndParse("areaBasedList2", extraParams);
         System.out.printf("[03_공통].지역(areaBasedList2) : %s\n 1. api_url : %s\n 1.총 개수: %d", lDongRegnCd, url_api, result.size()); //!확인용
         return result;
     }//func end
 
-    /*
-    // [03_17개] 1차 법정동코드(17개) 가져와서, getAreaList2Resion()에 해당 법정동코드 넘겨주는 메소드
+    // [03_17개] 1차 법정동코드(17개) + 지역기반 관광정보 조회(getAreaList2Resion) 데이터와 매칭하여 호출하는 메소드
+    // 카카오 지도 좌측메뉴(지역명) 클릭시, 활성화된 좌측메뉴의(.active) 법정동 코드를 전달해주는 것과는 별개로
+    // 위의 01+02 지역기반 관광정보 매칭/통합 데이터라 아래 메소드를 스케쥴링 후, 리스트맵으로 별도 자료 저장하여 저장된 리스트맵 자바객체를 패치로 전달하여 사용자에게 서비스함.
+    List<Map<String, Object>> touristData = new ArrayList<>();
     @Scheduled(cron = "0 0 3 * * *")
-    public void fetchAllCityDataScheduled() {
-        System.out.println("[시작] 전국 주요도시 관광정보 조회 ");
+    public void fetchAllAreaScheduled() {
         try {
-            List<Map<String, Object>> regionList = getLdongCode2Resion1(); // 1. 1차 지역(17개) 법정동 리스트 가져오기
-            // 2. for-each(반복문) 1차 지역목록 순회 > 코드와 지역명 추출
-            for (Map<String, Object> region : regionList) { // Map에서 code와 name값 추출
+            // 1. [01_17개] 1차 지역(17개) 법정동 리스트 가져오기
+            List<Map<String, Object>> regionList = getLdongCode2Resion1();
+            // 2. [01_17개] for-each(반복문) 1차 지역목록 순회 > Map에서 코드와 지역명 추출
+            for (Map<String, Object> region : regionList) {
                 String lDongRegnCd = (String) region.get("code");
-                String name = (String) region.get("name");
+                String lDongRegnname = (String) region.get("name"); // System.out.printf("법정동명 : %s / 법정동코드 %s", lDongRegnname, lDongRegnCd); //!확인용
                 try {
-                    System.out.printf("[%s(%s)] 관광정보 조회\n", name, code); // !확인용
-                    List<Map<String, Object>> touristData = getAreaList2Resion( lDongRegnCd ); // 추출code > 해당 지역 관광정보 조회
-                    System.out.printf("[%s] [02_17개]지역기반 관광정보(areaBasedList2) %s\n 4.총 개수: %d\n ",name, url_api, touristData.size() ); // 해당 지역 데이터 확인용!
+                    touristData = getAreaList2Resion( lDongRegnCd ); // 1차 법정동코드를 파라미터로 받는 관광정보 저장
+                    System.out.printf("[%s] [02_17개]지역기반 관광정보(areaBasedList2) %s\n 4.총 개수: %d\n ",lDongRegnname, url_api, touristData.size() ); // 해당 지역 데이터 확인용!
                 } catch (IOException e) {
-                    System.out.println("오류:" + name + e);
+                    System.out.println("오류:" + lDongRegnname + e);
                 }
             }
         } catch (IOException e) { System.out.printf("오류:"+ e); }
-        System.out.println("[종료] 전국 주요도시 관광정보 조회");
     }//func end
-    */
+
+
+
+    public List<Map<String, Object>> getAreaList2fff ( String lDongRegnCd ) throws IOException {
+
+
+
+        return result;
+    }// func end
+
+
+
 
     /* 예비확인용
     // [*전국*] 지역기반 관광정보(areaBasedList2) : 전국 관광데이터 (50,204개_250907기준)
