@@ -1,4 +1,4 @@
-import { getCityData, getAreaListData , userlocationMap  } from './mapInfoList.js';
+import { getLdong1Data, getAreaListData , userlocationMap  } from './mapInfoList.js';
 
 //[01] 활성화된(.active) 좌측 대메뉴명 > 상단 title에 넣기--------------------------
 let activeLinkText = $(".membership li.active a").text();
@@ -7,16 +7,16 @@ $("title").text(activeLinkText);
     $(".membership li.active a").clone().prependTo(".lnb h2");
 
 
-// [02] 법정동코드(1차 대분류 지역) 데이터 가져오기----------------------------------
+// [02] 법정동코드(1차 대분류 지역) 연동 >  죄측메뉴 지역명 매칭 출력 ----------------------------------
 const getAreaLnb = async() =>{
    
-    const ldongData = await getCityData();
+    const ldong1Data = await getLdong1Data();
     //console.log(ldongData);
     // 2) 법정동코드 데이터 html 출력
     const lnbMap = document.querySelector("#lnbMap");
     const defaultActiveAreaCode = '28'; 
     let html = "";
-    ldongData.forEach( (area) =>{
+    ldong1Data.forEach( (area) =>{
         const isActive = area.code === defaultActiveAreaCode ? 'active' : '';
         html += `
         <li data-code="${area.code}">

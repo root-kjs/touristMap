@@ -1,10 +1,10 @@
 package user.api;
-
+/* 공공데이터 > 국문관광정보 TourAPI4.0 (https://apis.data.go.kr/B551011/KorService2/) */
+// 공공데이터 API통신(GET) + JSON파싱 로직을 처리하는 범용함수
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,12 +18,12 @@ import java.util.Map;
 @Component
 public class TourApiClient {
 
-    @Value("${api.tour.service-key}") // 공공데이터 API서비스 키( https://apis.data.go.kr/B551011/KorService2/)
+    @Value("${api.tour.service-key}") // 공공데이터 API서비스 키
     private String serviceKey;
 
     private final ObjectMapper objectMapper = new ObjectMapper(); // API 응답 데이터 > ObjectMapper를 사용하여 JSON문자열을 자바객체 변환 도구 */
 
-    public static URL url_api;
+    public static URL url_api; // 해당 관광데이터 API 링크 확인용 전역변수
     /* [00] 공공데이터 API통신(GET) + JSON파싱 로직을 처리하는 범용함수(한국관광공사_국문 관광정보 서비스_GW : https://apis.data.go.kr/B551011/KorService2/) */
     public List<Map<String, Object>> fetchAndParse(String apiPath, String extraParams) throws IOException {
         /* 1) 가져올 API 경로 파라미터 설정 */
@@ -58,7 +58,6 @@ public class TourApiClient {
         }
         rd.close();
         conn.disconnect();
-
         if (sb.length() == 0) return Collections.emptyList(); // 응답이 비어있거나 올바르지 않은 경우 빈 리스트 반환
 
         /* 7) TypeReference를 사용해 복잡한 중첩 구조의 제네릭 타입을 명시 */
@@ -81,8 +80,9 @@ public class TourApiClient {
             System.out.println("[실패] 총 아이템 개수: 0");
             return Collections.emptyList(); // 최종 데이터가 null인 경우 빈 리스트 반환
         }
-        //System.out.println("[성공] 총 아이템 개수: " + itemList.size());
+        //System.out.println("[성공] 총 아이템 개수: " + itemList.size()); //!확인용
         return itemList;
     }//func end
 
 }// class end
+
