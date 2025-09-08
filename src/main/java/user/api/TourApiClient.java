@@ -1,6 +1,5 @@
 package user.api;
 /* 공공데이터 > 국문관광정보 TourAPI4.0 (https://apis.data.go.kr/B551011/KorService2/) */
-// 공공데이터 API통신(GET) + JSON파싱 로직을 처리하는 범용함수
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,8 +21,9 @@ public class TourApiClient {
     private String serviceKey;
 
     private final ObjectMapper objectMapper = new ObjectMapper(); // API 응답 데이터 > ObjectMapper를 사용하여 JSON문자열을 자바객체 변환 도구 */
-
     public static URL url_api; // 해당 관광데이터 API 링크 확인용 전역변수
+    /* 공공데이터 API통신(GET) + JSON파싱 로직을 처리하는 범용함수 */
+
     /* [00] 공공데이터 API통신(GET) + JSON파싱 로직을 처리하는 범용함수(한국관광공사_국문 관광정보 서비스_GW : https://apis.data.go.kr/B551011/KorService2/) */
     public List<Map<String, Object>> fetchAndParse(String apiPath, String extraParams) throws IOException {
         /* 1) 가져올 API 경로 파라미터 설정 */
@@ -38,7 +38,7 @@ public class TourApiClient {
 
         /* 3) 조합한 URL주소로 HTTP 통신 접속(GET) 요청 */
         url_api = new URL(urlBuilder.toString());
-        System.out.println("url = " + url_api);
+        // System.out.println("url = " + url_api); //!확인용
         HttpURLConnection conn = (HttpURLConnection) url_api.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");

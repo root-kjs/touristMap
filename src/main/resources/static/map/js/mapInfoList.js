@@ -9,11 +9,11 @@ const fetchData = async(apiPath) => {
         return null;
     }
 };
-const getLdongCodeData = async() => fetchData('ldong');      // [01] 법정동코드(ldongCode2) 
+const getLdongCodeData = async() => fetchData('ldongCd');      // [01] 법정동코드(ldongCode2) 
 export const getLclsSystmData = async() => fetchData('lcls');       // [02] 분류체계코드(lclsSystmCode2) 
 export const getLocationListData = async() => fetchData('location');// [03] 위치기반 관광정보(locationBasedList2)
-export const getLdong1Data = async() => fetchData('ldong1');            // [04] 법정동코드 > 대분류(17개)
-export const getAreaListData = async( lDongRegnCd ) => fetchData(`area1?lDongRegnCd=${lDongRegnCd}`);// [05] 지역기반(17개) 관광정보(areaBasedList2)
+export const getLdong1Data = async() => fetchData('ldong');            // [04] 법정동코드 > 대분류(17개)
+export const getAreaListData = async( lDongRegnCd ) => fetchData(`area?lDongRegnCd=${lDongRegnCd}`);// [05] 지역기반(17개) 관광정보(areaBasedList2)
 
 //getAreaListData().then( data => {console.log(data);} );    // !확인용
 

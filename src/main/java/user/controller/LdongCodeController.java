@@ -18,9 +18,9 @@ public class LdongCodeController {
     private final LdongCodeService ldongCodeService;
 
     /* [01] 법정동/지역코드(getLdongCode2) 데이터 호출 */
-    @GetMapping("/ldong")
+    @GetMapping("/ldongCd")
     public List<Map<String, Object>> getLdongCode2() throws IOException {
-        List<Map<String, Object>> result = ldongCodeService.getLdongCode2();
+        List<Map<String, Object>> result = ldongCodeService.getLdongCode2Data();
         return result;
     }// func end
 
