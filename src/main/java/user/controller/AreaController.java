@@ -20,23 +20,14 @@ public class AreaController {
     /* [01] 법정동 코드(17개지역) 데이터 호출 */
     @GetMapping("/ldong")
     public List<Map<String, Object>> getLdongCode2Data() throws IOException {
-        List<Map<String, Object>> result = areaService.getLdongCode2();
-        return result;
+        return areaService.getLdongCode2(); // 1. 실서버 패치용
     }// func end
 
     /* [02] 지역기반 관광정보 데이터 호출(법정동 코드(17개지역))  */
     @GetMapping("/area") // @RequestParam: lDongRegnCd=11 (서울), lDongRegnCd=28 (인천)
     public List<Map<String, Object>> getAreaListData( @RequestParam String lDongRegnCd ) throws IOException {
-        List<Map<String, Object>> result = areaService.getAreaListData( lDongRegnCd );
-        return result;
+        return areaService.getAreaListData( lDongRegnCd ); // 1. 실서버 패치용
     }// func end
 
-
-//    /* [02] 법정동 코드(17개지역) > 지역기반 관광정보 데이터 호출  */
-//    @GetMapping("/area1") // @RequestParam: lDongRegnCd=11 (서울), lDongRegnCd=28 (인천)
-//    public List<Map<String, Object>> getAreaList2Resion( @RequestParam String lDongRegnCd ) throws IOException {
-//        List<Map<String, Object>> result = areaService.getAreaList2Resion( lDongRegnCd );
-//        return result;
-//    }// func end
 
 }// class end

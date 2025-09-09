@@ -20,9 +20,7 @@ public class LclsSystmCodeController {
     /* [01] 분류체계코드/카테고리(getLclsSystmCode2) 데이터 호출 */
     @GetMapping("/lcls")
     public List<Map<String, Object>> getLclsSystmCode2Data() throws IOException {
-        List<Map<String, Object>> result = lclsSystmCodeService.getLclsSystmCode2Data();
-        return result;
+        return lclsSystmCodeService.getLclsSystmCode2Data();
     }// func end
-
 
 }//class end

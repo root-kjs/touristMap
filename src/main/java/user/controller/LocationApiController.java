@@ -20,8 +20,7 @@ public class LocationApiController {
     /* [01] 위치기반_관광정보_조회(getLocationBasedList2) 데이터 호출*/
     @GetMapping("/location")
     public List<Map<String, Object>> getLocationBasedList2() throws IOException {
-        List<Map<String, Object>> result = locationApiService.getLdongCode2Data();
-        return result;
+        return locationApiService.getLdongCode2Data();
     }// func end
 
 }// class end

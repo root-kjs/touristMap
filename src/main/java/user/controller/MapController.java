@@ -22,5 +22,4 @@ public class MapController {
         result.put("kakaoKey", kakaoMapAppKey);
         return result;
     }//func end
-
 }// class end

@@ -1,28 +1,57 @@
 package user.api;
 /* 공공API 데이터 > 스케쥴링 시간 외 실서버 배포시 > 서버 실행될때마다 공공데이터 재수집하는 메소드 */
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
 import user.service.AreaService;
 import user.service.LclsSystmCodeService;
 import user.service.LdongCodeService;
 import user.service.LocationApiService;
 
+import java.time.Instant;
+import java.util.Date;
+
 @Component
-public class ApiRun implements CommandLineRunner {
+@RequiredArgsConstructor
+public class ApiRun {
 
-    @Autowired private AreaService areaService;
-    @Autowired private LclsSystmCodeService lclsSystmCodeService;
-    @Autowired private LdongCodeService ldongCodeService;
-    @Autowired private LocationApiService locationApiService;
+    private final TaskScheduler scheduler;
+    private final AreaService area;
+    private final LclsSystmCodeService lcls;
+    private final LdongCodeService ldong;
+    private final LocationApiService loc;
 
-    @Override
-    public void run(String... args) throws Exception {
-        // 앱 기동 직후, 스케줄링 자동 1번 실행
-        areaService.schedulLdongCode2depth1();
-        areaService.schedulAreaList2LDong();
-        lclsSystmCodeService.schedulLclsSystmCode2();
-        ldongCodeService.schedulLdongCode2();
-        locationApiService.schedulLocationList2();
-    } //func end
-} //class end
+    @EventListener(ApplicationReadyEvent.class)
+    public void runAfterReady() {
+        schedule(0, area::schedulLdongCode2depth1);
+        schedule(30, area::schedulAreaList2LDong);
+        schedule(100, lcls::schedulLclsSystmCode2);
+        schedule(150, ldong::schedulLdongCode2);
+        schedule(200, loc::schedulLocationList2);
+    }
+
+    private void schedule(int delaySec, Runnable task) {
+        try {
+            scheduler.schedule(task, Date.from(Instant.now().plusSeconds(delaySec)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+@Configuration
+class TaskCfg {
+    @Bean
+    TaskScheduler taskScheduler() {
+        var s = new ThreadPoolTaskScheduler();
+        s.setPoolSize(1);
+        s.setThreadNamePrefix("startup-");
+        return s;
+    }
+}

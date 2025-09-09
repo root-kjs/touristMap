@@ -21,17 +21,20 @@ public class AreaService {
     /* [1-1★★스케쥴링★★] 1차 법정동 코드(ldongCode2) > 도/광역시(17개:서울/경기/인천 등) 데이터 호출 메소드 */
     List<Map<String, Object>> ldongCode2Data = new ArrayList<>();
     @Scheduled(cron = "0 0 3 * * *")
-    public List<Map<String, Object>> schedulLdongCode2depth1() throws IOException {
-        String extraParams = URLEncoder.encode("numOfRows", "UTF-8") + "=" + "17";
-        ldongCode2Data = tourApiClient.fetchAndParse("ldongCode2", extraParams);
-        //System.out.printf("1차 법정동 : %s\n 총 개수: %d", url_api, LdongCode2Data1.size()); // !확인용
-        return ldongCode2Data;
+    public List<Map<String, Object>> schedulLdongCode2depth1() {
+        try {
+            String extraParams = URLEncoder.encode("numOfRows", "UTF-8") + "=" + "17";
+            ldongCode2Data = tourApiClient.fetchAndParse("ldongCode2", extraParams);
+            //System.out.printf("1차 법정동 : %s\n 총 개수: %d", url_api, LdongCode2Data1.size()); // !확인용
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+            return ldongCode2Data;
     }//func end
 
     /* [1-2/패치] 1차 법정동 코드(ldongCode2) > 스케쥴링으로 저장된 자바 객체 데이터 */
     public List<Map<String, Object>> getLdongCode2( ){
-        List<Map<String, Object>> result = ldongCode2Data;
-        return result;
+        return ldongCode2Data;
     }// func end
 
     /* [2-1/수집] 지역기반 관광정보를 데이터 호출 메소드( 법정동코드(1차지역_17개) 파라미터 ) */
@@ -40,7 +43,7 @@ public class AreaService {
         // arrange(정렬구분): A=제목순, C=수정일순, D=생성일순 / 대표 이미지가 반드시 있는 정렬(O=제목순, Q=수정일순, R=생성일순) // 전국 data: 50,204개(250906)
         String extraParams = String.format("lDongRegnCd="+lDongRegnCd+"&numOfRows=10000&arrange=Q", URLEncoder.encode(lDongRegnCd, StandardCharsets.UTF_8));
         List<Map<String, Object>> areaLDongRegnCd = tourApiClient.fetchAndParse("areaBasedList2", extraParams);
-        System.out.printf("3.지역기반(areaBasedList2) : %s\n 1. api_url : %s\n 3.총 개수: %d", lDongRegnCd, url_api, areaLDongRegnCd.size()); //!확인용
+        //System.out.printf("3.지역기반(areaBasedList2) : %s\n 1. api_url : %s\n 3.총 개수: %d", lDongRegnCd, url_api, areaLDongRegnCd.size()); //!확인용
         return areaLDongRegnCd;
     }//func end
 
@@ -50,15 +53,19 @@ public class AreaService {
     /* 지역기반 관광정보 스케쥴링 저장소 */
     List<Map<String, Object>> areaListData = new ArrayList<>();
     @Scheduled(cron = "0 0 3 * * *")
-    public List<Map<String, Object>> schedulAreaList2LDong( ) throws IOException {
-        List<Map<String, Object>> regionList = getLdongCode2( );
-        String lDongRegnCd = "";
-        for (Map<String, Object> region : regionList) {
-            lDongRegnCd = (String) region.get("code");
-            List<Map<String, Object>> areaList = getAreaList2(lDongRegnCd);
-            areaListData.addAll(areaList);
+    public List<Map<String, Object>> schedulAreaList2LDong( ) {
+        try {
+            List<Map<String, Object>> regionList = getLdongCode2();
+            String lDongRegnCd = "";
+            for (Map<String, Object> region : regionList) {
+                lDongRegnCd = (String) region.get("code");
+                List<Map<String, Object>> areaList = getAreaList2(lDongRegnCd);
+                areaListData.addAll(areaList);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        System.out.printf("3.지역기반 스케쥴링(areaBasedList2) : %s\n 1. api_url : %s\n 3.총 개수: %d", areaListData, url_api, areaListData.size()); //!확인용
+        //System.out.printf("3.지역기반 스케쥴링(areaBasedList2) : %s\n 1. api_url : %s\n 3.총 개수: %d", areaListData, url_api, areaListData.size()); //!확인용
         return areaListData;
     }//func end
 
