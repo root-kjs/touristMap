@@ -7,7 +7,7 @@ $("title").text(activeLinkText);
     $(".membership li.active a").clone().prependTo(".lnb h2");
 
 
-// [02] 법정동코드(1차 대분류 지역) 연동 >  좌측메뉴 지역명 매칭 출력 ----------------------------------
+// [02] 법정동코드(1차 대분류 지역) 연동 > 좌측메뉴 지역명 매칭 출력 ----------------------------------
 const getAreaLnb = async() =>{
    
     const ldong1Data = await getLdong1Data();

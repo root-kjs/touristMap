@@ -30,10 +30,10 @@ public class ApiRun {
     @EventListener(ApplicationReadyEvent.class)
     public void runAfterReady() {
         schedule(0, area::schedulLdongCode2depth1);
-        schedule(30, area::schedulAreaList2LDong);
-        schedule(100, lcls::schedulLclsSystmCode2);
-        schedule(150, ldong::schedulLdongCode2);
-        schedule(200, loc::schedulLocationList2);
+        schedule(3, area::schedulAreaList2LDong);
+        schedule(30, lcls::schedulLclsSystmCode2);
+        schedule(35, ldong::schedulLdongCode2);
+        schedule(40, loc::schedulLocationList2);
     }
 
     private void schedule(int delaySec, Runnable task) {
