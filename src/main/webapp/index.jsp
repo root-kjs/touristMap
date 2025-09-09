@@ -100,6 +100,11 @@
         </footer>
     </div>
     <!-- ####### 04. FOOTER END ####### -->
+     <div class="modal_layer_wrap">
+        <div class="modal_layer_wrap">
+            
+         </div>
+     </div>
 </div>
 <script src="/js/jquery-1.10.2.min.js"></script>
 <script src="//kit.fontawesome.com/56b5cc4bd2.js" crossorigin="anonymous"></script><!-- 폰트어썸(아이콘 폰트) 사용 인증된 링크 -->
