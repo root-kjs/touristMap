@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling // 스케쥴링(TourAPI)
 public class AppStart extends SpringBootServletInitializer {
 
+
+
     public static void main(String[] args) {
         SpringApplication.run( AppStart.class );
     }

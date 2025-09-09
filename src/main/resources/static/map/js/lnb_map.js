@@ -29,12 +29,6 @@ const getAreaLnb = async() =>{
     lnbMap.innerHTML=html;
 }//func end
 
-// [03] 페이지 최초 로딩 시, 기본 인천 지역 지도 출력--------------------------------
-window.addEventListener('load', async() => {
-    await getAreaLnb(); // 좌측 메뉴가 먼저 로드
-    await $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1"); // 
-    userlocationMap('28'); // 디폴트 : 인천 지도
-});
 
 // [04] 좌측 지역메뉴 클릭시마다 > 우측 관광정보 타이틀명 변경------------------------
 window.handleAreaClick = ( lDongRegnCd ) => {
