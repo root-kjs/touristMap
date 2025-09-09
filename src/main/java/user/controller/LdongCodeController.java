@@ -23,5 +23,4 @@ public class LdongCodeController {
         List<Map<String, Object>> result = ldongCodeService.getLdongCode2Data();
         return result;
     }// func end
-
 }//class end
