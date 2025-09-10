@@ -8,12 +8,12 @@ $("title").text(activeLinkText);
     $(".membership li.active a").clone().prependTo(".lnb h2");
 
 // [02] 법정동코드(1차 대분류 지역) 연동 > 좌측메뉴 지역명 매칭 출력 ----------------------------------
-const getAreaLnb = async() =>{
+const getAreaLnb = async( bjdCode ) =>{
     const ldong1Data = await getLdong1Data();
     //console.log(ldongData);
     // 2) 법정동코드 데이터 html 출력
     const lnbMap = document.querySelector("#lnbMap");
-    const defaultActiveAreaCode = '28'; 
+    const defaultActiveAreaCode = bjdCode ; // [강사] 내위치 기반 초기 위치 로 변경
     let html = "";
     ldong1Data.forEach( ( lDongRegnCd ) =>{
         const isActive = lDongRegnCd.code === defaultActiveAreaCode ? 'active' : '';
@@ -31,9 +31,20 @@ const getAreaLnb = async() =>{
 // [03] 페이지 최초 로딩 시, 기본 인천 지역 지도 출력--------------------------------
 window.addEventListener('load', async() => {
     console.log("[지역별 지도] 좌측메뉴 출력!");
-    await getAreaLnb(); // 좌측 메뉴가 먼저 로드
-    await $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");  
-    userlocationMap('28'); // 디폴트 : 인천 지도
+
+    // [03-1] 강사 : 현재 위치IP 가져오기
+    const pos = await myPosition();
+    const lat = pos.coords.latitude;
+    const lng = pos.coords.longitude;
+    // [03-2] 강사 : 현재 위치IP 로 주소 가져오기
+    const address = await getAddressFromCoords(lat, lng);
+    // [03-3] 강사 : 현재 주소로 법정동 코드 앞자리 2개 가져오기
+    const bjdCode = await getBjdCodeFromAddress(address);
+
+    await getAreaLnb( bjdCode ); // 좌측 메뉴가 먼저 로드
+    await $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");
+    await userlocationMap( bjdCode , lat , lng );
+
 });
 
 // [04] 좌측 지역메뉴 클릭시마다 > 우측 관광정보 타이틀명 변경------------------------

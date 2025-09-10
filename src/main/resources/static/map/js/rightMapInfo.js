@@ -1,7 +1,8 @@
 import { getLdongCodeData , getLclsSystmData, getLocationListData, getLdong1Data, getAreaListData } from './getAPIdata.js';
 import { markerInfoLayer } from './markerInfoLayer.js';
 /* ========================= [01] 우측영역(index.jsp) > 지도 업체정보 출력하기 ========================= */
-export const mapInfoList = async() => { console.log("mapInfoList(우측지도업체정보) js start");
+export const mapInfoList = async(  lDongRegnCd , lat , lng  ) => { console.log("mapInfoList(우측지도업체정보) js start");
+
     try {
         /* 1) 법정동코드(ldongCode2) 호출 */
         const ldongData = await getLdongCodeData();
@@ -27,7 +28,7 @@ export const mapInfoList = async() => { console.log("mapInfoList(우측지도업
         }//console.log( lclsMap );
 
         /* 3) 위치기반 관광정보(locationBasedList2) 호출 */
-        const locationData = await getLocationListData(); //console.log( locationData );
+        const locationData = await getLocationListData( lDongRegnCd , lat , lng ); //console.log( locationData );
         // arrange=S(A=제목순,C=수정일순, D=생성일순, E=거리순) 대표이미지가 반드시 있는 정렬 (O=제목순, Q=수정일순, R=생성일순,S=거리순) 인천 중심좌표 : mapX=126.7052062  mapY=37.4562557 부평구 부평동 주부토로 19 인근(부평구청 근처)
 
         /* 4) 지도 마커 찍을 돔객체 가져오기 */
@@ -102,5 +103,5 @@ export const mapInfoList = async() => { console.log("mapInfoList(우측지도업
         console.error("[위치 기반] 오류 발생:", error);
     }
 }//func end
-mapInfoList();
+// mapInfoList();
 /* ========================= [02] 중앙영역(index.jsp) > 지역별 지도 마커 출력하기 ========================= */
