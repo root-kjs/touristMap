@@ -1,6 +1,5 @@
 import { getLdongCodeData , getLclsSystmData, getLocationListData, getLdong1Data, getAreaListData } from './getAPIdata.js';
-import { markerInfoLayer } from './markerInfoLayer.js';
-/* ========================= [01] 우측영역(index.jsp) > 지도 업체정보 출력하기 ========================= */
+/*  [01] 우측영역(index.jsp) > 지도 업체정보 출력하기 ================================================================================================= */
 export const mapInfoList = async() => { console.log("mapInfoList(우측지도업체정보) js start");
     try {
         /* 1) 법정동코드(ldongCode2) 호출 */
@@ -103,4 +102,3 @@ export const mapInfoList = async() => { console.log("mapInfoList(우측지도업
     }
 }//func end
 mapInfoList();
-/* ========================= [02] 중앙영역(index.jsp) > 지역별 지도 마커 출력하기 ========================= */

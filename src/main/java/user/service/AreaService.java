@@ -8,14 +8,12 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static user.api.TourApiClient.url_api;
 @Service
 @RequiredArgsConstructor
-
 public class AreaService {
-
     private final TourApiClient tourApiClient; //공공데이터 API통신(GET) + JSON파싱 로직을 처리하는 범용함수
 
     /* [1-1★★스케쥴링★★] 1차 법정동 코드(ldongCode2) > 도/광역시(17개:서울/경기/인천 등) 데이터 호출 메소드 */
@@ -50,8 +48,9 @@ public class AreaService {
     /* [2-2★★스케쥴링★★] 법정동 지역기반 관광정보 데이터 매칭 메소드 */
     // 카카오 지도 좌측메뉴(지역명) 클릭시, 활성화된 좌측메뉴의(.active) 법정동 코드를 전달해주는 것과는 별개로
     // 위의 01+02 지역기반 관광정보 매칭/통합 데이터라 아래 메소드를 스케쥴링 후, 리스트맵으로 별도 자료 저장하여 저장된 리스트맵 자바객체를 패치로 전달하여 사용자에게 서비스함.
-    /* 지역기반 관광정보 스케쥴링 저장소 */
-    List<Map<String, Object>> areaListData = new ArrayList<>();
+
+     List<Map<String, Object>> areaListData = new ArrayList<>(); /* [기존 전국/ 지역기반 관광정보 스케쥴링 저장소 */
+    // Map<String, List<Map<String, Object>>> areaListData = new HashMap<>(); /* [변경 17개 지역 / 지역기반 관광정보 스케쥴링 저장소 */
     @Scheduled(cron = "0 0 3 * * *")
     public List<Map<String, Object>> schedulAreaList2LDong( ) {
         try {
@@ -59,7 +58,7 @@ public class AreaService {
             String lDongRegnCd = "";
             for (Map<String, Object> region : regionList) {
                 lDongRegnCd = (String) region.get("code");
-                List<Map<String, Object>> areaList = getAreaList2(lDongRegnCd);
+                List<Map<String, Object>> areaList = getAreaList2( lDongRegnCd );
                 areaListData.addAll(areaList);
             }
         } catch (Exception e) {

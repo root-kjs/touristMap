@@ -1,4 +1,5 @@
 //import { getLdongCodeData , getLclsSystmData, getLocationListData, getLdong1Data, getAreaListData } from './getAPIdata.js';
+// [01] 지도마커 클릭시, 상세업체정보 출력하기-----------------------------------------------------------------------------------
 export const markerInfoLayer = async(  value, marker ) => { console.log("지도마커 클릭시, 상세업체정보 출력하기");
         // 4-2. 개별 마커 클릭 했을 경우, 해당 정보 노출하게 하는 이벤트 --> 상세관광정보 작업중!
         let html = "";

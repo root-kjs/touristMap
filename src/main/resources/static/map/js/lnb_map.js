@@ -1,7 +1,7 @@
 import { getLdong1Data  } from './getAPIdata.js';
 import { userlocationMap  } from './userlocationMap.js';
 
-//[01] 활성화된(.active) 좌측 대메뉴명 > 상단 title에 넣기--------------------------
+// [01] 활성화된(.active) 좌측 대메뉴명 > 상단 title에 넣기--------------------------------------------
 let activeLinkText = $(".membership li.active a").text();
 $("title").text(activeLinkText);
     // 사용자가 선택한 메뉴 활성화(class="active")에 따른 페이지 메뉴명 제이쿼리 변경 처리
@@ -28,7 +28,7 @@ const getAreaLnb = async() =>{
     lnbMap.innerHTML=html;
 }//func end
 
-// [03] 페이지 최초 로딩 시, 기본 인천 지역 지도 출력--------------------------------
+// [03] 페이지 최초 로딩 시, 기본 인천 지역 지도 출력--------------------------------------------------
 window.addEventListener('load', async() => {
     console.log("[지역별 지도] 좌측메뉴 출력!");
     await getAreaLnb(); // 좌측 메뉴가 먼저 로드
@@ -36,7 +36,7 @@ window.addEventListener('load', async() => {
     userlocationMap('28'); // 디폴트 : 인천 지도
 });
 
-// [04] 좌측 지역메뉴 클릭시마다 > 우측 관광정보 타이틀명 변경------------------------
+// [04] 좌측 지역메뉴 클릭시마다 > 우측 관광정보 타이틀명 변경------------------------------------------
 window.handleAreaClick = ( lDongRegnCd ) => {
     const activeLink = document.querySelector("#lnbMap .active");
     const currentPageTitle = document.querySelector('.right_contents.area > .page_title > h1 > a');
