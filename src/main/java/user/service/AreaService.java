@@ -27,7 +27,7 @@ public class AreaService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-            return ldongCode2Data;
+        return ldongCode2Data;
     }//func end
 
     /* [1-2/패치] 1차 법정동 코드(ldongCode2) > 스케쥴링으로 저장된 자바 객체 데이터 */
@@ -39,7 +39,7 @@ public class AreaService {
     /// **** 매개변수가 있는 메소드는 스케쥴링 불가(의존하는 데이터가 있기 때문에) **** */
     public List<Map<String, Object>> getAreaList2( String lDongRegnCd ) throws IOException {
         // arrange(정렬구분): A=제목순, C=수정일순, D=생성일순 / 대표 이미지가 반드시 있는 정렬(O=제목순, Q=수정일순, R=생성일순) // 전국 data: 50,204개(250906)
-        String extraParams = String.format("lDongRegnCd="+lDongRegnCd+"&numOfRows=10&arrange=Q", URLEncoder.encode(lDongRegnCd, StandardCharsets.UTF_8));
+        String extraParams = String.format("lDongRegnCd="+lDongRegnCd+"&numOfRows=100&arrange=Q", URLEncoder.encode(lDongRegnCd, StandardCharsets.UTF_8));
         List<Map<String, Object>> areaLDongRegnCd = tourApiClient.fetchAndParse("areaBasedList2", extraParams);
         //System.out.printf("3.지역기반(areaBasedList2) : %s\n 1. api_url : %s\n 3.총 개수: %d", lDongRegnCd, url_api, areaLDongRegnCd.size()); //!확인용
         return areaLDongRegnCd;
@@ -49,7 +49,7 @@ public class AreaService {
     // 카카오 지도 좌측메뉴(지역명) 클릭시, 활성화된 좌측메뉴의(.active) 법정동 코드를 전달해주는 것과는 별개로
     // 위의 01+02 지역기반 관광정보 매칭/통합 데이터라 아래 메소드를 스케쥴링 후, 리스트맵으로 별도 자료 저장하여 저장된 리스트맵 자바객체를 패치로 전달하여 사용자에게 서비스함.
 
-     List<Map<String, Object>> areaListData = new ArrayList<>(); /* [기존 전국/ 지역기반 관광정보 스케쥴링 저장소 */
+    List<Map<String, Object>> areaListData = new ArrayList<>(); /* [기존 전국/ 지역기반 관광정보 스케쥴링 저장소 */
     // Map<String, List<Map<String, Object>>> areaListData = new HashMap<>(); /* [변경 17개 지역 / 지역기반 관광정보 스케쥴링 저장소 */
     @Scheduled(cron = "0 0 3 * * *")
     public List<Map<String, Object>> schedulAreaList2LDong( ) {

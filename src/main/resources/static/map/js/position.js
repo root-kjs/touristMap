@@ -11,7 +11,7 @@ const myPosition = async () => {
         }); // navigator.geolocation end 
     }); // 동기함수 end 
 
-    console.log( position );
+    //console.log( position );
     console.log( `위도 : ${ position.coords.latitude }`)
     console.log( `경도 : ${ position.coords.longitude }`)
     return position; // 

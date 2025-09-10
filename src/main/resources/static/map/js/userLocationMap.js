@@ -29,7 +29,7 @@ export const userlocationMap = async( lDongRegnCd , lat , lng ) => { console.log
         // 인천 중심좌표 : mapX=126.7052062  mapY=37.4562557 부평구 부평동 주부토로 19 인근(부평구청 근처)
         center : new kakao.maps.LatLng( lat , lng ), // 지도의 중심좌표 -> 인천시청 기준 : 37.4563, 126.7052 // 인천광역시 옹진군 영흥면 : 위도 37.4689816 / 경도 126.5207318 // 인천역 : 위도 (Latitude): 37.478296 경도 (Longitude): 126.622685
         //더조은 학원 부평역 기준(사용자) : 위도 37.489457, 경도 126.724494
-        level : 8 // 지도의 확대 레벨
+        level : 7 // 지도의 확대 레벨
     });
 
 
@@ -47,7 +47,7 @@ export const userlocationMap = async( lDongRegnCd , lat , lng ) => { console.log
 
         // 지도 중심 이동
         map.setCenter(clickLocation);
-        map.setLevel(7);
+        map.setLevel(6);
 
         const address = await getAddressFromCoords(lat, lng);
         const clickLDongRegnCd = await getBjdCodeFromAddress(address);
@@ -87,33 +87,33 @@ export const userlocationMap = async( lDongRegnCd , lat , lng ) => { console.log
           circle.setMap(null);
         }
 
-         // 5km 반경의 원 생성 : https://apis.map.kakao.com/web/sample/drawShape/
+            // 2km 반경의 원 생성
         circle = new kakao.maps.Circle({
-          center: myLocation,// 원의 중심좌표
-          radius: 5000, // 미터 단위의 원의 반지름
+          center: myLocation,
+          radius: 5000,
           strokeWeight: 5,
-          strokeColor: '#75B8FA',
+          strokeColor: '#ffffffff',
           strokeOpacity: 0.8,
           strokeStyle: 'dashed',
           fillColor:  'rgba(9, 248, 236, 1)',
-          fillOpacity: 0.3
+          fillOpacity: 0.5
         });
         circle.setMap(map);
 
     /* 2) 위치기반조회(locationBasedList2) 호출 */
     // const areaListData = await getAreaListData(); //console.log( locationData ); // 기존 전국 관광정보 데이터(5만개 넘음)
     // const incheonAreaData = areaListData.filter(item => item.lDongRegnCd === '28'); // 기존 전체 맵에서 인천코드로 필터한 경우 
-    const selectAreaData = await getAreaListData( lDongRegnCd , lat , lng  ); // 기존 지역기반 데이터만 불러온 경우
+    const incheonAreaData = await getAreaListData( lDongRegnCd , lat , lng  );
 
     // 4) 카카오 map 마커 찍기 반복문
-    let markers = selectAreaData.map( (value) => {
+    let markers = incheonAreaData.map( (value) => {
         // 4-1. 마커 객체 생성 후 마커스로 배열 추가 대입
         let marker = new kakao.maps.Marker({
             position : new kakao.maps.LatLng(value.mapy, value.mapx), // 공공데이터 속성명으로 변경
             image : markerImage // 마커 이미지
         });
 
-    //console.log("markers 확인!");    
+    console.log("markers 확인!");    
 
     markerInfoLayer( value, marker );
 
