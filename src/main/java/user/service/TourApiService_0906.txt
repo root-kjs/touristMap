@@ -20,7 +20,7 @@ public class TourApiService {
     @Scheduled( cron = "0 0 9 * * *" ) //  매일 오전 9시가 될때마다 api 가져오기
     public List<Map<String, Object>> ldongCode2() throws IOException {
         StringBuilder urlBuilder = new StringBuilder("https://apis.data.go.kr/B551011/KorService2/ldongCode2"); /*URL*/
-        urlBuilder.append("?" + URLEncoder.encode("numOfRows","UTF-8")+"="+"300");    // 응답 데이터(콘텐츠) 수량
+        urlBuilder.append("?" + URLEncoder.encode("numOfRows","UTF-8")+"="+"10");    // 응답 데이터(콘텐츠) 수량
         urlBuilder.append("&" + URLEncoder.encode("lDongListYn","UTF-8")+"="+"Y");  // 분류체계 목록조회 여부(N: 코드조회, Y: 전체목록조회)
         /* --------------------------- 아래 공통 *필수* 파라미터 ------------------------------ */
         urlBuilder.append("&" + URLEncoder.encode("serviceKey","UTF-8")+"="+"DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D"); /* Service Key */

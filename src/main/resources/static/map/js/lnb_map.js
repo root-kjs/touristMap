@@ -1,4 +1,5 @@
-import { getLdong1Data, getAreaListData , userlocationMap  } from './mapInfoList.js';
+import { getLdong1Data  } from './getAPIdata.js';
+import { userlocationMap  } from './userlocationMap.js';
 
 //[01] 활성화된(.active) 좌측 대메뉴명 > 상단 title에 넣기--------------------------
 let activeLinkText = $(".membership li.active a").text();
@@ -6,10 +7,8 @@ $("title").text(activeLinkText);
     // 사용자가 선택한 메뉴 활성화(class="active")에 따른 페이지 메뉴명 제이쿼리 변경 처리
     $(".membership li.active a").clone().prependTo(".lnb h2");
 
-
 // [02] 법정동코드(1차 대분류 지역) 연동 > 좌측메뉴 지역명 매칭 출력 ----------------------------------
 const getAreaLnb = async() =>{
-   
     const ldong1Data = await getLdong1Data();
     //console.log(ldongData);
     // 2) 법정동코드 데이터 html 출력
@@ -31,6 +30,7 @@ const getAreaLnb = async() =>{
 
 // [03] 페이지 최초 로딩 시, 기본 인천 지역 지도 출력--------------------------------
 window.addEventListener('load', async() => {
+    console.log("[지역별 지도] 좌측메뉴 출력!");
     await getAreaLnb(); // 좌측 메뉴가 먼저 로드
     await $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");  
     userlocationMap('28'); // 디폴트 : 인천 지도
