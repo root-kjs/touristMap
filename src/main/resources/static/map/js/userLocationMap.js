@@ -29,7 +29,7 @@ export const userlocationMap = async( lDongRegnCd , lat , lng ) => { console.log
         // 인천 중심좌표 : mapX=126.7052062  mapY=37.4562557 부평구 부평동 주부토로 19 인근(부평구청 근처)
         center : new kakao.maps.LatLng( lat , lng ), // 지도의 중심좌표 -> 인천시청 기준 : 37.4563, 126.7052 // 인천광역시 옹진군 영흥면 : 위도 37.4689816 / 경도 126.5207318 // 인천역 : 위도 (Latitude): 37.478296 경도 (Longitude): 126.622685
         //더조은 학원 부평역 기준(사용자) : 위도 37.489457, 경도 126.724494
-        level : 6 // 지도의 확대 레벨
+        level : 7 // 지도의 확대 레벨
     });
 
 
