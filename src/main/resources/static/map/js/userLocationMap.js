@@ -2,7 +2,6 @@ import { getLdongCodeData , getLclsSystmData, getLocationListData, getLdong1Data
 import { mapInfoList  } from './rightMapInfo.js';
 import { markerInfoLayer } from './markerInfoLayer.js';
 
-
 let circle = null;
 
 export const userlocationMap = async( lDongRegnCd , lat , lng ) => { console.log("[지역별 지도] 마커 출력하기");
@@ -67,8 +66,10 @@ export const userlocationMap = async( lDongRegnCd , lat , lng ) => { console.log
     });
 
     // 3) 마커 이미지의 이미지 주소
-    var imageSrc = "/img/kakao_map/logo.jpg"; // https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png
-    var imageSize = new kakao.maps.Size(24, 24); // 마커 이미지의 이미지 크기
+    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png"// 파란 마커
+    // https://t1.daumcdn.net/localimg/localimages/07/2012/img/marker_normal.png 마커 이미지 모음
+
+    var imageSize = new kakao.maps.Size(40, 60); // 마커 이미지의 이미지 크기
     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); // 마커 이미지를 생성
     
         // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
@@ -87,16 +88,16 @@ export const userlocationMap = async( lDongRegnCd , lat , lng ) => { console.log
           circle.setMap(null);
         }
 
-            // 2km 반경의 원 생성
+        // 5km 반경의 원 생성 : https://apis.map.kakao.com/web/sample/drawShape/
         circle = new kakao.maps.Circle({
           center: myLocation,
-          radius: 5000,
+          radius: 5000, // 미터 단위의 원의 반지름
           strokeWeight: 5,
-          strokeColor: '#ffffffff',
+          strokeColor: '#75B8FA',
           strokeOpacity: 0.8,
           strokeStyle: 'dashed',
           fillColor:  'rgba(9, 248, 236, 1)',
-          fillOpacity: 0.5
+          fillOpacity: 0.4
         });
         circle.setMap(map);
 
@@ -113,10 +114,8 @@ export const userlocationMap = async( lDongRegnCd , lat , lng ) => { console.log
             image : markerImage // 마커 이미지
         });
 
-    console.log("markers 확인!");    
-
+    //console.log("markers 확인!");    
     markerInfoLayer( value, marker );
-
     return marker;
     });
 

@@ -74,7 +74,7 @@ export const mapInfoList = async(  lDongRegnCd , lat , lng  ) => { console.log("
 
                 html += `<div class="summary_card" onclick="detaiMapInfo()">
                      <div class="thumb">
-                         <img src="${value.firstimage || value.firstimage2}" alt="${value.title}">
+                         <img src="${value.firstimage2}" alt="${value.title}">
                          <span class="category"><b class="depth_2">${category2}</b></span>
                      </div>
                      <ul>

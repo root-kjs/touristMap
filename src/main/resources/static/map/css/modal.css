@@ -20,6 +20,8 @@ button.modal_close:hover{ opacity: .9; }
 /* 모달 콘텐츠 본문 */
 .modal_content{ min-height: 0; padding:10px 20px 50px; overflow-y:auto; }
 .modal_content h4{ font:600 16px/24px 'Noto Sans KR', SansSerif; letter-spacing:-1px; padding: 20px 0 5px; }
-.modal_content ul li b{ display: inline; min-width: 100px; color: rgb(61, 190, 100, 8); }
+.modal_content ul li{ display: flex; }
+.modal_content ul li b{ display: inline-block; min-width: 80px; color: rgb(61, 190, 100, 8); }
+.modal_content ul li a{ text-decoration: underline; color: rgb(25, 74, 233); }
 
 
