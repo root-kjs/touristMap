@@ -26,7 +26,7 @@ export const markerInfoLayer = async( value, marker ) => { //console.log("지도
                 </div>
                 <div class="modal_content">
                     <p class="description">${detailCommon.overview || '상세 정보가 없습니다.'}</p>
-                    <h4>r상세정보</h4>
+                    <h4>상세정보</h4>
                     <ul>
                         <li><b>주소</b><span>${detailCommon.addr1} ${detailCommon.addr2}</span></li>
                         <li><b>홈페이지</b><span> ${detailCommon.homepage ? `<a href='${detailCommon.homepage}' target='_blank'>${detailCommon.homepage}</a>` : '정보 없음'}</span></li>

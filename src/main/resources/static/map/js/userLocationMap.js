@@ -21,7 +21,7 @@ export const userlocationMap = async (lDongRegnCd, lat, lng) => {
     // [강사2025-09-11] 카카오맵 객체 생성 (기본 줌 레벨 6)
     map = new kakao.maps.Map(document.getElementById('map'), {
         center: new kakao.maps.LatLng(lat, lng),
-        level: 6
+        level: 7
     });
 
     // [강사2025-09-11] 마커 클러스터링 설정 (줌 확대 시 개별 마커 표시)
@@ -62,14 +62,14 @@ const updateMapContent = async (lDongRegnCd, lat, lng) => {
     // [강사2025-09-11] 지도 중심 이동
     map.setCenter(new kakao.maps.LatLng(lat, lng));
 
-    // [강사2025-09-11] 기존 원 제거 후 새 원(반경 5km) 표시
+    // [강사2025-09-11] 기존 원 제거 후 새 원(반경 5km) 표시 : https://apis.map.kakao.com/web/sample/drawShape/
     if (circle) circle.setMap(null);
     circle = new kakao.maps.Circle({
         center: new kakao.maps.LatLng(lat, lng),
-        radius: 5000,
+        radius: 5000, // 미터 단위의 원의 반지름
         strokeColor: '#75B8FA',
         strokeStyle: 'dashed',
-        fillColor: 'rgba(9, 248, 236, 1)',
+        fillColor: 'rgba(9, 248, 236, .5)',
         fillOpacity: 0.4
     });
     circle.setMap(map);
@@ -80,7 +80,8 @@ const updateMapContent = async (lDongRegnCd, lat, lng) => {
     // [강사2025-09-11] 마커 이미지 설정 (파란색 핀)
     const markerImage = new kakao.maps.MarkerImage(
         "https://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png",
-        new kakao.maps.Size(40, 60)
+        new kakao.maps.Size(25, 40)
+         // https://t1.daumcdn.net/localimg/localimages/07/2012/img/marker_normal.png 마커 이미지 모음
     );
 
     // [강사2025-09-11] 지역별 마커 생성 + 정보 레이어 바인딩
@@ -93,7 +94,18 @@ const updateMapContent = async (lDongRegnCd, lat, lng) => {
         return marker;
     });
 
+    // 마커 클러스터러에 클릭이벤트: 줌인(확대)
+    kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
+
+        // 현재 지도 레벨에서 1레벨 확대한 레벨
+        var level = map.getLevel()-1;
+
+        // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
+        map.setLevel(level, {anchor: cluster.getCenter()});
+    });
+
     // [강사2025-09-11] 기존 마커 제거 후 새 마커 클러스터링
     clusterer.clear();
     clusterer.addMarkers(markers);
+    
 };
