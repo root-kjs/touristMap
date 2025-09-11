@@ -1,6 +1,7 @@
 import { getLdongCodeData , getLclsSystmData, getLocationListData, getLdong1Data, getAreaListData } from './getAPIdata.js';
 import { mapInfoList  } from './rightMapInfo.js';
 import { markerInfoLayer } from './markerInfoLayer.js';
+import { keywordMapSearch } from './keywordMap.js';
 
 let map = null;       // [강사2025-09-11] 전역 지도 객체
 let circle = null;    // [강사2025-09-11] 원(반경 표시)
@@ -80,7 +81,7 @@ const updateMapContent = async (lDongRegnCd, lat, lng) => {
     // [강사2025-09-11] 마커 이미지 설정 (파란색 핀)
     const markerImage = new kakao.maps.MarkerImage(
         "https://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png",
-        new kakao.maps.Size(25, 40)
+        new kakao.maps.Size(25, 37)
          // https://t1.daumcdn.net/localimg/localimages/07/2012/img/marker_normal.png 마커 이미지 모음
     );
 
@@ -90,7 +91,8 @@ const updateMapContent = async (lDongRegnCd, lat, lng) => {
             position: new kakao.maps.LatLng(item.mapy, item.mapx),
             image: markerImage
         });
-        markerInfoLayer(item, marker);
+        markerInfoLayer(item, marker); // 1) 마커 클릭시, 우측 상세정보 조회 모달레이어 노출 메소드
+      
         return marker;
     });
 

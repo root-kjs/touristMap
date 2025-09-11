@@ -18,7 +18,7 @@ body::-webkit-scrollbar-corner {background:rgba(0,0,0,.08);}/*상하 좌우 스�
 .header_wrap header:after{ content:""; display: block; clear:both;  }
 .header_wrap header h1{ position: absolute; top: 9px; left: 0px;width: 100%; text-align: center; letter-spacing: -0.5px; font:600 20px/36px 'Noto Sans KR', SansSerif; letter-spacing:-1px; text-transform:uppercase }
 .header_wrap header h1 a{ display: inline-block;  background:url("/map/img/em_ic.png") no-repeat 0 5px; padding-left:35px; background-size: 30px 30px;  }
-.header_wrap header h1:hover{ color: #009900 }
+.header_wrap header h1 span{ font:600 16px/36px 'Noto Sans KR', SansSerif; letter-spacing:-0.5px;  color: rgba(0,0,0,.4) }
 .main .header_wrap header h1 a{ background: none; }
 
 /* 페이지 검색창 */
@@ -26,8 +26,8 @@ body::-webkit-scrollbar-corner {background:rgba(0,0,0,.08);}/*상하 좌우 스�
 .page_search input[type=text]{ width:79%; /*border:solid 1px rgba(0,0,0,.2); background: rgba(0,0,0,.05); */
     font:600 17px/34px Arial, 'Noto Sans KR',Sans-serif;  padding: 0 10px 0 15%; margin-right:5px; color:#000; border:none; border:solid 1px rgba(0,0,0,.7); border-width:2px; border-radius: 5px;  }
 .page_search input::placeholder{ color:rgba(0,0,0,.3); font-size: 14px }
-.page_search input[type=submit]{ display:inline-block; width:18%; height: 100%; background: none; color:#009900; position: absolute; top: 0px; left: 0px; z-index:100; font-size: 20px; font:700 18px "fontAwesome"  }
-.page_search:hover input[type=submit]{background: none; color: #009900; }
+.page_search input[type=button]{ display:inline-block; width:18%; height: 100%; background: none; color:#009900; position: absolute; top: 0px; left: 0px; z-index:100; font-size: 20px; font:700 18px "fontAwesome";border:none }
+.page_search:hover input[type=button]{ background: none; color: #009900;  }
 
 
 /* 검색창 추천 검색 키워드 */

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="robots" content="ALL"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title></title>
-    <meta name="Description" content="인천광역시 소재의 다양한 모임취향에 맞는(회식/데이트/동호회) AI추천 모임장소에 대한 상세정보를 제공합니다."/>
+    <title>K-Tour</title>
+    <meta name="Description" content="전국 소재의 다양한 모임취향에 맞는(회식/데이트/동호회) AI추천 모임장소에 대한 상세정보를 제공합니다."/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.1,maximum-scale=5.0,user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/map/css/reset.css" >
@@ -18,11 +18,11 @@
     <!-- ####### 01. HEADER START ####### -->
     <div class="header_wrap">
         <header>
-            <h1 class="logo"><a href="/index.jsp">인천광역시(데모체험)</a></h1>
+            <h1 class="logo"><a href="/index.jsp">인천광역시</a> <span>놀러가자<i>!</i></span></h1>
         </header>
         <div class="page_search">
-            <input type="text" placeholder="검색 키워드/상호명 입력" autofocus><!--
-                --><input type="submit" value="" class="fa fa-search">
+            <input type="text" placeholder="검색 키워드/상호명 입력" autofocus id="keywordInput"><!-- 
+            --><input type="button" value="" class="fa fa-search" onclick="searchValue()">
         </div>
         <dl class="search_keword"> 
             <dt><a href="#" onclick="sendCategory('전체')">우리동네 <b>AI추천</b> 모임아이템</a></dt>
@@ -90,7 +90,7 @@
     <hr class="skip"/>
     <div class="footer_wrap">
         <footer>
-            <p class="copyright">  © 2025 Root Lab</p>
+            <p class="copyright">  © 2025 Root.Lab</p>
         </footer>
     </div>
     <!-- ####### 04. FOOTER END ####### -->

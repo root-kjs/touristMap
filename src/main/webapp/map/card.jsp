@@ -41,7 +41,7 @@
     <div class="lnb_wrap">
         <div class="membership">
             <ul>
-                <li><a href="/map/index.jsp"><img src="/map/img/em_ic.png"/> 인천광역시<br/>(데모체험)</a></li>
+                <li><a href="/map/index.jsp"><img src="/map/img/em_ic.png"/> 인천광역시</a></li>
                 <li><a href="/map/place.jsp"><i class="fa-solid fa-map-location-dot"></i> 추천모임코스</a></li>
                 <li><a href="/map/category.jsp"><i class="fa-regular fa-compass"></i> 진행중인모임</a></li>
                 <li><a href="/map/invite.jsp"><i class="fa-solid fa-people-group"></i> 초대장만들기</a></li>

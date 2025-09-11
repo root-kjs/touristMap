@@ -4,8 +4,8 @@
     flex-direction: column; }
 
 /* 닫기 버튼 */
-button.modal_close{ font-size: 35px; position: absolute; top:10px; right:10px; background: none; padding: 0; border: 0; outline: 0; opacity: .6; }
-button.modal_close:hover{ opacity: .9; }
+button.modal_close{ font-size: 35px; position: absolute; top:10px; right:10px; background: none; padding: 0; border: 0; outline: 0; opacity: .7; color:#009900; }
+button.modal_close:hover{ opacity: .99; }
 
 /* 상단 대표 이미지 */
 .modal_img_bg{  max-height:270px; overflow: hidden; }
