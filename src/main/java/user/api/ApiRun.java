@@ -30,9 +30,9 @@ public class ApiRun {
     @EventListener(ApplicationReadyEvent.class)
     public void runAfterReady() {
         schedule(0, area::schedulLdongCode2depth1);
-        schedule(5, area::schedulAreaList2LDong);
-        schedule(10, lcls::schedulLclsSystmCode2);
-        schedule(15, ldong::schedulLdongCode2);
+        schedule(3, area::schedulAreaList2LDong);
+        schedule(20, lcls::schedulLclsSystmCode2);
+        schedule(25, ldong::schedulLdongCode2);
         // schedule(25, loc::schedulLocationList2); // [강사2025-09-11]스케줄링을 사용하지 않는다.
     }
 
