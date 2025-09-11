@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/map/css/reset.css" >
     <link rel="stylesheet" type="text/css" href="/map/css/layout.css" >
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel='stylesheet' type='text/css' media='screen' href='/map/css/mobile.css'>
 </head>
 <body>
 <div class="container">
