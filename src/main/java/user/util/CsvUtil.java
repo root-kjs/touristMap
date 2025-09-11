@@ -14,31 +14,40 @@ public class CsvUtil {
      */
     public static List<Map<String, Object>> read(String filePath) throws IOException {
         List<Map<String, Object>> list = new ArrayList<>();
+
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-
-            // [강사2025-09-11] 1. 첫 줄 = 헤더 (컬럼명)
+            // 1. 헤더 읽기
             String headerLine = br.readLine();
-            if (headerLine == null) return list; // 비어 있으면 바로 반환
-
+            if (headerLine == null) return list;
             String[] headers = headerLine.split(",");
 
-            // [강사2025-09-11] 2. 데이터 행(line)을 순차적으로 읽음
+            // 2. 데이터 행
             String line;
             while ((line = br.readLine()) != null) {
-                // -1 옵션: 빈 문자열("")도 인식
-                String[] values = line.split(",", -1);
                 Map<String, Object> row = new LinkedHashMap<>();
 
-                // [강사2025-09-11] 3. 헤더와 값 매칭하여 Map에 저장
-                for (int i = 0; i < headers.length; i++) {
-                    row.put(headers[i], values.length > i ? values[i] : "");
+                int start = 0;
+                int headerIndex = 0;
+                for (int i = 0; i < line.length(); i++) {
+                    if (line.charAt(i) == ',') {
+                        String value = line.substring(start, i);
+                        row.put(headers[headerIndex++], value);
+                        start = i + 1;
+                    }
                 }
-                list.add(row); // 한 행(Map)을 리스트에 추가
+                // 마지막 값
+                row.put(headers[headerIndex++], line.substring(start));
+
+                // 남는 헤더가 있다면 빈 값 채우기
+                while (headerIndex < headers.length) {
+                    row.put(headers[headerIndex++], "");
+                }
+
+                list.add(row);
             }
         }
-        return list; // [강사2025-09-11] 최종적으로 List<Map> 반환
+        return list;
     }
-
     /**
      * [강사2025-09-11] List<Map<String,Object>> → CSV 파일 쓰기
      * - Map의 key = 헤더, value = 값
@@ -47,29 +56,40 @@ public class CsvUtil {
      * @param data 저장할 데이터
      */
     public static void write(String filePath, List<Map<String, Object>> data) throws IOException {
-        if (data == null || data.isEmpty()) return; // [강사2025-09-11] 데이터 없으면 종료
+        if (data == null || data.isEmpty()) return; // 데이터 없으면 종료
 
-        // [강사2025-09-11] 디렉토리 없으면 생성
         File file = new File(filePath);
-        file.getParentFile().mkdirs();
+        if (file.getParentFile() != null) {
+            file.getParentFile().mkdirs(); // 디렉토리 생성
+        }
 
+        // try-with-resources → 자동 close
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-            // [강사2025-09-11] 1. 헤더 작성 (첫 Map의 keySet 사용)
+            // 1. 헤더 (순서 고정)
             Set<String> headers = data.get(0).keySet();
-            bw.write(String.join(",", headers));
+            List<String> headerList = new ArrayList<>(headers);
+            bw.write(String.join(",", headerList));
             bw.newLine();
 
-            // [강사2025-09-11] 2. 데이터 행 작성
+            // 2. 데이터 행
+            StringBuilder sb = new StringBuilder(256); // 재사용 버퍼
+            int rowCount = 0;
+
             for (Map<String, Object> row : data) {
-                List<String> values = new ArrayList<>();
-                for (String key : headers) {
-                    Object val = row.getOrDefault(key, "");
-                    // [강사2025-09-11] 쉼표가 들어간 값은 공백으로 치환 (CSV 구조 깨짐 방지)
-                    String safe = val.toString().replace(",", " ");
-                    values.add(safe);
+                sb.setLength(0); // 버퍼 초기화
+                for (int i = 0; i < headerList.size(); i++) {
+                    if (i > 0) sb.append(','); // 콤마 구분
+                    Object val = row.getOrDefault(headerList.get(i), "");
+                    // 쉼표 → 공백 치환 (혹은 CSV escape 필요시 따옴표 처리 가능)
+                    sb.append(val == null ? "" : val.toString().replace(",", " "));
                 }
-                bw.write(String.join(",", values));
+                bw.write(sb.toString());
                 bw.newLine();
+
+                // 대용량일 때 메모리 flush
+                if (++rowCount % 10000 == 0) {
+                    bw.flush();
+                }
             }
         }
     }
