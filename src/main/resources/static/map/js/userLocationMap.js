@@ -2,128 +2,98 @@ import { getLdongCodeData , getLclsSystmData, getLocationListData, getLdong1Data
 import { mapInfoList  } from './rightMapInfo.js';
 import { markerInfoLayer } from './markerInfoLayer.js';
 
-let circle = null;
+let map = null;       // [강사2025-09-11] 전역 지도 객체
+let circle = null;    // [강사2025-09-11] 원(반경 표시)
+let clusterer = null; // [강사2025-09-11] 마커 클러스터링 객체
 
-export const userlocationMap = async( lDongRegnCd , lat , lng ) => { console.log("[지역별 지도] 마커 출력하기");
+// [강사2025-09-11] 메인 함수: 사용자 지역(lDongRegnCd) + 좌표(lat/lng) 기반 지도 생성
+export const userlocationMap = async (lDongRegnCd, lat, lng) => {
+    // [강사2025-09-11] 우측 정보 패널 업데이트
+    await mapInfoList(lDongRegnCd , lat , lng);
 
-    
-    // 1. 위경도가 없을 경우 → lDongRegnCd 앞 2자리로 좌표 보완
+    // [강사2025-09-11] 좌표가 없으면 법정동 코드(lDongRegnCd)로 위/경도 보완
     if (!lat || !lng) {
-        const match = await getLdongRegnCode( lDongRegnCd );
-        console.log( match );
-        if (match) {
-            lat = match.lat;
-            lng = match.lng;
-        console.log(`[INFO] '${match.name}' 중심 좌표로 대체: (${lat}, ${lng})`);
-        } else {
-        console.warn(`[WARN] 유효하지 않은 법정동 코드: ${lDongRegnCd}`);
-        return;
-        }
+        const match = await getLdongRegnCode(lDongRegnCd);
+        lat = match?.lat;
+        lng = match?.lng;
     }
 
-    await mapInfoList( lDongRegnCd , lat , lng );
-
-    /* 1) 지도 위치 및 기본옵션 설정 */
-    var map = new kakao.maps.Map(document.getElementById('map'), {
-        // 인천 중심좌표 : mapX=126.7052062  mapY=37.4562557 부평구 부평동 주부토로 19 인근(부평구청 근처)
-        center : new kakao.maps.LatLng( lat , lng ), // 지도의 중심좌표 -> 인천시청 기준 : 37.4563, 126.7052 // 인천광역시 옹진군 영흥면 : 위도 37.4689816 / 경도 126.5207318 // 인천역 : 위도 (Latitude): 37.478296 경도 (Longitude): 126.622685
-        //더조은 학원 부평역 기준(사용자) : 위도 37.489457, 경도 126.724494
-        level : 6 // 지도의 확대 레벨
+    // [강사2025-09-11] 카카오맵 객체 생성 (기본 줌 레벨 6)
+    map = new kakao.maps.Map(document.getElementById('map'), {
+        center: new kakao.maps.LatLng(lat, lng),
+        level: 6
     });
 
-
-    // 지도 클릭 이벤트
-    let clickMarker = null; // 클릭으로 생성된 마커 저장용
-
-    kakao.maps.event.addListener(map, 'click', async (mouseEvent) => {
-
-        if (clickMarker) {
-            clickMarker.setMap(null); // 기존 마커 제거
-        }
-
-        const latlng = mouseEvent.latLng;
-        const clickLocation = new kakao.maps.LatLng(latlng.getLat(), latlng.getLng());
-
-        // 지도 중심 이동
-        map.setCenter(clickLocation);
-        map.setLevel(6);
-
-        const address = await getAddressFromCoords(lat, lng);
-        const clickLDongRegnCd = await getBjdCodeFromAddress(address);
-
-        await areaClick( clickLDongRegnCd )
-
-        await userlocationMap( clickLDongRegnCd  , latlng.getLat() , latlng.getLng() );
-
+    // [강사2025-09-11] 마커 클러스터링 설정 (줌 확대 시 개별 마커 표시)
+    clusterer = new kakao.maps.MarkerClusterer({
+        map: map,
+        averageCenter: true,
+        minLevel: 1,
+        disableClickZoom: true
     });
 
+    // [강사2025-09-11] 지도 클릭 이벤트 → 좌표 기반으로 지역 코드 갱신 & 지도 업데이트
+    kakao.maps.event.addListener(map, 'click', onMapClick);
 
-    var clusterer = new kakao.maps.MarkerClusterer({
-        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
-        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-        minLevel: 1, // 클러스터 할 최소 지도 레벨
-        disableClickZoom: true // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
+    // [강사2025-09-11] 초기 지도 콘텐츠 출력
+    await updateMapContent(lDongRegnCd, lat, lng);
+};
+
+// [강사2025-09-11] 지도 클릭 시 실행되는 이벤트 핸들러
+const onMapClick = async (mouseEvent) => {
+    const latlng = mouseEvent.latLng;
+    const lat = latlng.getLat();
+    const lng = latlng.getLng();
+
+    // [강사2025-09-11] 좌표 → 주소 변환 → 법정동 코드 변환
+    const address = await getAddressFromCoords(lat, lng);
+    const newLDongRegnCd = await getBjdCodeFromAddress(address);
+
+    // [강사2025-09-11] 클릭 위치를 중심으로 지도 콘텐츠 갱신
+    await updateMapContent(newLDongRegnCd, lat, lng);
+};
+
+// [강사2025-09-11] 지도 콘텐츠(반경, 마커, 정보레이어) 갱신 로직
+const updateMapContent = async (lDongRegnCd, lat, lng) => {
+    // [강사2025-09-11] 좌측 메뉴/상세 정보 갱신
+    await areaClick(lDongRegnCd);
+    await mapInfoList(lDongRegnCd , lat , lng);
+
+    // [강사2025-09-11] 지도 중심 이동
+    map.setCenter(new kakao.maps.LatLng(lat, lng));
+
+    // [강사2025-09-11] 기존 원 제거 후 새 원(반경 5km) 표시
+    if (circle) circle.setMap(null);
+    circle = new kakao.maps.Circle({
+        center: new kakao.maps.LatLng(lat, lng),
+        radius: 5000,
+        strokeColor: '#75B8FA',
+        strokeStyle: 'dashed',
+        fillColor: 'rgba(9, 248, 236, 1)',
+        fillOpacity: 0.4
     });
+    circle.setMap(map);
 
-    // 3) 마커 이미지의 이미지 주소
-    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png"// 파란 마커
-    // https://t1.daumcdn.net/localimg/localimages/07/2012/img/marker_normal.png 마커 이미지 모음
+    // [강사2025-09-11] 해당 지역 관광정보(areaList) 가져오기
+    const areaList = await getAreaListData(lDongRegnCd, lat, lng);
 
-    var imageSize = new kakao.maps.Size(40, 60); // 마커 이미지의 이미지 크기
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); // 마커 이미지를 생성
-    
-        // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-        var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-            iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+    // [강사2025-09-11] 마커 이미지 설정 (파란색 핀)
+    const markerImage = new kakao.maps.MarkerImage(
+        "https://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png",
+        new kakao.maps.Size(40, 60)
+    );
 
-        // 인포윈도우를 생성합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content : iwContent,
-            removable : iwRemoveable
+    // [강사2025-09-11] 지역별 마커 생성 + 정보 레이어 바인딩
+    const markers = areaList.map((item) => {
+        const marker = new kakao.maps.Marker({
+            position: new kakao.maps.LatLng(item.mapy, item.mapx),
+            image: markerImage
         });
-
-        const myLocation = new kakao.maps.LatLng(lat, lng);
-
-        if (circle) {
-          circle.setMap(null);
-        }
-
-        // 5km 반경의 원 생성 : https://apis.map.kakao.com/web/sample/drawShape/
-        circle = new kakao.maps.Circle({
-          center: myLocation,
-          radius: 5000, // 미터 단위의 원의 반지름
-          strokeWeight: 5,
-          strokeColor: '#75B8FA',
-          strokeOpacity: 0.8,
-          strokeStyle: 'dashed',
-          fillColor:  'rgba(9, 248, 236, 1)',
-          fillOpacity: 0.4
-        });
-        circle.setMap(map);
-
-    /* 2) 위치기반조회(locationBasedList2) 호출 */
-    // const areaListData = await getAreaListData(); //console.log( locationData ); // 기존 전국 관광정보 데이터(5만개 넘음)
-    // const incheonAreaData = areaListData.filter(item => item.lDongRegnCd === '28'); // 기존 전체 맵에서 인천코드로 필터한 경우 
-    const incheonAreaData = await getAreaListData( lDongRegnCd , lat , lng  );
-
-    // 4) 카카오 map 마커 찍기 반복문
-    let markers = incheonAreaData.map( (value) => {
-        // 4-1. 마커 객체 생성 후 마커스로 배열 추가 대입
-        let marker = new kakao.maps.Marker({
-            position : new kakao.maps.LatLng(value.mapy, value.mapx), // 공공데이터 속성명으로 변경
-            image : markerImage // 마커 이미지
-        });
-
-    //console.log("markers 확인!");    
-    markerInfoLayer( value, marker );
-    return marker;
+        markerInfoLayer(item, marker);
+        return marker;
     });
 
-    clusterer.addMarkers(markers); // 클러스터러에 마커들을 추가합니다
-    kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
-        var level = map.getLevel()-1; // 현재 지도 레벨에서 1레벨 확대한 레벨
-        map.setLevel(level, {anchor: cluster.getCenter()});  // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
-    });
-}//func end    
-    /* 마커 클릭시, 좌측 상세 업체 정보 나오는 레이어 */
-    
+    // [강사2025-09-11] 기존 마커 제거 후 새 마커 클러스터링
+    clusterer.clear();
+    clusterer.addMarkers(markers);
+};

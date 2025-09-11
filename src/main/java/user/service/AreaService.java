@@ -1,9 +1,13 @@
 package user.service;
 /* 공공데이터 > 지역기반 관광정보조회(http://apis.data.go.kr/B551011/KorService2/areaBasedList2) */
+import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import user.api.TourApiClient;
+import user.util.CsvUtil;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -14,20 +18,40 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class AreaService {
+
+    // [강사2025-09-11] 서블릿 컨텍스트: 웹 애플리케이션의 실제 경로(/data/...)를 찾을 때 사용
+    private final ServletContext servletContext;
+
     private final TourApiClient tourApiClient; //공공데이터 API통신(GET) + JSON파싱 로직을 처리하는 범용함수
 
     /* [1-1★★스케쥴링★★] 1차 법정동 코드(ldongCode2) > 도/광역시(17개:서울/경기/인천 등) 데이터 호출 메소드 */
     List<Map<String, Object>> ldongCode2Data = new ArrayList<>();
     @Scheduled(cron = "0 0 3 * * *")
     public List<Map<String, Object>> schedulLdongCode2depth1() {
+        // [강사2025-09-11] CSV 파일 경로 설정 (배포 서버의 실제 경로 기반)
+        String filePath = servletContext.getRealPath("/data/ldongCode2.csv");
+        File csvFile = new File(filePath);
+
         try {
-            String extraParams = URLEncoder.encode("numOfRows", "UTF-8") + "=" + "17";
-            ldongCode2Data = tourApiClient.fetchAndParse("ldongCode2", extraParams);
-            //System.out.printf("1차 법정동 : %s\n 총 개수: %d", url_api, LdongCode2Data1.size()); // !확인용
+            if (csvFile.exists()) {
+                // [강사2025-09-11] 기존 CSV 파일이 있으면, API 호출 대신 CSV에서 로딩
+                ldongCode2Data = CsvUtil.read(filePath);
+                System.out.println("[CSV 로딩] 법정동 1차 코드 - CSV에서 로드 완료 (" + ldongCode2Data.size() + "건)");
+            } else {
+                // [강사2025-09-11] CSV 파일이 없으면, API 호출을 통해 최초 데이터 수집
+                String extraParams = URLEncoder.encode("numOfRows", "UTF-8") + "=17";
+                ldongCode2Data = tourApiClient.fetchAndParse("ldongCode2", extraParams);
+
+                // [강사2025-09-11] API 응답 데이터를 CSV로 저장 (재사용 가능)
+                CsvUtil.write(filePath, ldongCode2Data);
+                System.out.println("[API 호출] 법정동 1차 코드 - API 호출 및 CSV 저장 완료 (" + ldongCode2Data.size() + "건)");
+            }
         } catch (Exception e) {
+            // [강사2025-09-11] 예외 처리: 스케줄링 실패 시 로그 출력 후 런타임 예외 발생
+            System.out.println(" [오류] 법정동 1차 스케줄링 실패 = " + e.getMessage());
             throw new RuntimeException(e);
         }
-        return ldongCode2Data;
+        return ldongCode2Data;  // [강사2025-09-11] 로딩된 법정동 1차 코드 목록 반환
     }//func end
 
     /* [1-2/패치] 1차 법정동 코드(ldongCode2) > 스케쥴링으로 저장된 자바 객체 데이터 */
@@ -53,18 +77,38 @@ public class AreaService {
     // Map<String, List<Map<String, Object>>> areaListData = new HashMap<>(); /* [변경 17개 지역 / 지역기반 관광정보 스케쥴링 저장소 */
     @Scheduled(cron = "0 0 3 * * *")
     public List<Map<String, Object>> schedulAreaList2LDong( ) {
+        // [강사2025-09-11] CSV 저장 경로 (지역 기반 목록)
+        String filePath = servletContext.getRealPath("/data/areaList2.csv");
+        File csvFile = new File(filePath);
+
         try {
-            List<Map<String, Object>> regionList = getLdongCode2();
-            String lDongRegnCd = "";
-            for (Map<String, Object> region : regionList) {
-                lDongRegnCd = (String) region.get("code");
-                List<Map<String, Object>> areaList = getAreaList2( lDongRegnCd );
-                areaListData.addAll(areaList);
+            if (csvFile.exists()) {
+                // [강사2025-09-11] 1. CSV 파일 존재 시 → CSV에서 로딩
+                areaListData = CsvUtil.read(filePath);
+                System.out.println("[CSV 로딩] 지역 기반 목록 - CSV에서 로드 완료 (" + areaListData.size() + "건)");
+            } else {
+                // [강사2025-09-11] 2. CSV 없음 → API 호출로 지역 기반 목록 생성
+                List<Map<String, Object>> regionList = getLdongCode2();
+                areaListData.clear(); // [강사2025-09-11] 기존 데이터 누적 방지 (초기화)
+
+                // [강사2025-09-11] 모든 법정동 코드별 지역 기반 관광정보(areaList) 호출 후 누적
+                for (Map<String, Object> region : regionList) {
+                    String lDongRegnCd = (String) region.get("code");
+                    List<Map<String, Object>> areaList = getAreaList2(lDongRegnCd);
+                    areaListData.addAll(areaList);
+                }
+
+                // [강사2025-09-11] CSV로 저장 (재사용 가능)
+                CsvUtil.write(filePath, areaListData);
+                System.out.println("[API 호출] 지역 기반 목록 - API 호출 및 CSV 저장 완료 (" + areaListData.size() + "건)");
             }
         } catch (Exception e) {
+            // [강사2025-09-11] 예외 발생 시 로그 출력 + 런타임 예외 발생
+            System.out.println("[오류] 지역기반목록 스케줄링 실패 = " + e.getMessage());
             throw new RuntimeException(e);
         }
-        //System.out.printf("3.지역기반 스케쥴링(areaBasedList2) : %s\n 1. api_url : %s\n 3.총 개수: %d", areaListData, url_api, areaListData.size()); //!확인용
+
+        // [강사2025-09-11] 최종적으로 지역 기반 목록 데이터 반환
         return areaListData;
     }//func end
 
