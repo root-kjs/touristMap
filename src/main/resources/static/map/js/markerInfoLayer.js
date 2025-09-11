@@ -1,4 +1,4 @@
-
+import { detailCommon2Data, detailIntro2Data, detailImage2Data, detailPetTour2Data, detailInfo2Data } from './detailTourInfo.js';
 // [01] 지도마커 클릭시, 상세업체정보 출력하기-----------------------------------------------------------------------------------
 export const markerInfoLayer = async( value, marker ) => { //console.log("지도마커 클릭시, 상세업체정보 출력하기");
 
@@ -33,25 +33,25 @@ export const markerInfoLayer = async( value, marker ) => { //console.log("지도
                         <li><b>홈페이지</b><span> ${detailCommon.homepage ? `<a href='${detailCommon.homepage}' target='_blank'>${detailCommon.homepage}</a>` : '정보 없음'}</span></li>
                         <li><b>Tel.</b><span>${value.tel ? `<a href="tel:${value.tel}">${value.tel}</a>` : '-'}</span></li>`
                         /** 관광타입 ID별(contentTypeId) 추가 정보 */
-                        if( contentTypeId == 12 ){ //12:관광지 
+                        // if( contentTypeId == 12 ){ //12:관광지 
                             
-                        }else if( contentTypeId == 14 ){ // 14:문화시설
+                        // }else if( contentTypeId == 14 ){ // 14:문화시설
 
-                        }else if( contentTypeId == 15 ){ // 15:축제공연행사
+                        // }else if( contentTypeId == 15 ){ // 15:축제공연행사
 
-                        }else if( contentTypeId == 25 ){ // 25:여행코스
+                        // }else if( contentTypeId == 25 ){ // 25:여행코스
 
-                        }else if( contentTypeId == 28 ){ // 28:레포츠
+                        // }else if( contentTypeId == 28 ){ // 28:레포츠
 
-                        }else if( contentTypeId == 32 ){ // 32:숙박
+                        // }else if( contentTypeId == 32 ){ // 32:숙박
 
-                        }else if( contentTypeId == 38 ){ // 38:쇼핑
+                        // }else if( contentTypeId == 38 ){ // 38:쇼핑
 
-                        }else if( contentTypeId == 39 ){ // 39:음식점
+                        // }else if( contentTypeId == 39 ){ // 39:음식점
 
-                        }else{ // 그 외
+                        // }else{ // 그 외
 
-                        }
+                        // }
                     `</ul>
                     <h4>사진이미지</h4>
                     <ul class="addition_img_wrap">
