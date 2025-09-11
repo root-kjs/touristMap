@@ -1,29 +1,3 @@
-//import { getLdongCodeData , getLclsSystmData, getLocationListData, getLdong1Data, getAreaListData } from './getAPIdata.js';
-const serviceKey = `DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D`; // 서비스키
-// 1. 상세관광정보(공통)
-const detailCommon2Data = async( value ) => { 
-    const URL = `https://apis.data.go.kr/B551011/KorService2/detailCommon2?contentId=${value.contentid}&MobileOS=ETC&MobileApp=AppTest&_type=json&serviceKey=`;
-    const response = await fetch( URL+serviceKey );
-    const data = await response.json();
-    return data.response.body.items.item[0];
-}//func end
-
-// 2. 상세관광정보(관광타입별)
-const detailIntro2Data = async( value ) => { // 상세관광정보
-    const URL = `https://apis.data.go.kr/B551011/KorService2/detailIntro2?contentId=${value.contentid}&contentTypeId=${value.contenttypeid}&MobileOS=ETC&MobileApp=AppTest&_type=json&serviceKey=`;
-    const response = await fetch( URL+serviceKey );
-    const data = await response.json();
-    return data.response.body.items.item[0];
-}//func end
-
-
-// 2. 상세관광정보(관광타입별)
-const detailInfo2Data = async( value ) => { // 상세관광 반복정보
-    const URL = `https://apis.data.go.kr/B551011/KorService2/detailInfo2?contentId=${value.contentid}&contentTypeId=${value.contenttypeid}&MobileOS=ETC&MobileApp=AppTest&_type=json&serviceKey=`;
-    const response = await fetch( URL+serviceKey );
-    const data = await response.json();
-    return data.response.body.items.item[0];
-}//func end
 
 // [01] 지도마커 클릭시, 상세업체정보 출력하기-----------------------------------------------------------------------------------
 export const markerInfoLayer = async( value, marker ) => { //console.log("지도마커 클릭시, 상세업체정보 출력하기");
@@ -53,13 +27,32 @@ export const markerInfoLayer = async( value, marker ) => { //console.log("지도
                 </div>
                 <div class="modal_content">
                     <p class="description">${detailCommon.overview || '상세 정보가 없습니다.'}</p>
-                    <h4>상세정보</h4>
+                    <h4>r상세정보</h4>
                     <ul>
                         <li><b>주소</b><span>${detailCommon.addr1} ${detailCommon.addr2}</span></li>
                         <li><b>홈페이지</b><span> ${detailCommon.homepage ? `<a href='${detailCommon.homepage}' target='_blank'>${detailCommon.homepage}</a>` : '정보 없음'}</span></li>
-                        <li><b>Tel.</b><span>${value.tel ? `<a href="tel:${value.tel}">${value.tel}</a>` : '-'}</span></li>
-                     
-                    </ul>
+                        <li><b>Tel.</b><span>${value.tel ? `<a href="tel:${value.tel}">${value.tel}</a>` : '-'}</span></li>`
+                        /** 관광타입 ID별(contentTypeId) 추가 정보 */
+                        if( contentTypeId == 12 ){ //12:관광지 
+                            
+                        }else if( contentTypeId == 14 ){ // 14:문화시설
+
+                        }else if( contentTypeId == 15 ){ // 15:축제공연행사
+
+                        }else if( contentTypeId == 25 ){ // 25:여행코스
+
+                        }else if( contentTypeId == 28 ){ // 28:레포츠
+
+                        }else if( contentTypeId == 32 ){ // 32:숙박
+
+                        }else if( contentTypeId == 38 ){ // 38:쇼핑
+
+                        }else if( contentTypeId == 39 ){ // 39:음식점
+
+                        }else{ // 그 외
+
+                        }
+                    `</ul>
                     <h4>사진이미지</h4>
                     <ul class="addition_img_wrap">
                         <li><img src="${detailCommon.firstimage2}" alt="${value.title}"/></li>

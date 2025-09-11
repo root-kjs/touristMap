@@ -12,7 +12,7 @@ const schoolMap = async() => {
            disableClickZoom: true // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
        });
        const serviceKey = "DOpLI7EuzXtbDtCQ40p5sHOuJ9NW89eB%2Fd7hUs3CQsVoZ6d6q2HZiDViRsYqCJuabArktqa8tJcOmldsY5A7eg%3D%3D";
-       const URL = "//apis.data.go.kr/B551011/KorService2/locationBasedList2?lDongRegnCd=28&arrange=S&mapX=126.7052062&mapY=37.4562557&radius=20000&numOfRows=100&MobileOS=WEB&MobileApp=AppTest&_type=json&serviceKey=";
+       const URL = "https://apis.data.go.kr/B551011/KorService2/locationBasedList2?lDongRegnCd=28&arrange=S&mapX=126.7052062&mapY=37.4562557&radius=20000&numOfRows=100&MobileOS=WEB&MobileApp=AppTest&_type=json&serviceKey=";
        const response = await fetch( URL+serviceKey, {method : "GET"} );
        const data = await response.json();
        //console.log(data); //확인용

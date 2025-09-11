@@ -32,7 +32,7 @@ dependencies {
     implementation "org.apache.tomcat.embed:tomcat-embed-jasper"        // JSP 라이브러리
     compileOnly 'org.projectlombok:lombok'                              // 롬복 라이브러리
     annotationProcessor 'org.projectlombok:lombok'                      // 롬복 라이브러리
-    implementation 'org.json:json:20231013'                             // org.json 라이브러리(JSONObject, JSONArray)
+    //implementation 'org.json:json:20231013'                             // org.json 라이브러리(JSONObject, JSONArray)
     implementation 'org.springframework.boot:spring-boot-starter-websocket' // websocket
 }
 
