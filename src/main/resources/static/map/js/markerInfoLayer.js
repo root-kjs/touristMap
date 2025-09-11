@@ -8,7 +8,6 @@ export const markerInfoLayer = async( value, marker ) => { //console.log("지도
         try {
             const detailCommon = await detailCommon2Data( value ); // 1. 상세관광정보(공통) 호출
             const detailIntro = await detailIntro2Data( value );   // 2. 상세관광정보(관광타입별) 
-            const detailInfo = await detailInfo2Data( value );    // 2. 상세관광 반복정보(관광타입별)
 
             console.log( detailCommon );
             // 2) 마커 클릭했을 경우, 모달 레이어창 나오기
@@ -31,28 +30,8 @@ export const markerInfoLayer = async( value, marker ) => { //console.log("지도
                     <ul>
                         <li><b>주소</b><span>${detailCommon.addr1} ${detailCommon.addr2}</span></li>
                         <li><b>홈페이지</b><span> ${detailCommon.homepage ? `<a href='${detailCommon.homepage}' target='_blank'>${detailCommon.homepage}</a>` : '정보 없음'}</span></li>
-                        <li><b>Tel.</b><span>${value.tel ? `<a href="tel:${value.tel}">${value.tel}</a>` : '-'}</span></li>`
-                        /** 관광타입 ID별(contentTypeId) 추가 정보 */
-                        // if( contentTypeId == 12 ){ //12:관광지 
-                            
-                        // }else if( contentTypeId == 14 ){ // 14:문화시설
-
-                        // }else if( contentTypeId == 15 ){ // 15:축제공연행사
-
-                        // }else if( contentTypeId == 25 ){ // 25:여행코스
-
-                        // }else if( contentTypeId == 28 ){ // 28:레포츠
-
-                        // }else if( contentTypeId == 32 ){ // 32:숙박
-
-                        // }else if( contentTypeId == 38 ){ // 38:쇼핑
-
-                        // }else if( contentTypeId == 39 ){ // 39:음식점
-
-                        // }else{ // 그 외
-
-                        // }
-                    `</ul>
+                        <li><b>Tel.</b><span>${value.tel ? `<a href="tel:${value.tel}">${value.tel}</a>` : '-'}</span></li>
+                    </ul>
                     <h4>사진이미지</h4>
                     <ul class="addition_img_wrap">
                         <li><img src="${detailCommon.firstimage2}" alt="${value.title}"/></li>
