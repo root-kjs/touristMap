@@ -17,7 +17,7 @@ export const markerInfoLayer = async( value, marker ) => { //console.log("지도
             <div class="modal_box">
                 <button class="modal_close fa fa-close" onclick="this.closest('.modal_marker_info_layer').style.display='none'"></button>
                 <div class="modal_img_box">
-                    <div class="modal_img_bg"><img src="${value.firstimage}" alt="${value.title}"/></div>
+                    <div class="modal_img_bg"><img src="${value.firstimage ? value.firstimage : '/map/img/no_img.jpg'}" alt="${value.title}"/></div>
                     <div class="modal_content_outline">
                         <h3>${value.title}</h3>
                         <span>${value.contenttypeid}</span>
@@ -34,8 +34,8 @@ export const markerInfoLayer = async( value, marker ) => { //console.log("지도
                     </ul>
                     <h4>사진이미지</h4>
                     <ul class="addition_img_wrap">
-                        <li><img src="${detailCommon.firstimage2}" alt="${value.title}"/></li>
-                        <li><img src="http://tong.visitkorea.or.kr/cms/resource/86/3488286_image2_1.JPG" alt=""/></li>
+                        <li><img src="${value.firstimage ? value.firstimage : '/map/img/no_img.jpg'}" alt="${value.title}"/></li>
+                        <li><img src="${value.firstimage ? value.firstimage : '/map/img/no_img.jpg'}" alt="${value.title}"/></li>
                     </ul>
                     <h4>부가정보</h4>
                     <ul>

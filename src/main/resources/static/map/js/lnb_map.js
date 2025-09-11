@@ -51,17 +51,23 @@ window.addEventListener('load', async() => {
 window.handleAreaClick = ( lDongRegnCd ) => {
     const activeLink = document.querySelector("#lnbMap .active");
     const currentPageTitle = document.querySelector('.right_contents.area > .page_title > h1 > a');
+    const logotitle = document.querySelector('header h1.logo a'); // 로고명
+    let activeLnbText = $(".sub_menu_list li a.active span").text(); // 좌측 활성화(선택된) 지역명
     // 1) 기존 'active' 클래스 제거
     if (activeLink) {
         activeLink.classList.remove('active');
         //console.log("복사 삭제");
         currentPageTitle.remove('a');
+        //logotitle.remove('a');
+        //logotitle.remove.text();
     }
     // 2) 클릭된 링크에 'active' 클래스 추가
     const clickedLink = document.querySelector(`#lnbMap [data-code="${lDongRegnCd}"] a`);
     if (clickedLink) {
         clickedLink.classList.add('active');
         $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");
+        //$(".sub_menu_list li a.active").clone().prependTo("header h1.logo a");
+        //logotitle.text(activeLnbText);
         //console.log("복사 생성");
     }
     // 3) 좌측 지역명 선택에 따른 지도 마커 업데이트
