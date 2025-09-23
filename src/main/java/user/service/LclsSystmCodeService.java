@@ -26,7 +26,7 @@ public class LclsSystmCodeService {
 
     /* [1-1/★★스케쥴링★★] 분류체계 코드조회(lclsSystmCode2) */
     List<Map<String, Object>> lclsSystmData = new ArrayList<>();
-    @Scheduled(cron = "0 0 3 * * *") // 매일 오전 3시가 될때마다 api 가져오기
+    @Scheduled(cron = "0 06 3 * * *") // 매일 오전 3시가 될때마다 api 가져오기
     public List<Map<String, Object>> schedulLclsSystmCode2()  {
         // [강사2025-09-11] CSV 저장 경로 (배포 서버 실제 경로 기준)
         String filePath = servletContext.getRealPath("/data/lclsSystmCode2.csv");

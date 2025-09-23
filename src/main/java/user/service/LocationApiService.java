@@ -19,7 +19,7 @@ public class LocationApiService {
 
     /* [1-1/★★스케쥴링★★]  위치기반 관광정보(locationBasedList2) --> 중심좌표기준 반경 20km 이내 관광정보 출력 */
     List<Map<String, Object>> locationList2Data = new ArrayList<>();
-    //@Scheduled(cron = "0 0 3 * * *") // 매일 오전 3시가 될때마다 api 가져오기
+    //@Scheduled(cron = "0 09 3 * * *") // 매일 오전 3시가 될때마다 api 가져오기
     public List<Map<String, Object>> schedulLocationList2(  ) {
         try {
             String extraParams = URLEncoder.encode("numOfRows", "UTF-8") + "=" + "100";// 한 페이지 결과 수 : 일단 최대값 설정함(250906기준 전국관광 정보 데이터수 : 50,204개)

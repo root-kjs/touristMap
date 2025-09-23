@@ -75,7 +75,7 @@ public class AreaService {
 
     List<Map<String, Object>> areaListData = new ArrayList<>(); /* [기존 전국/ 지역기반 관광정보 스케쥴링 저장소 */
     // Map<String, List<Map<String, Object>>> areaListData = new HashMap<>(); /* [변경 17개 지역 / 지역기반 관광정보 스케쥴링 저장소 */
-    @Scheduled(cron = "0 0 3 * * *")
+    @Scheduled(cron = "0 03 3 * * *")
     public List<Map<String, Object>> schedulAreaList2LDong( ) {
         // [강사2025-09-11] CSV 저장 경로 (지역 기반 목록)
         String filePath = servletContext.getRealPath("/data/areaList2.csv");
