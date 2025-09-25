@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class AppStart extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run( AppStart.class );
+        SpringApplication.run(AppStart.class);
     }
 
     // WAR 파일로 배포할 때 외부 Tomcat이 사용할 설정 : 외부 서버설정을 내가 작업하는 스프링설정으로 변경

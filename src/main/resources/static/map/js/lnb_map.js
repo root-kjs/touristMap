@@ -41,7 +41,7 @@ window.addEventListener('load', async() => {
     await $(".sub_menu_list li a.active").clone().prependTo(".right_contents h1");
     //userlocationMap('28'); // 디폴트 : 인천 지도
     userlocationMap( bjdCode , lat , lng ); // 디폴트 : 인천 지도
-
+    handleAreaClick( bjdCode ); // 최초 렌더링시 우측 타이틀명 변경
 });
 
 // [04] 좌측 지역메뉴 클릭시마다 > 우측 관광정보 타이틀명 변경------------------------
